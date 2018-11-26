@@ -1,4 +1,4 @@
-# jikan-go
+# Jikan Go
 
 Sample usage of the Jikan API v3 in Golang
 
