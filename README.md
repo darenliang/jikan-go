@@ -20,6 +20,10 @@ import (
 
 func main() {
 	anime, _ := jikan.GetAnimeInfo(1)
-	fmt.Println(anime)
+	fmt.Println(anime.Title)
 }
+```
+```
+Output:
+Cowboy Bebop
 ```
