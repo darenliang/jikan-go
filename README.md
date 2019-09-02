@@ -38,10 +38,7 @@ import (
 )
 
 func main() {
-	search, err := jikan.GetSearch(jikan.Search{Type: "anime", Q: "FMAB", OrderBy: "score"})
-	if err != nil {
-		panic(err)
-	}
+	search, _ := jikan.GetSearch(jikan.Search{Type: "anime", Q: "FMAB", OrderBy: "score"})
 	firstAnime := search["results"].([]interface{})[0].(map[string]interface{})
 	fmt.Println(firstAnime["title"], firstAnime["mal_id"])
 }
