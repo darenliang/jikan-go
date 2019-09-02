@@ -12,7 +12,6 @@ To install: `go get github.com/darenliang/jikan-go`
 To import: `import "github.com/darenliang/jikan-go"` and use as `jikan`
 
 Sample usage:
-
 ```go
 package main
 
@@ -30,10 +29,44 @@ func main() {
 Output:
 Cowboy Bebop
 ```
-### Why do I need to create new structs everytime I use the API?
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/darenliang/jikan-go"
+)
+
+func main() {
+	search, err := jikan.GetSearch(jikan.Search{Type: "anime", Q: "FMAB", OrderBy: "score"})
+	if err != nil {
+		panic(err)
+	}
+	firstAnime := search["results"].([]interface{})[0].(map[string]interface{})
+	fmt.Println(firstAnime["title"], firstAnime["mal_id"])
+}
+```
+```
+Output:
+Fullmetal Alchemist: Brotherhood 5114
+```
+### Why do I to perform type assertions when I want to use nested data?
+Golang doesn't allow dynamic return types for functions other than using interfaces.
+
+Returning interfaces doesn't allow you to use the interface value's underlying concrete value.
+
+Since all structs returned are in the type `map[string]interface{}`, you can only readily use first level data.
+
+For accessing lower levels of data, you must perform type assertions in advance.
+
+To type assert a slice/array, append `.([]interface{})` before accessing the index.
+
+To type assert a map, append `.(map[string]interface{})` before accessing the index.
+
+### Why do I need to create new structs every time I use the API?
 Due to the nature of Golang, it is [not possible to use optional parameters in functions](https://golang.org/doc/faq#overloading).
 
-It starts becoming a real problem when Jikan API's "search" or "user" request is used. There is just no simple way of calling only the request parameters you need directly. Although there are such things as "variadic arguments", it is strong typed and will not take in different data types.
+It starts becoming a real problem when Jikan API's "search" or "user" request is used. There is just no simple way of calling only the request parameters you need directly. Although there are such things as "variadic arguments", it does not provide the ability to only add request parameters you need.
 
 One way around this problem is by using structs. We can take advantage of Golang's zero values, allowing us to not have to specify every single request parameter.
 
