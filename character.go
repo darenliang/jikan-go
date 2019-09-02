@@ -4,8 +4,8 @@ import "fmt"
 
 // Character struct defines a character
 type Character struct {
-	ID      int
-	Request string
+	ID      int    // MyAnimeList Character ID
+	Request string // Request type (Optional)
 }
 
 // GetCharacter returns a map of a character as specified in the Character struct

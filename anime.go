@@ -4,9 +4,9 @@ import "fmt"
 
 // Anime struct defines an anime
 type Anime struct {
-	ID      int    // MyAnimeList ID
-	Request string // Request type
-	Page    int    // Page number
+	ID      int    // MyAnimeList Anime ID
+	Request string // Request type (Optional)
+	Page    int    // Page number (Available depending on request type)
 }
 
 // GetAnime returns a map of an anime as specified in the Anime struct

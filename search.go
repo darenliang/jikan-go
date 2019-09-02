@@ -7,23 +7,25 @@ import (
 
 // Search struct defines an search
 type Search struct {
-	Type         string
-	Q            string
-	Page         int
-	TypeFormat   string
-	Status       string
-	Rated        string
-	Genre        int
-	Score        float64
-	StartDate    string
-	EndDate      string
-	GenreExclude bool
-	Limit        int
-	OrderBy      string
-	Sort         string
-	Producer     int
-	Magazine     int
-	Letter       rune
+	Type string // Object type
+
+	// All below are optional
+	Q            string  // Search query
+	Page         int     // Page number
+	TypeFormat   string  // Media format
+	Status       string  // Status
+	Rated        string  // Age rating
+	Genre        int     // MyAnimeList Genre ID
+	Score        float64 // Score 0.0 - 10.0
+	StartDate    string  // Start date
+	EndDate      string  // End date
+	GenreExclude bool    // Exclude genre filter
+	Limit        int     // Limit results
+	OrderBy      string  // Order by
+	Sort         string  // Sort
+	Producer     int     // MyAnimeList Producer ID
+	Magazine     int     // MyAnimeList Magazine ID
+	Letter       rune    // Starting letter
 }
 
 // GetSearch returns a map of an search as specified in the Search struct

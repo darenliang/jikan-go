@@ -7,8 +7,8 @@ import (
 
 // Producer struct defines a producer
 type Producer struct {
-	ProducerID int
-	Page       int
+	ProducerID int // MyAnimeList Producer ID
+	Page       int // Page number (Optional)
 }
 
 // GetProducer returns a map of a producer as specified in the Producer struct

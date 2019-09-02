@@ -4,8 +4,9 @@ import "fmt"
 
 // Club struct defines a club
 type Club struct {
-	ID      int
-	Request string
+	ID      int    // MyAnimeList Club ID
+	Request string // Request type
+	Page    int    // Page number (Available upon request type activation)
 }
 
 // GetClub returns a map of a club as specified in the Club struct
@@ -15,7 +16,7 @@ func GetClub(club Club) (map[string]interface{}, error) {
 	switch club.Request {
 	case
 		"members":
-		result, err = getMapFromUrl(fmt.Sprintf("/anime/%v/%v", club.ID, club.Request)), nil
+		result, err = getMapFromUrl(fmt.Sprintf("/anime/%v/%v/%v", club.ID, club.Request, club.Page)), nil
 	default:
 		result, err = getMapFromUrl(fmt.Sprintf("/anime/%v", club.ID)), nil
 	}

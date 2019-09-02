@@ -4,8 +4,8 @@ import "fmt"
 
 // Person struct defines a person
 type Person struct {
-	ID      int
-	Request string
+	ID      int    // MyAnimeList Person ID
+	Request string // Request type (Optional)
 }
 
 // GetPerson returns a map of a person as specified in the Person struct

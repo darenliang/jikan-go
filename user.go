@@ -7,28 +7,39 @@ import (
 
 // User struct defines a user
 type User struct {
-	Username         string
-	Request          int
-	Data             string
-	HistoryType      string
-	FriendsPage      int
-	AnimeListFilter  string
-	MangaListFilter  string
-	Search           string
-	Page             int
-	Sort             string
-	OrderBy          string
-	OrderBy2         string
-	AiredFrom        string
-	AiredTo          string
-	Producer         int
-	Year             int
-	Season           string
-	AiringStatus     string
-	PublishedFrom    string
-	PublishedTo      string
-	Magazine         int
-	PublishingStatus string
+	Username string // MyAnimeList username
+	Request  int    // Request type
+	Data     string // Specify data type
+
+	// Use only when choosing history
+	HistoryType string // Specify history type
+
+	// Use only when choosing friends
+	FriendsPage int // Specify friends page
+
+	AnimeListFilter string // Anime List Filter
+	MangaListFilter string // Manga List Filter
+
+	// Use only when choosing animelist or mangalist (Only need to choose what you need)
+	Search string // Search query
+	Page   int    // Page number
+	Sort   string // Sort
+
+	// Only for AnimeListFilter
+	OrderBy      string // Order by
+	OrderBy2     string // Second order by
+	AiredFrom    string // Aired from
+	AiredTo      string // Aired to
+	Producer     int    // MyAnimeList Producer ID
+	Year         int    // Year
+	Season       string // Season
+	AiringStatus string // Airing status
+
+	// Only for MangaListFilter
+	PublishedFrom    string // Published from
+	PublishedTo      string // Published to
+	Magazine         int    // MyAnimeList Magazine ID
+	PublishingStatus string // Publishing status
 }
 
 // GetUser returns a map of a user as specified in the User struct
