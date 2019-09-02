@@ -3,7 +3,7 @@
 [![GoDoc](https://godoc.org/github.com/darenliang/jikan-go?status.svg)](https://godoc.org/github.com/darenliang/jikan-go)
 [![Go Report Card](https://goreportcard.com/badge/github.com/darenliang/jikan-go)](https://goreportcard.com/report/github.com/darenliang/jikan-go)
 
-These Golang bindings cover the complete Jikan API
+Go bindings for Jikan.
 
 Since the documentation is still not complete yet, please refer to the official [Jikan API documentation](https://jikan.docs.apiary.io) for assistance on certain request parameters.
 
@@ -22,7 +22,7 @@ import (
 )
 
 func main() {
-	anime, _ := jikan.GetAnime(Anime{ID: 1})
+	anime, _ := jikan.GetAnime(jikan.Anime{ID: 1})
 	fmt.Println(anime["title"])
 }
 ```
