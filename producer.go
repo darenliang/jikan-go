@@ -2,48 +2,27 @@ package jikan
 
 import (
 	"fmt"
-	"time"
+	"strings"
 )
 
-type ProducerInfo struct {
-	Meta struct {
-		MalID int    `json:"mal_id"`
-		Type  string `json:"type"`
-		Name  string `json:"name"`
-		URL   string `json:"url"`
-	} `json:"meta"`
-	Anime []struct {
-		MalID       int       `json:"mal_id"`
-		URL         string    `json:"url"`
-		Title       string    `json:"title"`
-		ImageURL    string    `json:"image_url"`
-		Synopsis    string    `json:"synopsis"`
-		Type        string    `json:"type"`
-		AiringStart time.Time `json:"airing_start"`
-		Episodes    int       `json:"episodes"`
-		Members     int       `json:"members"`
-		Genres      []struct {
-			MalID int    `json:"mal_id"`
-			Type  string `json:"type"`
-			Name  string `json:"name"`
-			URL   string `json:"url"`
-		} `json:"genres"`
-		Source    string `json:"source"`
-		Producers []struct {
-			MalID int    `json:"mal_id"`
-			Type  string `json:"type"`
-			Name  string `json:"name"`
-			URL   string `json:"url"`
-		} `json:"producers"`
-		Score     float64  `json:"score"`
-		Licensors []string `json:"licensors"`
-		R18       bool     `json:"r18"`
-		Kids      bool     `json:"kids"`
-	} `json:"anime"`
+// Producer struct defines a producer
+type Producer struct {
+	ProducerID int
+	Page       int
 }
 
-func GetProducerInfo(id int, page int) (ProducerInfo, error) {
-	producer := ProducerInfo{}
-	err := ParseResults(fmt.Sprintf("%s/producer/%d/%d", Endpoint, id, page), &producer)
-	return producer, err
+// GetProducer returns a map of a producer as specified in the Producer struct
+func GetProducer(producer Producer) (map[string]interface{}, error) {
+	var result map[string]interface{}
+	var err error
+	var query strings.Builder
+	query.WriteString(fmt.Sprintf("/producer/%v", producer.ProducerID))
+	if producer.Page != 0 {
+		query.WriteString(fmt.Sprintf("/%v", producer.Page))
+	}
+	result, err = getMapFromUrl(query.String()), nil
+	if _, ok := result["error"]; ok {
+		result, err = nil, fmt.Errorf("error %v, %v, %v", result["status"], result["message"], result["error"])
+	}
+	return result, err
 }

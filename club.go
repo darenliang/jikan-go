@@ -1,62 +1,26 @@
 package jikan
 
-import (
-	"fmt"
-	"time"
-)
+import "fmt"
 
-type ClubInfo struct {
-	MalID         int       `json:"mal_id"`
-	URL           string    `json:"url"`
-	ImageURL      string    `json:"image_url"`
-	Title         string    `json:"title"`
-	MembersCount  int       `json:"members_count"`
-	PicturesCount int       `json:"pictures_count"`
-	Category      string    `json:"category"`
-	Created       time.Time `json:"created"`
-	Type          string    `json:"type"`
-	Staff         []struct {
-		MalID int    `json:"mal_id"`
-		Type  string `json:"type"`
-		Name  string `json:"name"`
-		URL   string `json:"url"`
-	} `json:"staff"`
-	AnimeRelations []struct {
-		MalID int    `json:"mal_id"`
-		Type  string `json:"type"`
-		Name  string `json:"name"`
-		URL   string `json:"url"`
-	} `json:"anime_relations"`
-	MangaRelations []struct {
-		MalID int    `json:"mal_id"`
-		Type  string `json:"type"`
-		Name  string `json:"name"`
-		URL   string `json:"url"`
-	} `json:"manga_relations"`
-	CharacterRelations []struct {
-		MalID int    `json:"mal_id"`
-		Type  string `json:"type"`
-		Name  string `json:"name"`
-		URL   string `json:"url"`
-	} `json:"character_relations"`
+// Club struct defines a club
+type Club struct {
+	ID      int
+	Request string
 }
 
-type ClubMembers struct {
-	Members []struct {
-		Username string `json:"username"`
-		URL      string `json:"url"`
-		ImageURL string `json:"image_url"`
-	} `json:"members"`
-}
-
-func GetClubInfo(id int) (ClubInfo, error) {
-	club := ClubInfo{}
-	err := ParseResults(fmt.Sprintf("%s/club/%d", Endpoint, id), &club)
-	return club, err
-}
-
-func GetClubMembers(id int, page int) (ClubMembers, error) {
-	members := ClubMembers{}
-	err := ParseResults(fmt.Sprintf("%s/magazine/%d/members/%d", Endpoint, id, page), &members)
-	return members, err
+// GetClub returns a map of a club as specified in the Club struct
+func GetClub(club Club) (map[string]interface{}, error) {
+	var result map[string]interface{}
+	var err error
+	switch club.Request {
+	case
+		"members":
+		result, err = getMapFromUrl(fmt.Sprintf("/anime/%v/%v", club.ID, club.Request)), nil
+	default:
+		result, err = getMapFromUrl(fmt.Sprintf("/anime/%v", club.ID)), nil
+	}
+	if _, ok := result["error"]; ok {
+		result, err = nil, fmt.Errorf("error %v, %v, %v", result["status"], result["message"], result["error"])
+	}
+	return result, err
 }

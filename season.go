@@ -2,107 +2,43 @@ package jikan
 
 import (
 	"fmt"
-	"time"
 )
 
-type SeasonInfo struct {
-	SeasonName string `json:"season_name"`
-	SeasonYear int    `json:"season_year"`
-	Anime      []struct {
-		MalID       int       `json:"mal_id"`
-		URL         string    `json:"url"`
-		Title       string    `json:"title"`
-		ImageURL    string    `json:"image_url"`
-		Synopsis    string    `json:"synopsis"`
-		Type        string    `json:"type"`
-		AiringStart time.Time `json:"airing_start"`
-		Episodes    int       `json:"episodes"`
-		Members     int       `json:"members"`
-		Genres      []struct {
-			MalID int    `json:"mal_id"`
-			Type  string `json:"type"`
-			Name  string `json:"name"`
-			URL   string `json:"url"`
-		} `json:"genres"`
-		Source    string `json:"source"`
-		Producers []struct {
-			MalID int    `json:"mal_id"`
-			Type  string `json:"type"`
-			Name  string `json:"name"`
-			URL   string `json:"url"`
-		} `json:"producers"`
-		Score     float64 `json:"score"`
-		Licensors []struct {
-			MalID int    `json:"mal_id"`
-			Type  string `json:"type"`
-			Name  string `json:"name"`
-			URL   string `json:"url"`
-		} `json:"licensors"`
-		R18        bool `json:"r18"`
-		Kids       bool `json:"kids"`
-		Continuing bool `json:"continuing"`
-	} `json:"anime"`
+// Season struct defines a season
+type Season struct {
+	Year   int
+	Season string
 }
 
-type SeasonArchive struct {
-	Archive []struct {
-		Year    int      `json:"year"`
-		Seasons []string `json:"seasons"`
-	} `json:"archive"`
-}
-type SeasonLater struct {
-	SeasonName string `json:"season_name"`
-	SeasonYear int    `json:"season_year"`
-	Anime      []struct {
-		MalID       int       `json:"mal_id"`
-		URL         string    `json:"url"`
-		Title       string    `json:"title"`
-		ImageURL    string    `json:"image_url"`
-		Synopsis    string    `json:"synopsis"`
-		Type        string    `json:"type"`
-		AiringStart time.Time `json:"airing_start"`
-		Episodes    int       `json:"episodes"`
-		Members     int       `json:"members"`
-		Genres      []struct {
-			MalID int    `json:"mal_id"`
-			Type  string `json:"type"`
-			Name  string `json:"name"`
-			URL   string `json:"url"`
-		} `json:"genres"`
-		Source    string `json:"source"`
-		Producers []struct {
-			MalID int    `json:"mal_id"`
-			Type  string `json:"type"`
-			Name  string `json:"name"`
-			URL   string `json:"url"`
-		} `json:"producers"`
-		Score     float64 `json:"score"`
-		Licensors []struct {
-			MalID int    `json:"mal_id"`
-			Type  string `json:"type"`
-			Name  string `json:"name"`
-			URL   string `json:"url"`
-		} `json:"licensors"`
-		R18        bool `json:"r18"`
-		Kids       bool `json:"kids"`
-		Continuing bool `json:"continuing"`
-	} `json:"anime"`
-}
-
-func GetSeasonInfo(season string, year int) (SeasonInfo, error) {
-	result := SeasonInfo{}
-	err := ParseResults(fmt.Sprintf("%s/season/%d/%s", Endpoint, year, season), &result)
+// GetSeason returns a map of a season as specified in the Season struct
+func GetSeason(season Season) (map[string]interface{}, error) {
+	var result map[string]interface{}
+	var err error
+	result, err = getMapFromUrl(fmt.Sprintf("/season/%v/%v", season.Year, season.Season)), nil
+	if _, ok := result["error"]; ok {
+		result, err = nil, fmt.Errorf("error %v, %v, %v", result["status"], result["message"], result["error"])
+	}
 	return result, err
 }
 
-func GetSeasonArchive() (SeasonArchive, error) {
-	result := SeasonArchive{}
-	err := ParseResults(fmt.Sprintf("%s/season/archive", Endpoint), &result)
+// GetSeasonArchive returns a map of season archives
+func GetSeasonArchive() (map[string]interface{}, error) {
+	var result map[string]interface{}
+	var err error
+	result, err = getMapFromUrl("/season/archive"), nil
+	if _, ok := result["error"]; ok {
+		result, err = nil, fmt.Errorf("error %v, %v, %v", result["status"], result["message"], result["error"])
+	}
 	return result, err
 }
 
-func GetSeasonLater() (SeasonLater, error) {
-	result := SeasonLater{}
-	err := ParseResults(fmt.Sprintf("%s/season/later", Endpoint), &result)
+// GetSeasonArchive returns a map of a list of anime from seasons later
+func GetSeasonLater() (map[string]interface{}, error) {
+	var result map[string]interface{}
+	var err error
+	result, err = getMapFromUrl("/season/later"), nil
+	if _, ok := result["error"]; ok {
+		result, err = nil, fmt.Errorf("error %v, %v, %v", result["status"], result["message"], result["error"])
+	}
 	return result, err
 }

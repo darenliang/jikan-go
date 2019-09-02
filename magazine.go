@@ -2,45 +2,27 @@ package jikan
 
 import (
 	"fmt"
-	"time"
+	"strings"
 )
 
-type MagazineInfo struct {
-	Meta struct {
-		MalID int    `json:"mal_id"`
-		Type  string `json:"type"`
-		Name  string `json:"name"`
-		URL   string `json:"url"`
-	} `json:"meta"`
-	Manga []struct {
-		MalID           int       `json:"mal_id"`
-		URL             string    `json:"url"`
-		Title           string    `json:"title"`
-		ImageURL        string    `json:"image_url"`
-		Synopsis        string    `json:"synopsis"`
-		Type            string    `json:"type"`
-		PublishingStart time.Time `json:"publishing_start"`
-		Volumes         int       `json:"volumes"`
-		Members         int       `json:"members"`
-		Genres          []struct {
-			MalID int    `json:"mal_id"`
-			Type  string `json:"type"`
-			Name  string `json:"name"`
-			URL   string `json:"url"`
-		} `json:"genres"`
-		Authors []struct {
-			MalID int    `json:"mal_id"`
-			Type  string `json:"type"`
-			Name  string `json:"name"`
-			URL   string `json:"url"`
-		} `json:"authors"`
-		Score         float64  `json:"score"`
-		Serialization []string `json:"serialization"`
-	} `json:"manga"`
+// Magazine struct defines a magazine
+type Magazine struct {
+	MagazineID int
+	Page       int
 }
 
-func GetMagazineInfo(id int, page int) (MagazineInfo, error) {
-	magazine := MagazineInfo{}
-	err := ParseResults(fmt.Sprintf("%s/magazine/%d/%d", Endpoint, id, page), &magazine)
-	return magazine, err
+// GetMagazine returns a map of a magazine as specified in the Magazine struct
+func GetMagazine(magazine Magazine) (map[string]interface{}, error) {
+	var result map[string]interface{}
+	var err error
+	var query strings.Builder
+	query.WriteString(fmt.Sprintf("/magazine/%v", magazine.MagazineID))
+	if magazine.Page != 0 {
+		query.WriteString(fmt.Sprintf("/%v", magazine.Page))
+	}
+	result, err = getMapFromUrl(query.String()), nil
+	if _, ok := result["error"]; ok {
+		result, err = nil, fmt.Errorf("error %v, %v, %v", result["status"], result["message"], result["error"])
+	}
+	return result, err
 }
