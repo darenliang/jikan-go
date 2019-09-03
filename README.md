@@ -47,7 +47,7 @@ func main() {
 Output:
 Fullmetal Alchemist: Brotherhood 5114
 ```
-### Why do I to perform type assertions when I want to use nested data?
+### Why do I have to perform type assertions when I want to use the nested data?
 Golang doesn't allow dynamic return types for functions other than using interfaces.
 
 Returning interfaces doesn't allow you to use the interface value's underlying concrete value.
