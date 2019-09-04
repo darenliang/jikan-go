@@ -59,8 +59,8 @@ Due to the multiple different response structures of the Jikan API, it is not ve
 
 Ideally, using functions like `GetAnimeEpisodes` should get you the Jikan's episode json data. However, the problem is that adding many structures creates a few nuisances that are hard to go unnoticed.
 
-1. You must rely on the Go Docs for all struct fields since they are different from Jikan's normal key values.
-2. You must know the exact function name to call for a specific struct.
+1. You have to rely on the Go Docs for all struct fields since they are different from Jikan's normal key values.
+2. You have to know the exact function name to call for a specific struct.
 3. Whenever a new data field is added to the Jikan API, the corresponding struct that is supposed to hold the data field will ignore it unless it is updated.
 
 ### Why do I have to perform type assertions when I want to use the nested data?
