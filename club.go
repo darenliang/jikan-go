@@ -10,6 +10,7 @@ type Club struct {
 }
 
 // GetClub returns a map of a club as specified in the Club struct
+// Calls responses through the /club/ endpoint
 func GetClub(club Club) (map[string]interface{}, error) {
 	var result map[string]interface{}
 	var err error

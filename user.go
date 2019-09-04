@@ -43,6 +43,7 @@ type User struct {
 }
 
 // GetUser returns a map of a user as specified in the User struct
+// Calls responses through the /user/ endpoint
 func GetUser(user User) (map[string]interface{}, error) {
 	var result map[string]interface{}
 	var err error

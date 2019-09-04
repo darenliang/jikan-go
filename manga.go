@@ -10,6 +10,7 @@ type Manga struct {
 }
 
 // GetManga returns a map of a manga as specified in the Manga struct
+// Calls responses through the /manga/ endpoint
 func GetManga(manga Manga) (map[string]interface{}, error) {
 	var result map[string]interface{}
 	var err error

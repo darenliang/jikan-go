@@ -9,6 +9,7 @@ type Person struct {
 }
 
 // GetPerson returns a map of a person as specified in the Person struct
+// Calls responses through the /person/ endpoint
 func GetPerson(person Person) (map[string]interface{}, error) {
 	var result map[string]interface{}
 	var err error

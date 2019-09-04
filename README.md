@@ -5,7 +5,11 @@
 
 Go bindings for Jikan.
 
-Since the documentation is still not complete yet, please refer to the official [Jikan API documentation](https://jikan.docs.apiary.io) for assistance on certain request parameters.
+Since the documentation is not very comprehensive, please refer to the official [Jikan API documentation](https://jikan.docs.apiary.io) for assistance on certain request parameters.
+
+All json data is put into maps instead of structs, so consulting the official documentation of the REST API will show you the available data fields.
+
+To visualize the response you can printout the map using `fmt.Println()` or you can use the `PrettyPrint()` function bundled in the package.
 
 To install: `go get github.com/darenliang/jikan-go`
 
@@ -27,6 +31,7 @@ func main() {
 ```
 ```
 Output:
+
 Cowboy Bebop
 ```
 ```go
@@ -40,13 +45,24 @@ import (
 func main() {
 	search, _ := jikan.GetSearch(jikan.Search{Type: "anime", Q: "FMAB", OrderBy: "score"})
 	firstAnime := search["results"].([]interface{})[0].(map[string]interface{})
-	fmt.Println(firstAnime["title"], firstAnime["mal_id"])
+	fmt.Printf("Title: %v\nID: %v", firstAnime["title"], firstAnime["mal_id"])
 }
 ```
 ```
 Output:
-Fullmetal Alchemist: Brotherhood 5114
+
+Title: Fullmetal Alchemist: Brotherhood
+ID: 5114
 ```
+### Why use maps over structs for reponses?
+Due to the multiple different response structures of the Jikan API, it is not very convenient to call different functions depending on the return type of the struct.
+
+Ideally, using functions like `GetAnimeEpisodes` should get you the Jikan's episode json data. However, the problem is that adding many structures creates a few nuisances that are hard to go unnoticed.
+
+1. You must rely on the Go Docs for all struct fields since they are different from Jikan's normal key values.
+2. You must know the exact function name to call for a specific struct.
+3. Whenever a new data field is added to the Jikan API, the corresponding struct that is supposed to hold the data field will ignore it unless it is updated.
+
 ### Why do I have to perform type assertions when I want to use the nested data?
 Golang doesn't allow dynamic return types for functions other than using interfaces.
 

@@ -2,6 +2,7 @@ package jikan
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/url"
@@ -40,4 +41,13 @@ func getMapFromUrl(url string) map[string]interface{} {
 		panic(err)
 	}
 	return jsonMap
+}
+
+// PrettyPrint pretty prints an interface value
+func PrettyPrint(val interface{}) {
+	pretty, err := json.MarshalIndent(val, "", "  ")
+	if err == nil {
+		fmt.Println(string(pretty))
+	}
+	return
 }

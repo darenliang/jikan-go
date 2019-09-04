@@ -29,6 +29,7 @@ type Search struct {
 }
 
 // GetSearch returns a map of an search as specified in the Search struct
+// Calls responses through the /search/ endpoint
 func GetSearch(search Search) (map[string]interface{}, error) {
 	var result map[string]interface{}
 	var err error

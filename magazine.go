@@ -12,6 +12,7 @@ type Magazine struct {
 }
 
 // GetMagazine returns a map of a magazine as specified in the Magazine struct
+// Calls responses through the /magazine/ endpoint
 func GetMagazine(magazine Magazine) (map[string]interface{}, error) {
 	var result map[string]interface{}
 	var err error

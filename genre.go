@@ -13,6 +13,7 @@ type Genre struct {
 }
 
 // GetGenre returns a map of a genre as specified in the Genre struct
+// Calls responses through the /genre/ endpoint
 func GetGenre(genre Genre) (map[string]interface{}, error) {
 	var result map[string]interface{}
 	var err error

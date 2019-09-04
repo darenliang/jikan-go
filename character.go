@@ -9,6 +9,7 @@ type Character struct {
 }
 
 // GetCharacter returns a map of a character as specified in the Character struct
+// Calls responses through the /character/ endpoint
 func GetCharacter(character Character) (map[string]interface{}, error) {
 	var result map[string]interface{}
 	var err error
