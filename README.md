@@ -5,7 +5,7 @@
 
 Go bindings for Jikan.
 
-Since the documentation is not very comprehensive, please refer to the official [Jikan API documentation](https://jikan.docs.apiary.io) for assistance on certain request parameters.
+Since the [documentation](https://godoc.org/github.com/darenliang/jikan-go) is not very comprehensive, please refer to the official [Jikan API documentation](https://jikan.docs.apiary.io) for assistance on certain request parameters.
 
 All json data is put into maps instead of structs, so consulting the official documentation of the REST API will show you the available data fields.
 
