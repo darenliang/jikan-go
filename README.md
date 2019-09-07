@@ -3,7 +3,7 @@
 [![GoDoc](https://godoc.org/github.com/darenliang/jikan-go?status.svg)](https://godoc.org/github.com/darenliang/jikan-go)
 [![Go Report Card](https://goreportcard.com/badge/github.com/darenliang/jikan-go)](https://goreportcard.com/report/github.com/darenliang/jikan-go)
 
-Go bindings for Jikan.
+A complete Go wrapper for the Jikan API.
 
 Since the [documentation](https://godoc.org/github.com/darenliang/jikan-go) is not very comprehensive, please refer to the official [Jikan API documentation](https://jikan.docs.apiary.io) for assistance on certain request parameters.
 
