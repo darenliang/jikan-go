@@ -83,6 +83,6 @@ Due to the nature of Golang, it is [not possible to use optional parameters in f
 
 It starts becoming a real problem when Jikan API's "search" or "user" request is used. There is just no simple way of calling only the request parameters you need directly. Although there are such things as "variadic arguments", it does not provide the ability to only add request parameters you need.
 
-One way around this problem is by using structs. We can take advantage of Golang's zero values, allowing us to not have to specify every single request parameter.
+One way around this problem is by passing structs as a function parameter. We can take advantage of Golang's zero values, allowing us to not have to specify every single request parameter.
 
 If there is a better way of addressing this problem, please let me know.
