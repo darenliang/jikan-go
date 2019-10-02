@@ -54,7 +54,10 @@ import (
 
 func main() {
 	search, _ := jikan.GetSearch(jikan.Search{Type: "anime", Q: "FMAB", OrderBy: "score"})
+	
+	// Get first anime from results
 	firstAnime := search["results"].([]interface{})[0].(map[string]interface{})
+	
 	fmt.Printf("Title: %v\nID: %v", firstAnime["title"], firstAnime["mal_id"])
 }
 ```
@@ -75,7 +78,7 @@ Here are some problems when using structs for responses:
 2. You have to know the exact function name to call for a specific struct.
 3. Whenever a new data field is added to the Jikan API, the corresponding struct that is supposed to hold the data field will ignore it unless it is updated.
 
-### Why do I have to perform type assertions when I want to use the nested data?
+### Why do I have to perform type assertions when I want to use map data?
 Golang doesn't allow dynamic return types for functions other than using interfaces.
 
 Returning interfaces doesn't allow you to use the interface value's underlying concrete value.
@@ -87,6 +90,8 @@ For accessing lower levels of data, you must perform type assertions in advance.
 To type assert a slice/array, append `.([]interface{})` before accessing the index.
 
 To type assert a map, append `.(map[string]interface{})` before accessing the index.
+
+To use a golang basic type, append `.(type)` where type is the data type you want to assert. Such examples include `.(string)` and `.(float64)`.
 
 ### Why do I need to create new structs every time I use the API?
 Due to the nature of Golang, it is [not possible to use optional parameters in functions](https://golang.org/doc/faq#overloading).
