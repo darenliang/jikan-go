@@ -11,11 +11,15 @@ All json data is put into maps instead of structs, so consulting the official do
 
 To visualize the response you can printout the map using `fmt.Println()` or you can use the `PrettyPrint()` function bundled in the package.
 
+### Installation
+
 To install: `go get github.com/darenliang/jikan-go`
 
 To import: `import "github.com/darenliang/jikan-go"` and use as `jikan`
 
-Sample usage:
+### Sample usage
+
+##### Basic Example
 ```go
 package main
 
@@ -26,7 +30,12 @@ import (
 
 func main() {
 	anime, _ := jikan.GetAnime(jikan.Anime{ID: 1})
+
+	// You can print values of type interface{}
 	fmt.Println(anime["title"])
+
+	// You can assert the type to make it more useful
+	fmt.Println("Anime: " + anime["title"].(string))
 }
 ```
 ```
@@ -34,6 +43,7 @@ Output:
 
 Cowboy Bebop
 ```
+##### Nested Data Example
 ```go
 package main
 
