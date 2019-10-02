@@ -33,9 +33,6 @@ func main() {
 
 	// You can print values of type interface{}
 	fmt.Println(anime["title"])
-
-	// You can assert the type to make it more useful
-	fmt.Println("Anime: " + anime["title"].(string))
 }
 ```
 ```
@@ -43,7 +40,7 @@ Output:
 
 Cowboy Bebop
 ```
-##### Nested Data Example
+##### Nested Data with Type Assertions Example
 ```go
 package main
 
@@ -54,18 +51,20 @@ import (
 
 func main() {
 	search, _ := jikan.GetSearch(jikan.Search{Type: "anime", Q: "FMAB", OrderBy: "score"})
-	
+
 	// Get first anime from results
 	firstAnime := search["results"].([]interface{})[0].(map[string]interface{})
-	
-	fmt.Printf("Title: %v\nID: %v", firstAnime["title"], firstAnime["mal_id"])
+
+	// Make type assertions
+	fmt.Println("Title: " + firstAnime["title"].(string))
+	fmt.Printf("Members: %v thousand\n", firstAnime["members"].(float64)/1000)
 }
 ```
 ```
 Output:
 
 Title: Fullmetal Alchemist: Brotherhood
-ID: 5114
+Members: 1533.286 thousand
 ```
 ### Why use maps over structs for reponses?
 Due to the multiple different response structures of the Jikan API, it is not very convenient to call different functions depending on the return type of the struct.
@@ -91,7 +90,7 @@ To type assert a slice/array, append `.([]interface{})` before accessing the ind
 
 To type assert a map, append `.(map[string]interface{})` before accessing the index.
 
-To use a golang basic type, append `.(type)` where type is the data type you want to assert. Such examples include `.(string)` and `.(float64)`.
+To use a golang basic type, append `.(type)` where type is the data type you want to assert. Such examples include `.(string)`, `.(float64)` and `.(bool)`.
 
 ### Why do I need to create new structs every time I use the API?
 Due to the nature of Golang, it is [not possible to use optional parameters in functions](https://golang.org/doc/faq#overloading).
