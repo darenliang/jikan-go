@@ -91,8 +91,7 @@ To type assert a slice/array, append `.([]interface{})` before accessing the ind
 
 To type assert a map, append `.(map[string]interface{})` before accessing the index.
 
-To use a golang basic type, append `.(type)` where type is the data type you want to assert.
-Such examples include `.(string)` and `.(float64)`.
+To use a golang basic type, append `.(type)` where type is the data type you want to assert. Such examples include `.(string)` and `.(float64)`.
 
 ### Why do I need to create new structs every time I use the API?
 Due to the nature of Golang, it is [not possible to use optional parameters in functions](https://golang.org/doc/faq#overloading).
