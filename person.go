@@ -15,7 +15,7 @@ func GetPerson(person Person) (map[string]interface{}, error) {
 	var err error
 	result, err = getMapFromUrl(fmt.Sprintf("/person/%v/%v", person.ID, person.Request)), nil
 	if _, ok := result["error"]; ok {
-		result, err = nil, fmt.Errorf("error %v, %v, %v", result["status"], result["message"], result["error"])
+		result, err = nil, getResultError(result)
 	}
 	return result, err
 }

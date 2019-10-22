@@ -9,6 +9,11 @@ import (
 	"time"
 )
 
+// getResultError returns an error with information from result
+func getResultError(result map[string]interface{}) error {
+	return fmt.Errorf("error %v, %v, %v", result["status"], result["message"], result["error"])
+}
+
 // getJsonString returns a json string from a url
 func getJsonString(rawURL string) string {
 	var httpClient = &http.Client{Timeout: ClientTimeout * time.Second}

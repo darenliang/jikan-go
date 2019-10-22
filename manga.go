@@ -23,7 +23,7 @@ func GetManga(manga Manga) (map[string]interface{}, error) {
 		result, err = getMapFromUrl(fmt.Sprintf("/manga/%v/%v", manga.ID, manga.Request)), nil
 	}
 	if _, ok := result["error"]; ok {
-		result, err = nil, fmt.Errorf("error %v, %v, %v", result["status"], result["message"], result["error"])
+		result, err = nil, getResultError(result)
 	}
 	return result, err
 }

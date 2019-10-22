@@ -27,7 +27,7 @@ func GetTop(top Top) (map[string]interface{}, error) {
 	}
 	result, err = getMapFromUrl(query.String()), nil
 	if _, ok := result["error"]; ok {
-		result, err = nil, fmt.Errorf("error %v, %v, %v", result["status"], result["message"], result["error"])
+		result, err = nil, getResultError(result)
 	}
 	return result, err
 }

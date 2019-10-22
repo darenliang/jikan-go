@@ -17,7 +17,7 @@ func GetSeason(season Season) (map[string]interface{}, error) {
 	var err error
 	result, err = getMapFromUrl(fmt.Sprintf("/season/%v/%v", season.Year, season.Season)), nil
 	if _, ok := result["error"]; ok {
-		result, err = nil, fmt.Errorf("error %v, %v, %v", result["status"], result["message"], result["error"])
+		result, err = nil, getResultError(result)
 	}
 	return result, err
 }
@@ -29,7 +29,7 @@ func GetSeasonArchive() (map[string]interface{}, error) {
 	var err error
 	result, err = getMapFromUrl("/season/archive"), nil
 	if _, ok := result["error"]; ok {
-		result, err = nil, fmt.Errorf("error %v, %v, %v", result["status"], result["message"], result["error"])
+		result, err = nil, getResultError(result)
 	}
 	return result, err
 }
@@ -41,7 +41,7 @@ func GetSeasonLater() (map[string]interface{}, error) {
 	var err error
 	result, err = getMapFromUrl("/season/later"), nil
 	if _, ok := result["error"]; ok {
-		result, err = nil, fmt.Errorf("error %v, %v, %v", result["status"], result["message"], result["error"])
+		result, err = nil, getResultError(result)
 	}
 	return result, err
 }
