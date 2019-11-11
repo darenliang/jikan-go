@@ -9,7 +9,7 @@ Since the [documentation](https://godoc.org/github.com/darenliang/jikan-go) is n
 
 All json data is put into maps instead of structs, so consulting the official documentation of the REST API will show you the available data fields.
 
-To visualize the response you can printout the map using `fmt.Println()` or you can use the `PrettyPrint()` function bundled in the package.
+To visualize the response you can printout the map using `fmt.Println()` or you can use the `PrettyPrint()` function bundled in the package to print the map with indentation.
 
 ### Installation
 
