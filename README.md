@@ -9,7 +9,7 @@ Since the [documentation](https://godoc.org/github.com/darenliang/jikan-go) is n
 
 All json data is put into maps instead of structs, so consulting the official documentation of the REST API will show you the available data fields.
 
-To visualize the response you can printout the map using `fmt.Println()` or you can use the `PrettyPrint()` function bundled in the package.
+To visualize the response you can printout the map using `fmt.Println()` or you can use the `PrettyPrint()` function bundled in the package to print the map with indentation.
 
 ### Installation
 
@@ -69,7 +69,7 @@ Members: 1533.286 thousand
 ### Why use maps over structs for reponses?
 Due to the multiple different response structures of the Jikan API, it is not very convenient to call different functions depending on the return type of the struct.
 
-Ideally, using functions like `GetAnimeEpisodes` should get you the Jikan's episode json data. However, the problem is that adding many structures creates a few nuisances that are hard to go unnoticed.
+Ideally, using functions like `Anime.Get()` should get you the Jikan's anime json data. However, the problem is that adding many structures creates a few nuisances that are hard to go unnoticed.
 
 Here are some problems when using structs for responses:
 
