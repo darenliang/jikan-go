@@ -29,7 +29,7 @@ import (
 )
 
 func main() {
-	anime, _ := jikan.GetAnime(jikan.Anime{ID: 1})
+	anime, _ := jikan.Anime{ID: 1}.Get()
 
 	// You can print values of type interface{}
 	fmt.Println(anime["title"])
@@ -50,7 +50,7 @@ import (
 )
 
 func main() {
-	search, _ := jikan.GetSearch(jikan.Search{Type: "anime", Q: "FMAB", OrderBy: "score"})
+	search, _ := jikan.Search{Type: "anime", Q: "FMAB", OrderBy: "score"}.Get()
 
 	// Get first anime from results
 	firstAnime := search["results"].([]interface{})[0].(map[string]interface{})
