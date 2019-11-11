@@ -28,9 +28,9 @@ type Search struct {
 	Letter       rune    // Starting letter
 }
 
-// GetSearch returns a map of an search as specified in the Search struct
+// Get returns a map of an search as specified in the Search struct
 // Calls responses through the /search/ endpoint
-func GetSearch(search Search) (map[string]interface{}, error) {
+func (search Search) Get() (map[string]interface{}, error) {
 	var result map[string]interface{}
 	var err error
 	var query strings.Builder

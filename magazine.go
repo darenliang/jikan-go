@@ -11,9 +11,9 @@ type Magazine struct {
 	Page       int // Page number (Optional)
 }
 
-// GetMagazine returns a map of a magazine as specified in the Magazine struct
+// Get returns a map of a magazine as specified in the Magazine struct
 // Calls responses through the /magazine/ endpoint
-func GetMagazine(magazine Magazine) (map[string]interface{}, error) {
+func (magazine Magazine) Get() (map[string]interface{}, error) {
 	var result map[string]interface{}
 	var err error
 	var query strings.Builder

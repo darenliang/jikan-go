@@ -9,9 +9,9 @@ type Anime struct {
 	Page    int    // Page number (Available depending on request type)
 }
 
-// GetAnime returns a map of an anime as specified in the Anime struct
+// Get returns a map of an anime as specified in the Anime struct
 // Calls responses through the /anime/ endpoint
-func GetAnime(anime Anime) (map[string]interface{}, error) {
+func (anime Anime) Get() (map[string]interface{}, error) {
 	var result map[string]interface{}
 	var err error
 	switch anime.Request {

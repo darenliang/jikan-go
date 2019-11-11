@@ -9,9 +9,9 @@ type Club struct {
 	Page    int    // Page number (Available upon request type activation)
 }
 
-// GetClub returns a map of a club as specified in the Club struct
+// Get returns a map of a club as specified in the Club struct
 // Calls responses through the /club/ endpoint
-func GetClub(club Club) (map[string]interface{}, error) {
+func (club Club) Get() (map[string]interface{}, error) {
 	var result map[string]interface{}
 	var err error
 	switch club.Request {

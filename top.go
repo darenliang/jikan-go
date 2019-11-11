@@ -12,9 +12,9 @@ type Top struct {
 	Subtype string // Subtype (Available upon page specification)
 }
 
-// GetTop returns a map of a top as specified in the Top struct
+// Get returns a map of a top as specified in the Top struct
 // Calls responses through the /top/ endpoint
-func GetTop(top Top) (map[string]interface{}, error) {
+func (top Top) Get() (map[string]interface{}, error) {
 	var result map[string]interface{}
 	var err error
 	var query strings.Builder

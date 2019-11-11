@@ -12,9 +12,9 @@ type Genre struct {
 	Page    int    // Page number (Optional)
 }
 
-// GetGenre returns a map of a genre as specified in the Genre struct
+// Get returns a map of a genre as specified in the Genre struct
 // Calls responses through the /genre/ endpoint
-func GetGenre(genre Genre) (map[string]interface{}, error) {
+func (genre Genre) Get() (map[string]interface{}, error) {
 	var result map[string]interface{}
 	var err error
 	var query strings.Builder

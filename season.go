@@ -10,9 +10,9 @@ type Season struct {
 	Season string // Season
 }
 
-// GetSeason returns a map of a season as specified in the Season struct
+// Get returns a map of a season as specified in the Season struct
 // Calls responses through the /season/ endpoint
-func GetSeason(season Season) (map[string]interface{}, error) {
+func (season Season) Get() (map[string]interface{}, error) {
 	var result map[string]interface{}
 	var err error
 	result, err = getMapFromUrl(fmt.Sprintf("/season/%v/%v", season.Year, season.Season)), nil

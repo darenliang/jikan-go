@@ -2,12 +2,17 @@ package jikan
 
 import "fmt"
 
-// GetSchedule returns a map of a schedule depending on the day
+// Schedule struct defines a producer
+type Schedule struct {
+	Day string // Day of the week
+}
+
+// Get returns a map of a schedule as specified in the Schedule struct
 // Calls responses through the /schedule/ endpoint
-func GetSchedule(day string) (map[string]interface{}, error) {
+func (schedule Schedule) Get() (map[string]interface{}, error) {
 	var result map[string]interface{}
 	var err error
-	result, err = getMapFromUrl(fmt.Sprintf("/schedule/%v", day)), nil
+	result, err = getMapFromUrl(fmt.Sprintf("/schedule/%v", schedule.Day)), nil
 	if _, ok := result["error"]; ok {
 		result, err = nil, getResultError(result)
 	}

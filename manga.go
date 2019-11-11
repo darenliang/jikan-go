@@ -9,9 +9,9 @@ type Manga struct {
 	Page    int    // Page number (Available depending on request type)
 }
 
-// GetManga returns a map of a manga as specified in the Manga struct
+// Get returns a map of a manga as specified in the Manga struct
 // Calls responses through the /manga/ endpoint
-func GetManga(manga Manga) (map[string]interface{}, error) {
+func (manga Manga) Get() (map[string]interface{}, error) {
 	var result map[string]interface{}
 	var err error
 	switch manga.Request {

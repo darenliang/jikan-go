@@ -11,9 +11,9 @@ type Producer struct {
 	Page       int // Page number (Optional)
 }
 
-// GetProducer returns a map of a producer as specified in the Producer struct
+// Get returns a map of a producer as specified in the Producer struct
 // Calls responses through the /producer/ endpoint
-func GetProducer(producer Producer) (map[string]interface{}, error) {
+func (producer Producer) Get() (map[string]interface{}, error) {
 	var result map[string]interface{}
 	var err error
 	var query strings.Builder

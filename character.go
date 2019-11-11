@@ -8,9 +8,9 @@ type Character struct {
 	Request string // Request type (Optional)
 }
 
-// GetCharacter returns a map of a character as specified in the Character struct
+// Get returns a map of a character as specified in the Character struct
 // Calls responses through the /character/ endpoint
-func GetCharacter(character Character) (map[string]interface{}, error) {
+func (character Character) Get() (map[string]interface{}, error) {
 	var result map[string]interface{}
 	var err error
 	result, err = getMapFromUrl(fmt.Sprintf("/character/%v/%v", character.ID, character.Request)), nil
