@@ -4,9 +4,9 @@ import "fmt"
 
 // Club struct defines a club
 type Club struct {
-	ID      int    // MyAnimeList Club ID
-	Request string // Request type
-	Page    int    // Page number (Available upon request type activation)
+	ID      int    // MyAnimeList club ID
+	Request string // request type
+	Page    int    // page number (available upon request type activation)
 }
 
 // Get returns a map of a club as specified in the Club struct

@@ -4,9 +4,9 @@ import "fmt"
 
 // Manga struct defines a manga
 type Manga struct {
-	ID      int    // MyAnimeList Anime ID
-	Request string // Request type (Optional)
-	Page    int    // Page number (Available depending on request type)
+	ID      int    // MyAnimeList manga ID
+	Request string // request type (optional)
+	Page    int    // page number (available depending on request type)
 }
 
 // Get returns a map of a manga as specified in the Manga struct

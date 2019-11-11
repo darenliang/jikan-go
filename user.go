@@ -8,38 +8,38 @@ import (
 // User struct defines a user
 type User struct {
 	Username string // MyAnimeList username
-	Request  int    // Request type
-	Data     string // Specify data type
+	Request  int    // request type
+	Data     string // specify data type
 
 	// Use only when choosing history
-	HistoryType string // Specify history type
+	HistoryType string // specify history type
 
 	// Use only when choosing friends
-	FriendsPage int // Specify friends page
+	FriendsPage int // specify friends page
 
-	AnimeListFilter string // Anime List Filter
-	MangaListFilter string // Manga List Filter
+	AnimeListFilter string // anime List Filter
+	MangaListFilter string // manga List Filter
 
 	// Use only when choosing animelist or mangalist (Only need to choose what you need)
-	Search string // Search query
-	Page   int    // Page number
-	Sort   string // Sort
+	Search string // search query
+	Page   int    // page number
+	Sort   string // sort
 
 	// Only for AnimeListFilter
-	OrderBy      string // Order by
-	OrderBy2     string // Second order by
-	AiredFrom    string // Aired from
-	AiredTo      string // Aired to
-	Producer     int    // MyAnimeList Producer ID
-	Year         int    // Year
-	Season       string // Season
-	AiringStatus string // Airing status
+	OrderBy      string // rrder by
+	OrderBy2     string // second order by
+	AiredFrom    string // aired from
+	AiredTo      string // aired to
+	Producer     int    // MyAnimeList producer ID
+	Year         int    // year
+	Season       string // season
+	AiringStatus string // airing status
 
 	// Only for MangaListFilter
-	PublishedFrom    string // Published from
-	PublishedTo      string // Published to
-	Magazine         int    // MyAnimeList Magazine ID
-	PublishingStatus string // Publishing status
+	PublishedFrom    string // published from
+	PublishedTo      string // published to
+	Magazine         int    // MyAnimeList magazine ID
+	PublishingStatus string // publishing status
 }
 
 // Get returns a map of a user as specified in the User struct

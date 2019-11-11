@@ -7,8 +7,8 @@ import (
 
 // Magazine struct defines a magazine
 type Magazine struct {
-	MagazineID int // MyAnimeList Magazine ID
-	Page       int // Page number (Optional)
+	MagazineID int // MyAnimeList magazine ID
+	Page       int // page number (optional)
 }
 
 // Get returns a map of a magazine as specified in the Magazine struct

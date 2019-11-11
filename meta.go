@@ -7,10 +7,10 @@ import (
 
 // Meta struct defines a meta
 type Meta struct {
-	Request string // Request type
-	Type    string // Object Type
-	Period  string // Request Period
-	Offset  int    // Page number (Optional)
+	Request string // request type
+	Type    string // object Type
+	Period  string // request Period
+	Offset  int    // page number (optional)
 }
 
 // Get returns a map of a meta as specified in the Meta struct

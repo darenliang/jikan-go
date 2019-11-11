@@ -7,9 +7,9 @@ import (
 
 // Top struct defines a top
 type Top struct {
-	Type    string // Object type
-	Page    int    // Page number (Optional)
-	Subtype string // Subtype (Available upon page specification)
+	Type    string // object type
+	Page    int    // page number (optional)
+	Subtype string // subtype (available upon page specification)
 }
 
 // Get returns a map of a top as specified in the Top struct

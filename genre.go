@@ -7,9 +7,9 @@ import (
 
 // Genre struct defines a genre
 type Genre struct {
-	Type    string // Media type
-	GenreID int    // MyAnimeList Genre ID
-	Page    int    // Page number (Optional)
+	Type    string // media type
+	GenreID int    // MyAnimeList genre ID
+	Page    int    // page number (optional)
 }
 
 // Get returns a map of a genre as specified in the Genre struct

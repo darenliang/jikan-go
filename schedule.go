@@ -4,7 +4,7 @@ import "fmt"
 
 // Schedule struct defines a producer
 type Schedule struct {
-	Day string // Day of the week
+	Day string // day of the week
 }
 
 // Get returns a map of a schedule as specified in the Schedule struct

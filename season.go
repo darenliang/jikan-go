@@ -6,8 +6,8 @@ import (
 
 // Season struct defines a season
 type Season struct {
-	Year   int    // Year
-	Season string // Season
+	Year   int    // year
+	Season string // season
 }
 
 // Get returns a map of a season as specified in the Season struct
