@@ -5,7 +5,9 @@
 
 A complete Go wrapper for the Jikan API.
 
-Since the [documentation](https://godoc.org/github.com/darenliang/jikan-go) is not very comprehensive, please refer to the official [Jikan API documentation](https://jikan.docs.apiary.io) for assistance on certain request parameters.
+Documentation can be found here: [pkg.go.dev](https://pkg.go.dev/github.com/darenliang/jikan-go?tab=doc) or [godoc.org](https://godoc.org/github.com/darenliang/jikan-go)
+
+Since the documentation is not very comprehensive, please refer to the official [Jikan API documentation](https://jikan.docs.apiary.io) for assistance on certain request parameters.
 
 All json data is put into maps instead of structs, so consulting the official documentation of the REST API will show you the available data fields.
 
