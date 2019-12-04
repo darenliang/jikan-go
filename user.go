@@ -26,7 +26,7 @@ type User struct {
 	Sort   string // sort
 
 	// Only for AnimeListFilter
-	OrderBy      string // rrder by
+	OrderBy      string // order by
 	OrderBy2     string // second order by
 	AiredFrom    string // aired from
 	AiredTo      string // aired to
