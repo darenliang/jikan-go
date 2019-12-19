@@ -15,7 +15,7 @@ To visualize the response you can printout the map using `fmt.Println()` or you 
 
 ### Installation
 
-To install: `go get github.com/darenliang/jikan-go`
+To install/update: `go get -u github.com/darenliang/jikan-go`
 
 To import: `import "github.com/darenliang/jikan-go"` and use as `jikan`
 
