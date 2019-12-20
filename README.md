@@ -19,7 +19,7 @@ To install/update: `go get -u github.com/darenliang/jikan-go`
 
 To import: `import "github.com/darenliang/jikan-go"` and use as `jikan`
 
-### Sample usage
+### Usage
 
 ##### Basic Example
 ```go
