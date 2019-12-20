@@ -59,7 +59,7 @@ func main() {
 
 	// Make type assertions
 	fmt.Println("Title: " + firstAnime["title"].(string))
-	fmt.Printf("Members: %v thousand\n", firstAnime["members"].(float64)/1000)
+	fmt.Printf("Members: %v thousand", firstAnime["members"].(float64)/1000)
 }
 ```
 ```
