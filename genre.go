@@ -12,8 +12,8 @@ type Genre struct {
 	Page    int    // page number (optional)
 }
 
-// Get returns a map of a genre as specified in the Genre struct
-// Calls responses through the /genre/ endpoint
+// Get returns a map of a genre as specified in the Genre struct.
+// Calls responses through the /genre/ endpoint.
 func (genre Genre) Get() (map[string]interface{}, error) {
 	var result map[string]interface{}
 	var err error

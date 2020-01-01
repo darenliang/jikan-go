@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-// Search struct defines an search
+// Search struct defines a search
 type Search struct {
 	Type string // object type
 

@@ -10,8 +10,8 @@ type Season struct {
 	Season string // season
 }
 
-// Get returns a map of a season as specified in the Season struct
-// Calls responses through the /season/ endpoint
+// Get returns a map of a season as specified in the Season struct.
+// Calls responses through the /season/ endpoint.
 func (season Season) Get() (map[string]interface{}, error) {
 	var result map[string]interface{}
 	var err error
@@ -22,9 +22,9 @@ func (season Season) Get() (map[string]interface{}, error) {
 	return result, err
 }
 
-// GetArchive returns a map of season archives
-// Calls responses through the /season/archive endpoint
-// An empty Season struct is allowed
+// GetArchive returns a map of season archives.
+// Calls responses through the /season/archive endpoint.
+// An empty Season struct is allowed.
 func (season Season) GetArchive() (map[string]interface{}, error) {
 	var result map[string]interface{}
 	var err error
@@ -35,9 +35,9 @@ func (season Season) GetArchive() (map[string]interface{}, error) {
 	return result, err
 }
 
-// GetLater returns a map of a list of anime from seasons later
-// Calls responses through the /season/archive endpoint
-// An empty Season struct is allowed
+// GetLater returns a map of a list of anime from seasons later.
+// Calls responses through the /season/archive endpoint.
+// An empty Season struct is allowed.
 func (season Season) GetLater() (map[string]interface{}, error) {
 	var result map[string]interface{}
 	var err error

@@ -13,8 +13,8 @@ type Meta struct {
 	Offset  int    // page number (optional)
 }
 
-// Get returns a map of a meta as specified in the Meta struct
-// Calls responses through the /meta/ endpoint
+// Get returns a map of a meta as specified in the Meta struct.
+// Calls responses through the /meta/ endpoint.
 func (meta Meta) Get() (map[string]interface{}, error) {
 	var result map[string]interface{}
 	var err error

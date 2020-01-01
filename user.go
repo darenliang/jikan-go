@@ -42,8 +42,8 @@ type User struct {
 	PublishingStatus string // publishing status
 }
 
-// Get returns a map of a user as specified in the User struct
-// Calls responses through the /user/ endpoint
+// Get returns a map of a user as specified in the User struct.
+// Calls responses through the /user/ endpoint.
 func (user User) Get() (map[string]interface{}, error) {
 	var result map[string]interface{}
 	var err error

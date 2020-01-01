@@ -8,8 +8,8 @@ type Character struct {
 	Request string // request type (optional)
 }
 
-// Get returns a map of a character as specified in the Character struct
-// Calls responses through the /character/ endpoint
+// Get returns a map of a character as specified in the Character struct.
+// Calls responses through the /character/ endpoint.
 func (character Character) Get() (map[string]interface{}, error) {
 	var result map[string]interface{}
 	var err error

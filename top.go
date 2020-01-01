@@ -12,8 +12,8 @@ type Top struct {
 	Subtype string // subtype (available upon page specification)
 }
 
-// Get returns a map of a top as specified in the Top struct
-// Calls responses through the /top/ endpoint
+// Get returns a map of a top as specified in the Top struct.
+// Calls responses through the /top/ endpoint.
 func (top Top) Get() (map[string]interface{}, error) {
 	var result map[string]interface{}
 	var err error

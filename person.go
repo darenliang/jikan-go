@@ -8,7 +8,7 @@ type Person struct {
 	Request string // request type (optional)
 }
 
-// Get returns a map of a person as specified in the Person struct
+// Get returns a map of a person as specified in the Person struct.
 // Calls responses through the /person/ endpoint
 func (person Person) Get() (map[string]interface{}, error) {
 	var result map[string]interface{}

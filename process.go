@@ -48,7 +48,8 @@ func getMapFromUrl(url string) map[string]interface{} {
 	return jsonMap
 }
 
-// PrettyPrint pretty prints an interface value
+// PrettyPrint pretty prints an interface value.
+// Used to print response maps.
 func PrettyPrint(val interface{}) {
 	pretty, err := json.MarshalIndent(val, "", "  ")
 	if err == nil {
