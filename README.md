@@ -5,7 +5,7 @@
 
 A complete Go wrapper for the Jikan API.
 
-Documentation can be found at [godoc.org](https://godoc.org/github.com/darenliang/jikan-go) or [pkg.go.dev](https://pkg.go.dev/github.com/darenliang/jikan-go?tab=doc)
+Documentation can be found at [godoc.org](https://godoc.org/github.com/darenliang/jikan-go)
 
 Since the documentation is not very comprehensive, please refer to the official [Jikan API documentation](https://jikan.docs.apiary.io) on available request parameters.
 
