@@ -11,7 +11,7 @@ Please refer to the official [Jikan API documentation](https://jikan.docs.apiary
 
 All json data is put into maps instead of structs, so consulting the official documentation of the REST API will show you the available data fields.
 
-To visualize the response you can printout the map using `fmt.Println()` or you can use the `PrettyPrint()` function bundled in the package to print the map with indentation.
+To visualize the response you can printout the map using `fmt.Println()` or you can use the `jikan.PrettyPrint()` function bundled in the package to print the map with indentation.
 
 ### Installation
 
