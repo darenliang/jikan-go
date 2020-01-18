@@ -68,7 +68,6 @@ Output:
 Title: Fullmetal Alchemist: Brotherhood
 Members: 1533.286 thousand
 ```
-## FAQ
 ### Why use maps over structs for reponses?
 Due to the multiple different response structures of the Jikan API, it is not very convenient to call different functions depending on the return type of the struct.
 
