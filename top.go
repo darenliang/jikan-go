@@ -54,7 +54,7 @@ type TopPeople struct {
 	} `json:"top"`
 }
 
-// TopPeople struct for the /top/characters endpoint
+// TopCharacters struct for the /top/characters endpoint
 type TopCharacters struct {
 	Top []struct {
 		MalID        int       `json:"mal_id"`
