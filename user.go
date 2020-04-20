@@ -2,10 +2,11 @@ package jikan
 
 import (
 	"fmt"
+	"net/url"
 	"time"
 )
 
-// User struct
+// User struct for the /user endpoint
 type User struct {
 	UserID     int       `json:"user_id"`
 	Username   string    `json:"username"`
@@ -50,7 +51,7 @@ type User struct {
 	About string `json:"about"`
 }
 
-// UserHistory struct
+// UserHistory struct for the /user/history endpoint
 type UserHistory struct {
 	History []struct {
 		Meta      MalItem   `json:"meta"`
@@ -59,7 +60,7 @@ type UserHistory struct {
 	} `json:"history"`
 }
 
-// UserFriends struct
+// UserFriends struct for the /user/friends endpoint
 type UserFriends struct {
 	Friends []struct {
 		URL          string    `json:"url"`
@@ -70,7 +71,7 @@ type UserFriends struct {
 	} `json:"friends"`
 }
 
-// UserAnimeList struct
+// UserAnimeList struct for the /user/animelist endpoint
 type UserAnimeList struct {
 	Anime []struct {
 		MalID           int       `json:"mal_id"`
@@ -105,7 +106,7 @@ type UserAnimeList struct {
 	} `json:"anime"`
 }
 
-// UserMangaList struct
+// UserMangaList struct for the /mangalist endpoint
 type UserMangaList struct {
 	Manga []struct {
 		MalID            int       `json:"mal_id"`
@@ -138,7 +139,8 @@ type UserMangaList struct {
 func GetUser(username string) (*User, error) {
 	res := &User{}
 
-	err := urlToStruct(fmt.Sprintf("/user/%s", username), res)
+	err := urlToStruct(fmt.Sprintf("/user/%s",
+		url.QueryEscape(username)), res)
 
 	if err != nil {
 		return nil, err
@@ -148,10 +150,11 @@ func GetUser(username string) (*User, error) {
 }
 
 // GetUserHistory returns user history
-func GetUserHistory(username, mediaType string) (*UserHistory, error) {
+func GetUserHistory(username, opt string) (*UserHistory, error) {
 	res := &UserHistory{}
 
-	err := urlToStruct(fmt.Sprintf("/user/%s/history/%s", username, mediaType), res)
+	err := urlToStruct(fmt.Sprintf("/user/%s/history/%s",
+		url.QueryEscape(username), url.QueryEscape(opt)), res)
 
 	if err != nil {
 		return nil, err
@@ -164,7 +167,8 @@ func GetUserHistory(username, mediaType string) (*UserHistory, error) {
 func GetUserFriends(username string, page int) (*UserFriends, error) {
 	res := &UserFriends{}
 
-	err := urlToStruct(fmt.Sprintf("/user/%s/friends/%d", username, page), res)
+	err := urlToStruct(fmt.Sprintf("/user/%s/friends/%d",
+		url.QueryEscape(username), page), res)
 
 	if err != nil {
 		return nil, err
@@ -174,10 +178,11 @@ func GetUserFriends(username string, page int) (*UserFriends, error) {
 }
 
 // GetUserAnimeList returns user anime list
-func GetUserAnimeList(username, option string, page int) (*UserAnimeList, error) {
+func GetUserAnimeList(username, opt string, page int) (*UserAnimeList, error) {
 	res := &UserAnimeList{}
 
-	err := urlToStruct(fmt.Sprintf("/user/%s/animelist/%s/%d", username, option, page), res)
+	err := urlToStruct(fmt.Sprintf("/user/%s/animelist/%s/%d",
+		url.QueryEscape(username), url.QueryEscape(opt), page), res)
 
 	if err != nil {
 		return nil, err
@@ -187,10 +192,11 @@ func GetUserAnimeList(username, option string, page int) (*UserAnimeList, error)
 }
 
 // GetUserMangaList returns user manga list
-func GetUserMangaList(username, option string, page int) (*UserMangaList, error) {
+func GetUserMangaList(username, opt string, page int) (*UserMangaList, error) {
 	res := &UserMangaList{}
 
-	err := urlToStruct(fmt.Sprintf("/user/%s/mangalist/%s/%d", username, option, page), res)
+	err := urlToStruct(fmt.Sprintf("/user/%s/mangalist/%s/%d",
+		url.QueryEscape(username), url.QueryEscape(opt), page), res)
 
 	if err != nil {
 		return nil, err

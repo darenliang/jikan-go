@@ -48,10 +48,7 @@ import (
 )
 
 func main() {
-	search, _ := jikan.GetSearch(jikan.SearchQuery{
-		Type: "anime",
-		Q:    "Cowboy Bebop",
-	})
+	search, _ := jikan.GetSearchAnime("q=Cowboy Bebop", "type=tv")
 	fmt.Println(search.Results[0].Score)
 }
 ```

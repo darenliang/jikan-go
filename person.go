@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-// Person struct
+// Person struct for the /person endpoint
 type Person struct {
 	MalID            int       `json:"mal_id"`
 	URL              string    `json:"url"`
@@ -19,41 +19,21 @@ type Person struct {
 	MemberFavorites  int       `json:"member_favorites"`
 	About            string    `json:"about"`
 	VoiceActingRoles []struct {
-		Role  string `json:"role"`
-		Anime struct {
-			MalID    int    `json:"mal_id"`
-			URL      string `json:"url"`
-			ImageURL string `json:"image_url"`
-			Name     string `json:"name"`
-		} `json:"anime"`
-		Character struct {
-			MalID    int    `json:"mal_id"`
-			URL      string `json:"url"`
-			ImageURL string `json:"image_url"`
-			Name     string `json:"name"`
-		} `json:"character"`
+		Role      string     `json:"role"`
+		Anime     MalImgItem `json:"anime"`
+		Character MalImgItem `json:"character"`
 	} `json:"voice_acting_roles"`
 	AnimeStaffPositions []struct {
-		Position string `json:"position"`
-		Anime    struct {
-			MalID    int    `json:"mal_id"`
-			URL      string `json:"url"`
-			ImageURL string `json:"image_url"`
-			Name     string `json:"name"`
-		} `json:"anime"`
+		Position string     `json:"position"`
+		Anime    MalImgItem `json:"anime"`
 	} `json:"anime_staff_positions"`
 	PublishedManga []struct {
-		Position string `json:"position"`
-		Manga    struct {
-			MalID    int    `json:"mal_id"`
-			URL      string `json:"url"`
-			ImageURL string `json:"image_url"`
-			Name     string `json:"name"`
-		} `json:"manga"`
+		Position string     `json:"position"`
+		Manga    MalImgItem `json:"manga"`
 	} `json:"published_manga"`
 }
 
-// PersonPictures struct
+// PersonPictures struct for the /person/pictures endpoint
 type PersonPictures = AnimePictures
 
 // GetPerson returns person

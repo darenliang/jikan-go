@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-// Anime struct
+// Anime struct for the /anime endpoint
 type Anime struct {
 	MalID         int      `json:"mal_id"`
 	URL           string   `json:"url"`
@@ -46,7 +46,7 @@ type Anime struct {
 	EndingThemes  []string  `json:"ending_themes"`
 }
 
-// AnimeCharactersStaff struct
+// AnimeCharactersStaff struct for the /anime/characters_staff endpoint
 type AnimeCharactersStaff struct {
 	Characters []struct {
 		MalID       int    `json:"mal_id"`
@@ -71,7 +71,7 @@ type AnimeCharactersStaff struct {
 	} `json:"staff"`
 }
 
-// AnimeEpisodes struct
+// AnimeEpisodes struct for the /anime/episodes endpoint
 type AnimeEpisodes struct {
 	EpisodesLastPage int `json:"episodes_last_page"`
 	Episodes         []struct {
@@ -87,7 +87,7 @@ type AnimeEpisodes struct {
 	} `json:"episodes"`
 }
 
-// AnimeNews struct
+// AnimeNews struct for the /anime/news endpoint
 type AnimeNews struct {
 	Articles []struct {
 		URL        string    `json:"url"`
@@ -102,7 +102,7 @@ type AnimeNews struct {
 	} `json:"articles"`
 }
 
-// AnimePictures struct
+// AnimePictures struct for the /anime/pictures endpoint
 type AnimePictures struct {
 	Pictures []struct {
 		Large string `json:"large"`
@@ -110,7 +110,7 @@ type AnimePictures struct {
 	} `json:"pictures"`
 }
 
-// AnimeVideos struct
+// AnimeVideos struct for the /anime/videos endpoint
 type AnimeVideos struct {
 	Promo []struct {
 		Title    string `json:"title"`
@@ -125,7 +125,7 @@ type AnimeVideos struct {
 	} `json:"episodes"`
 }
 
-// AnimeStats struct
+// AnimeStats struct for the /anime/stats endpoint
 type AnimeStats struct {
 	Watching    int       `json:"watching"`
 	Completed   int       `json:"completed"`
@@ -136,7 +136,7 @@ type AnimeStats struct {
 	Scores      MalScores `json:"scores"`
 }
 
-// AnimeForum struct
+// AnimeForum struct for the /anime/forum endpoint
 type AnimeForum struct {
 	Topics []struct {
 		TopicID    int       `json:"topic_id"`
@@ -155,12 +155,12 @@ type AnimeForum struct {
 	} `json:"topics"`
 }
 
-// AnimeMoreInfo struct
+// AnimeMoreInfo struct for the /anime/moreinfo endpoint
 type AnimeMoreInfo struct {
 	Moreinfo string `json:"moreinfo"`
 }
 
-// AnimeReviews struct
+// AnimeReviews struct for the /anime/reviews endpoint
 type AnimeReviews struct {
 	Reviews []struct {
 		MalID        int       `json:"mal_id"`
@@ -186,7 +186,7 @@ type AnimeReviews struct {
 	} `json:"reviews"`
 }
 
-// AnimeRecommendations struct
+// AnimeRecommendations struct for the /anime/recommendations endpoint
 type AnimeRecommendations struct {
 	Recommendations []struct {
 		MalID               int    `json:"mal_id"`
@@ -198,7 +198,7 @@ type AnimeRecommendations struct {
 	} `json:"recommendations"`
 }
 
-// AnimeUserUpdates struct
+// AnimeUserUpdates struct for the /anime/userupdates endpoint
 type AnimeUserUpdates struct {
 	Users []struct {
 		Username      string    `json:"username"`

@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-// Club struct
+// Club struct for the /club endpoint
 type Club struct {
 	MalID              int       `json:"mal_id"`
 	URL                string    `json:"url"`
@@ -22,7 +22,7 @@ type Club struct {
 	CharacterRelations []MalItem `json:"character_relations"`
 }
 
-// ClubMembers struct
+// ClubMembers struct for the /club/members endpoint
 type ClubMembers struct {
 	Members []struct {
 		Username string `json:"username"`

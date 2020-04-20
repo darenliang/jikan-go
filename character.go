@@ -2,13 +2,13 @@ package jikan
 
 import "fmt"
 
-// Character struct
+// Character struct for the /character endpoint
 type Character struct {
 	MalID           int            `json:"mal_id"`
 	URL             string         `json:"url"`
 	Name            string         `json:"name"`
 	NameKanji       string         `json:"name_kanji"`
-	Nicknames       []interface{}  `json:"nicknames"`
+	Nicknames       []string       `json:"nicknames"`
 	About           string         `json:"about"`
 	MemberFavorites int            `json:"member_favorites"`
 	ImageURL        string         `json:"image_url"`
@@ -23,7 +23,7 @@ type Character struct {
 	} `json:"voice_actors"`
 }
 
-// CharacterPictures struct
+// CharacterPictures struct for the /character/pictures endpoint
 type CharacterPictures = AnimePictures
 
 // GetCharacter returns character

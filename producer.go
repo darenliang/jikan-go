@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-// Producer struct
+// Producer struct for the /producer endpoint
 type Producer struct {
 	Meta  MalItem        `json:"meta"`
 	Anime []MalAnimeDesc `json:"anime"`

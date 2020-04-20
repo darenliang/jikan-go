@@ -1,6 +1,6 @@
 package jikan
 
-// MetaStatus struct
+// MetaStatus struct for the /meta/status endpoint
 type MetaStatus struct {
 	CachedRequests           int    `json:"cached_requests"`
 	RequestsToday            int    `json:"requests_today"`

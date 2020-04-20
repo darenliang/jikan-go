@@ -2,9 +2,10 @@ package jikan
 
 import (
 	"fmt"
+	"net/url"
 )
 
-// Schedule struct
+// Schedule struct for the /schedule endpoint
 type Schedule struct {
 	Monday    []MalAnimeDesc `json:"monday"`
 	Tuesday   []MalAnimeDesc `json:"tuesday"`
@@ -21,7 +22,7 @@ type Schedule struct {
 func GetSchedule(day string) (*Schedule, error) {
 	res := &Schedule{}
 
-	err := urlToStruct(fmt.Sprintf("/schedule/%s", day), res)
+	err := urlToStruct(fmt.Sprintf("/schedule/%s", url.QueryEscape(day)), res)
 
 	if err != nil {
 		return nil, err

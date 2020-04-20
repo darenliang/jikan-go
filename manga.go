@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-// Manga struct
+// Manga struct for the /manga endpoint
 type Manga struct {
 	MalID         int      `json:"mal_id"`
 	URL           string   `json:"url"`
@@ -37,18 +37,18 @@ type Manga struct {
 	Serializations []MalItem `json:"serializations"`
 }
 
-// MangaCharacters struct
+// MangaCharacters struct for the /manga/characters endpoint
 type MangaCharacters struct {
 	Characters []MalRoleStaff `json:"characters"`
 }
 
-// MangaNews struct
+// MangaNews struct for the /manga/news endpoint
 type MangaNews = AnimeNews
 
-// MangaPictures struct
+// MangaPictures struct for the /manga/pictures endpoint
 type MangaPictures = AnimePictures
 
-// MangaStats struct
+// MangaStats struct for the /manga/stats endpoint
 type MangaStats struct {
 	Reading    int       `json:"reading"`
 	Completed  int       `json:"completed"`
@@ -59,20 +59,20 @@ type MangaStats struct {
 	Scores     MalScores `json:"scores"`
 }
 
-// MangaForum struct
+// MangaForum struct for the /manga/forum endpoint
 type MangaForum = AnimeForum
 
-// MangaMoreInfo struct
+// MangaMoreInfo struct for the /manga/moreinfo endpoint
 type MangaMoreInfo = AnimeMoreInfo
 
-// MangaReviews struct
+// MangaReviews struct for the /manga/reviews endpoint
 type MangaReviews struct {
 	Reviews []struct {
-		MalID        int         `json:"mal_id"`
-		URL          string      `json:"url"`
-		Type         interface{} `json:"type"`
-		HelpfulCount int         `json:"helpful_count"`
-		Date         time.Time   `json:"date"`
+		MalID        int       `json:"mal_id"`
+		URL          string    `json:"url"`
+		Type         string    `json:"type"`
+		HelpfulCount int       `json:"helpful_count"`
+		Date         time.Time `json:"date"`
 		Reviewer     struct {
 			URL          string `json:"url"`
 			ImageURL     string `json:"image_url"`
@@ -90,22 +90,22 @@ type MangaReviews struct {
 	} `json:"reviews"`
 }
 
-// MangaRecommendations struct
+// MangaRecommendations struct for the /manga/recommendations endpoint
 type MangaRecommendations = AnimeRecommendations
 
-// MangaUserUpdates struct
+// MangaUserUpdates struct for the /manga/userupdates endpoint
 type MangaUserUpdates struct {
 	Users []struct {
-		Username      string      `json:"username"`
-		URL           string      `json:"url"`
-		ImageURL      string      `json:"image_url"`
-		Score         interface{} `json:"score"`
-		Status        string      `json:"status"`
-		VolumesRead   interface{} `json:"volumes_read"`
-		VolumesTotal  int         `json:"volumes_total"`
-		ChaptersRead  int         `json:"chapters_read"`
-		ChaptersTotal int         `json:"chapters_total"`
-		Date          time.Time   `json:"date"`
+		Username      string    `json:"username"`
+		URL           string    `json:"url"`
+		ImageURL      string    `json:"image_url"`
+		Score         int       `json:"score"`
+		Status        string    `json:"status"`
+		VolumesRead   int       `json:"volumes_read"`
+		VolumesTotal  int       `json:"volumes_total"`
+		ChaptersRead  int       `json:"chapters_read"`
+		ChaptersTotal int       `json:"chapters_total"`
+		Date          time.Time `json:"date"`
 	} `json:"users"`
 }
 

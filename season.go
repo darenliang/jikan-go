@@ -2,10 +2,11 @@ package jikan
 
 import (
 	"fmt"
+	"net/url"
 	"time"
 )
 
-// Season struct
+// Season struct for the /season endpoint
 type Season struct {
 	SeasonName string `json:"season_name"`
 	SeasonYear int    `json:"season_year"`
@@ -30,7 +31,7 @@ type Season struct {
 	} `json:"anime"`
 }
 
-// SeasonArchive struct
+// SeasonArchive struct for the /season/archive endpoint
 type SeasonArchive struct {
 	Archive []struct {
 		Year    int      `json:"year"`
@@ -38,14 +39,14 @@ type SeasonArchive struct {
 	} `json:"archive"`
 }
 
-// SeasonLater struct
+// SeasonLater struct for the /season/later endpoint
 type SeasonLater = Season
 
 // GetSeason returns season
 func GetSeason(year int, season string) (*Season, error) {
 	res := &Season{}
 
-	err := urlToStruct(fmt.Sprintf("/season/%d/%s", year, season), res)
+	err := urlToStruct(fmt.Sprintf("/season/%d/%s", year, url.QueryEscape(season)), res)
 
 	if err != nil {
 		return nil, err

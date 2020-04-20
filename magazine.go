@@ -2,27 +2,12 @@ package jikan
 
 import (
 	"fmt"
-	"time"
 )
 
-// Magazine struct
+// Magazine struct for the /magazine endpoint
 type Magazine struct {
-	Meta  MalItem `json:"meta"`
-	Manga []struct {
-		MalID           int       `json:"mal_id"`
-		URL             string    `json:"url"`
-		Title           string    `json:"title"`
-		ImageURL        string    `json:"image_url"`
-		Synopsis        string    `json:"synopsis"`
-		Type            string    `json:"type"`
-		PublishingStart time.Time `json:"publishing_start"`
-		Volumes         int       `json:"volumes"`
-		Members         int       `json:"members"`
-		Genres          []MalItem `json:"genres"`
-		Authors         []MalItem `json:"authors"`
-		Score           float64   `json:"score"`
-		Serialization   []string  `json:"serialization"`
-	} `json:"manga"`
+	Meta  MalItem        `json:"meta"`
+	Manga []MalMangaDesc `json:"manga"`
 }
 
 // GetMagazine returns magazine

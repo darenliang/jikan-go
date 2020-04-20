@@ -1,38 +1,13 @@
 package jikan
 
 import (
-	"errors"
 	"fmt"
-	"net/url"
 	"strings"
 	"time"
 )
 
-// SearchQuery struct
-type SearchQuery struct {
-	Type string // object type
-
-	// All below are optional
-	Q            string  // search query
-	Page         int     // page number
-	TypeFormat   string  // media format
-	Status       string  // status
-	Rated        string  // age rating
-	Genre        int     // MyAnimeList genre ID
-	Score        float64 // score 0.0 - 10.0
-	StartDate    string  // start date
-	EndDate      string  // end date
-	GenreExclude bool    // exclude genre filter
-	Limit        int     // limit results
-	OrderBy      string  // order by
-	Sort         string  // sort
-	Producer     int     // MyAnimeList producer ID
-	Magazine     int     // MyAnimeList magazine ID
-	Letter       rune    // starting letter
-}
-
-// Search struct
-type Search struct {
+// SearchAnime struct for the /search/anime endpoint
+type SearchAnime struct {
 	Results []struct {
 		MalID     int       `json:"mal_id"`
 		URL       string    `json:"url"`
@@ -51,70 +26,100 @@ type Search struct {
 	LastPage int `json:"last_page"`
 }
 
-// GetSearch returns search
-func GetSearch(q SearchQuery) (*Search, error) {
-	res := &Search{}
+// SearchManga struct for the /search/manga endpoint
+type SearchManga struct {
+	Results []struct {
+		MalID      int       `json:"mal_id"`
+		URL        string    `json:"url"`
+		ImageURL   string    `json:"image_url"`
+		Title      string    `json:"title"`
+		Publishing bool      `json:"publishing"`
+		Synopsis   string    `json:"synopsis"`
+		Type       string    `json:"type"`
+		Chapters   int       `json:"chapters"`
+		Volumes    int       `json:"volumes"`
+		Score      float64   `json:"score"`
+		StartDate  time.Time `json:"start_date"`
+		EndDate    time.Time `json:"end_date"`
+		Members    int       `json:"members"`
+	} `json:"results"`
+	LastPage int `json:"last_page"`
+}
 
-	if q.Type == "" {
-		return nil, errors.New("search type not specified")
-	}
+// SearchPeople struct for the /search/people endpoint
+type SearchPeople struct {
+	Results []struct {
+		MalID            int      `json:"mal_id"`
+		URL              string   `json:"url"`
+		ImageURL         string   `json:"image_url"`
+		Name             string   `json:"name"`
+		AlternativeNames []string `json:"alternative_names"`
+	} `json:"results"`
+	LastPage int `json:"last_page"`
+}
 
-	if q.Q == "" {
-		return nil, errors.New("search query not specified")
-	}
+// SearchCharacter struct for the /search/character endpoint
+type SearchCharacter struct {
+	Results []struct {
+		MalID            int       `json:"mal_id"`
+		URL              string    `json:"url"`
+		ImageURL         string    `json:"image_url"`
+		Name             string    `json:"name"`
+		AlternativeNames []string  `json:"alternative_names"`
+		Anime            []MalItem `json:"anime"`
+		Manga            []MalItem `json:"manga"`
+	} `json:"results"`
+	LastPage int `json:"last_page"`
+}
 
-	var query strings.Builder
-	query.WriteString(fmt.Sprintf("/search/%v/?", q.Type))
-	if q.Q != "" {
-		query.WriteString(fmt.Sprintf("q=%v&", url.QueryEscape(q.Q)))
-	}
-	if q.Page != 0 {
-		query.WriteString(fmt.Sprintf("page=%v&", q.Page))
-	}
-	if q.TypeFormat != "" {
-		query.WriteString(fmt.Sprintf("type=%v&", q.TypeFormat))
-	}
-	if q.Status != "" {
-		query.WriteString(fmt.Sprintf("status=%v&", q.Status))
-	}
-	if q.Rated != "" {
-		query.WriteString(fmt.Sprintf("rated=%v&", q.Rated))
-	}
-	if q.Genre != 0 {
-		query.WriteString(fmt.Sprintf("genre=%v&", q.Genre))
-	}
-	if q.Score != 0 {
-		query.WriteString(fmt.Sprintf("score=%v&", q.Score))
-	}
-	if q.StartDate != "" {
-		query.WriteString(fmt.Sprintf("start_date=%v&", q.StartDate))
-	}
-	if q.EndDate != "" {
-		query.WriteString(fmt.Sprintf("end_date=%v&", q.EndDate))
-	}
-	if q.GenreExclude != false {
-		query.WriteString(fmt.Sprintf("genre_exclude=%v&", 1))
-	}
-	if q.Limit != 0 {
-		query.WriteString(fmt.Sprintf("limit=%v&", q.Limit))
-	}
-	if q.OrderBy != "" {
-		query.WriteString(fmt.Sprintf("order_by=%v&", q.OrderBy))
-	}
-	if q.Sort != "" {
-		query.WriteString(fmt.Sprintf("sort=%v&", q.Sort))
-	}
-	if q.Producer != 0 {
-		query.WriteString(fmt.Sprintf("producer=%v&", q.Producer))
-	}
-	if q.Magazine != 0 {
-		query.WriteString(fmt.Sprintf("magazine=%v&", q.Magazine))
-	}
-	if q.Letter != 0 {
-		query.WriteString(fmt.Sprintf("letter=%v&", q.Letter))
+// GetSearchAnime returns search anime
+func GetSearchAnime(opts ...string) (*SearchAnime, error) {
+	res := &SearchAnime{}
+
+	err := urlToStruct(fmt.Sprintf("/search/anime?%s",
+		strings.Join(processArray(opts, escapeOption), "&")), res)
+
+	if err != nil {
+		return nil, err
 	}
 
-	err := urlToStruct(query.String(), res)
+	return res, nil
+}
+
+// GetSearchManga returns search manga
+func GetSearchManga(opts ...string) (*SearchManga, error) {
+	res := &SearchManga{}
+
+	err := urlToStruct(fmt.Sprintf("/search/manga?%s",
+		strings.Join(processArray(opts, escapeOption), "&")), res)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return res, nil
+}
+
+// GetSearchPeople returns search people
+func GetSearchPeople(opts ...string) (*SearchPeople, error) {
+	res := &SearchPeople{}
+
+	err := urlToStruct(fmt.Sprintf("/search/people?%s",
+		strings.Join(processArray(opts, escapeOption), "&")), res)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return res, nil
+}
+
+// GetSearchCharacter returns search character
+func GetSearchCharacter(opts ...string) (*SearchCharacter, error) {
+	res := &SearchCharacter{}
+
+	err := urlToStruct(fmt.Sprintf("/search/character?%s",
+		strings.Join(processArray(opts, escapeOption), "&")), res)
 
 	if err != nil {
 		return nil, err

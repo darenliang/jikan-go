@@ -2,48 +2,31 @@ package jikan
 
 import "time"
 
+// MalScore struct
+type MalScore struct {
+	Votes      int     `json:"votes"`
+	Percentage float64 `json:"percentage"`
+}
+
 // MalScores struct
 type MalScores struct {
-	Num1 struct {
-		Votes      int     `json:"votes"`
-		Percentage float64 `json:"percentage"`
-	} `json:"1"`
-	Num2 struct {
-		Votes      int     `json:"votes"`
-		Percentage float64 `json:"percentage"`
-	} `json:"2"`
-	Num3 struct {
-		Votes      int     `json:"votes"`
-		Percentage float64 `json:"percentage"`
-	} `json:"3"`
-	Num4 struct {
-		Votes      int     `json:"votes"`
-		Percentage float64 `json:"percentage"`
-	} `json:"4"`
-	Num5 struct {
-		Votes      int     `json:"votes"`
-		Percentage float64 `json:"percentage"`
-	} `json:"5"`
-	Num6 struct {
-		Votes      int     `json:"votes"`
-		Percentage float64 `json:"percentage"`
-	} `json:"6"`
-	Num7 struct {
-		Votes      int     `json:"votes"`
-		Percentage float64 `json:"percentage"`
-	} `json:"7"`
-	Num8 struct {
-		Votes      int     `json:"votes"`
-		Percentage float64 `json:"percentage"`
-	} `json:"8"`
-	Num9 struct {
-		Votes      int     `json:"votes"`
-		Percentage float64 `json:"percentage"`
-	} `json:"9"`
-	Num10 struct {
-		Votes      int     `json:"votes"`
-		Percentage float64 `json:"percentage"`
-	} `json:"10"`
+	Num1  MalScore `json:"1"`
+	Num2  MalScore `json:"2"`
+	Num3  MalScore `json:"3"`
+	Num4  MalScore `json:"4"`
+	Num5  MalScore `json:"5"`
+	Num6  MalScore `json:"6"`
+	Num7  MalScore `json:"7"`
+	Num8  MalScore `json:"8"`
+	Num9  MalScore `json:"9"`
+	Num10 MalScore `json:"10"`
+}
+
+// MalDay struct
+type MalDay struct {
+	Day   int `json:"day"`
+	Month int `json:"month"`
+	Year  int `json:"year"`
 }
 
 // MalDates struct
@@ -51,16 +34,8 @@ type MalDates struct {
 	From time.Time `json:"from"`
 	To   time.Time `json:"to"`
 	Prop struct {
-		From struct {
-			Day   int `json:"day"`
-			Month int `json:"month"`
-			Year  int `json:"year"`
-		} `json:"from"`
-		To struct {
-			Day   int `json:"day"`
-			Month int `json:"month"`
-			Year  int `json:"year"`
-		} `json:"to"`
+		From MalDay `json:"from"`
+		To   MalDay `json:"to"`
 	} `json:"prop"`
 	String string `json:"string"`
 }
@@ -108,4 +83,21 @@ type MalAnimeDesc struct {
 	Licensors   []string  `json:"licensors"`
 	R18         bool      `json:"r18"`
 	Kids        bool      `json:"kids"`
+}
+
+// MalMangaDesc struct
+type MalMangaDesc struct {
+	MalID           int       `json:"mal_id"`
+	URL             string    `json:"url"`
+	Title           string    `json:"title"`
+	ImageURL        string    `json:"image_url"`
+	Synopsis        string    `json:"synopsis"`
+	Type            string    `json:"type"`
+	PublishingStart time.Time `json:"publishing_start"`
+	Volumes         int       `json:"volumes"`
+	Members         int       `json:"members"`
+	Genres          []MalItem `json:"genres"`
+	Authors         []MalItem `json:"authors"`
+	Score           float64   `json:"score"`
+	Serialization   []string  `json:"serialization"`
 }
