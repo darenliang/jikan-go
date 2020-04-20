@@ -46,7 +46,7 @@ type Anime struct {
 	EndingThemes  []string  `json:"ending_themes"`
 }
 
-// AnimeCharacterStaff struct
+// AnimeCharactersStaff struct
 type AnimeCharactersStaff struct {
 	Characters []struct {
 		MalID       int    `json:"mal_id"`
