@@ -5,6 +5,7 @@ import (
 	"time"
 )
 
+// Magazine struct
 type Magazine struct {
 	Meta  MalItem `json:"meta"`
 	Manga []struct {

@@ -4,6 +4,7 @@ import (
 	"fmt"
 )
 
+// Producer struct
 type Producer struct {
 	Meta  MalItem        `json:"meta"`
 	Anime []MalAnimeDesc `json:"anime"`

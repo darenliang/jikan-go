@@ -37,18 +37,18 @@ type Manga struct {
 	Serializations []MalItem `json:"serializations"`
 }
 
-// Manga characters struct
+// MangaCharacters struct
 type MangaCharacters struct {
 	Characters []MalRoleStaff `json:"characters"`
 }
 
-// Manga news struct
+// MangaNews struct
 type MangaNews = AnimeNews
 
-// Manga pictures struct
+// MangaPictures struct
 type MangaPictures = AnimePictures
 
-// Manga stats struct
+// MangaStats struct
 type MangaStats struct {
 	Reading    int       `json:"reading"`
 	Completed  int       `json:"completed"`
@@ -59,13 +59,13 @@ type MangaStats struct {
 	Scores     MalScores `json:"scores"`
 }
 
-// Manga forum struct
+// MangaForum struct
 type MangaForum = AnimeForum
 
-// Manga more info struct
+// MangaMoreInfo struct
 type MangaMoreInfo = AnimeMoreInfo
 
-// Manga reviews struct
+// MangaReviews struct
 type MangaReviews struct {
 	Reviews []struct {
 		MalID        int         `json:"mal_id"`
@@ -90,10 +90,10 @@ type MangaReviews struct {
 	} `json:"reviews"`
 }
 
-// Manga recommendations struct
+// MangaRecommendations struct
 type MangaRecommendations = AnimeRecommendations
 
-// Manga user updates struct
+// MangaUserUpdates struct
 type MangaUserUpdates struct {
 	Users []struct {
 		Username      string      `json:"username"`

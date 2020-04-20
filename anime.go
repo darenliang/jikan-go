@@ -46,7 +46,7 @@ type Anime struct {
 	EndingThemes  []string  `json:"ending_themes"`
 }
 
-// Anime character staff struct
+// AnimeCharacterStaff struct
 type AnimeCharactersStaff struct {
 	Characters []struct {
 		MalID       int    `json:"mal_id"`
@@ -71,7 +71,7 @@ type AnimeCharactersStaff struct {
 	} `json:"staff"`
 }
 
-// Anime episodes struct
+// AnimeEpisodes struct
 type AnimeEpisodes struct {
 	EpisodesLastPage int `json:"episodes_last_page"`
 	Episodes         []struct {
@@ -87,7 +87,7 @@ type AnimeEpisodes struct {
 	} `json:"episodes"`
 }
 
-// Anime news struct
+// AnimeNews struct
 type AnimeNews struct {
 	Articles []struct {
 		URL        string    `json:"url"`
@@ -102,7 +102,7 @@ type AnimeNews struct {
 	} `json:"articles"`
 }
 
-// Anime pictures struct
+// AnimePictures struct
 type AnimePictures struct {
 	Pictures []struct {
 		Large string `json:"large"`
@@ -110,7 +110,7 @@ type AnimePictures struct {
 	} `json:"pictures"`
 }
 
-// Anime videos struct
+// AnimeVideos struct
 type AnimeVideos struct {
 	Promo []struct {
 		Title    string `json:"title"`
@@ -125,7 +125,7 @@ type AnimeVideos struct {
 	} `json:"episodes"`
 }
 
-// Anime stats struct
+// AnimeStats struct
 type AnimeStats struct {
 	Watching    int       `json:"watching"`
 	Completed   int       `json:"completed"`
@@ -136,7 +136,7 @@ type AnimeStats struct {
 	Scores      MalScores `json:"scores"`
 }
 
-// Anime forum struct
+// AnimeForum struct
 type AnimeForum struct {
 	Topics []struct {
 		TopicID    int       `json:"topic_id"`
@@ -155,12 +155,12 @@ type AnimeForum struct {
 	} `json:"topics"`
 }
 
-// Anime more info struct
+// AnimeMoreInfo struct
 type AnimeMoreInfo struct {
 	Moreinfo string `json:"moreinfo"`
 }
 
-// Anime reviews struct
+// AnimeReviews struct
 type AnimeReviews struct {
 	Reviews []struct {
 		MalID        int       `json:"mal_id"`
@@ -186,7 +186,7 @@ type AnimeReviews struct {
 	} `json:"reviews"`
 }
 
-// Anime recommendations struct
+// AnimeRecommendations struct
 type AnimeRecommendations struct {
 	Recommendations []struct {
 		MalID               int    `json:"mal_id"`
@@ -198,7 +198,7 @@ type AnimeRecommendations struct {
 	} `json:"recommendations"`
 }
 
-// Anime user updates struct
+// AnimeUserUpdates struct
 type AnimeUserUpdates struct {
 	Users []struct {
 		Username      string    `json:"username"`
