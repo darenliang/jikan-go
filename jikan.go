@@ -1,4 +1,4 @@
-// Package jikan provides Jikan API bindings for Go
+// Package jikan provides Jikan API bindings for Go.
 // Please note that all functions/structs are named in accordance to Jikan's endpoints/responses
 package jikan
 
