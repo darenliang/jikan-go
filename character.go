@@ -12,8 +12,8 @@ type Character struct {
 	About           string         `json:"about"`
 	MemberFavorites int            `json:"member_favorites"`
 	ImageURL        string         `json:"image_url"`
-	Animeography    []malRoleStaff `json:"animeography"`
-	Mangaography    []malRoleStaff `json:"mangaography"`
+	Animeography    []MalRoleStaff `json:"animeography"`
+	Mangaography    []MalRoleStaff `json:"mangaography"`
 	VoiceActors     []struct {
 		MalID    int    `json:"mal_id"`
 		Name     string `json:"name"`

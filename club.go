@@ -16,10 +16,10 @@ type Club struct {
 	Category           string    `json:"category"`
 	Created            time.Time `json:"created"`
 	Type               string    `json:"type"`
-	Staff              []malItem `json:"staff"`
-	AnimeRelations     []malItem `json:"anime_relations"`
-	MangaRelations     []malItem `json:"manga_relations"`
-	CharacterRelations []malItem `json:"character_relations"`
+	Staff              []MalItem `json:"staff"`
+	AnimeRelations     []MalItem `json:"anime_relations"`
+	MangaRelations     []MalItem `json:"manga_relations"`
+	CharacterRelations []MalItem `json:"character_relations"`
 }
 
 // ClubMembers struct

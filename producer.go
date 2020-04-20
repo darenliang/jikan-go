@@ -5,8 +5,8 @@ import (
 )
 
 type Producer struct {
-	Meta  malItem         `json:"meta"`
-	Anime []malAnimeShort `json:"anime"`
+	Meta  MalItem        `json:"meta"`
+	Anime []MalAnimeDesc `json:"anime"`
 }
 
 // GetProducer returns producer

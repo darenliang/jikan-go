@@ -6,7 +6,7 @@ import (
 )
 
 type Magazine struct {
-	Meta  malItem `json:"meta"`
+	Meta  MalItem `json:"meta"`
 	Manga []struct {
 		MalID           int       `json:"mal_id"`
 		URL             string    `json:"url"`
@@ -17,8 +17,8 @@ type Magazine struct {
 		PublishingStart time.Time `json:"publishing_start"`
 		Volumes         int       `json:"volumes"`
 		Members         int       `json:"members"`
-		Genres          []malItem `json:"genres"`
-		Authors         []malItem `json:"authors"`
+		Genres          []MalItem `json:"genres"`
+		Authors         []MalItem `json:"authors"`
 		Score           float64   `json:"score"`
 		Serialization   []string  `json:"serialization"`
 	} `json:"manga"`

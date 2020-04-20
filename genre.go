@@ -6,9 +6,9 @@ import (
 
 // Genre struct
 type Genre struct {
-	MalURL    malItem         `json:"mal_url"`
-	ItemCount int             `json:"item_count"`
-	Anime     []malAnimeShort `json:"anime"`
+	MalURL    MalItem        `json:"mal_url"`
+	ItemCount int            `json:"item_count"`
+	Anime     []MalAnimeDesc `json:"anime"`
 }
 
 // GetGenre returns genre

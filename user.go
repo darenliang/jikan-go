@@ -42,10 +42,10 @@ type User struct {
 		VolumesRead  int     `json:"volumes_read"`
 	} `json:"manga_stats"`
 	Favorites struct {
-		Anime      []malItemImg `json:"anime"`
-		Manga      []malItemImg `json:"manga"`
-		Characters []malItemImg `json:"characters"`
-		People     []malItemImg `json:"people"`
+		Anime      []MalImgItem `json:"anime"`
+		Manga      []MalImgItem `json:"manga"`
+		Characters []MalImgItem `json:"characters"`
+		People     []MalImgItem `json:"people"`
 	} `json:"favorites"`
 	About string `json:"about"`
 }
@@ -53,7 +53,7 @@ type User struct {
 // UserHistory struct
 type UserHistory struct {
 	History []struct {
-		Meta      malItem   `json:"meta"`
+		Meta      MalItem   `json:"meta"`
 		Increment int       `json:"increment"`
 		Date      time.Time `json:"date"`
 	} `json:"history"`
@@ -100,8 +100,8 @@ type UserAnimeList struct {
 		Storage         string    `json:"storage"`
 		Priority        string    `json:"priority"`
 		AddedToList     bool      `json:"added_to_list"`
-		Studios         []malItem `json:"studios"`
-		Licensors       []malItem `json:"licensors"`
+		Studios         []MalItem `json:"studios"`
+		Licensors       []MalItem `json:"licensors"`
 	} `json:"anime"`
 }
 
@@ -130,7 +130,7 @@ type UserMangaList struct {
 		Retail           string    `json:"retail"`
 		Priority         string    `json:"priority"`
 		AddedToList      bool      `json:"added_to_list"`
-		Magazines        []malItem `json:"magazines"`
+		Magazines        []MalItem `json:"magazines"`
 	} `json:"manga"`
 }
 

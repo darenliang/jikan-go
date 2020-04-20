@@ -6,15 +6,15 @@ import (
 
 // Schedule struct
 type Schedule struct {
-	Monday    []malAnimeShort `json:"monday"`
-	Tuesday   []malAnimeShort `json:"tuesday"`
-	Wednesday []malAnimeShort `json:"wednesday"`
-	Thursday  []malAnimeShort `json:"thursday"`
-	Friday    []malAnimeShort `json:"friday"`
-	Saturday  []malAnimeShort `json:"saturday"`
-	Sunday    []malAnimeShort `json:"sunday"`
-	Other     []malAnimeShort `json:"other"`
-	Unknown   []malAnimeShort `json:"unknown"`
+	Monday    []MalAnimeDesc `json:"monday"`
+	Tuesday   []MalAnimeDesc `json:"tuesday"`
+	Wednesday []MalAnimeDesc `json:"wednesday"`
+	Thursday  []MalAnimeDesc `json:"thursday"`
+	Friday    []MalAnimeDesc `json:"friday"`
+	Saturday  []MalAnimeDesc `json:"saturday"`
+	Sunday    []MalAnimeDesc `json:"sunday"`
+	Other     []MalAnimeDesc `json:"other"`
+	Unknown   []MalAnimeDesc `json:"unknown"`
 }
 
 // GetSchedule returns schedule

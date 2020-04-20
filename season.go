@@ -5,6 +5,7 @@ import (
 	"time"
 )
 
+// Season struct
 type Season struct {
 	SeasonName string `json:"season_name"`
 	SeasonYear int    `json:"season_year"`
@@ -18,9 +19,9 @@ type Season struct {
 		AiringStart time.Time `json:"airing_start"`
 		Episodes    int       `json:"episodes"`
 		Members     int       `json:"members"`
-		Genres      []malItem `json:"genres"`
+		Genres      []MalItem `json:"genres"`
 		Source      string    `json:"source"`
-		Producers   []malItem `json:"producers"`
+		Producers   []MalItem `json:"producers"`
 		Score       float64   `json:"score"`
 		Licensors   []string  `json:"licensors"`
 		R18         bool      `json:"r18"`

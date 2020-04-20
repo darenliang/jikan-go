@@ -20,7 +20,7 @@ type Anime struct {
 	Episodes      int      `json:"episodes"`
 	Status        string   `json:"status"`
 	Airing        bool     `json:"airing"`
-	Aired         malDates `json:"aired"`
+	Aired         MalDates `json:"aired"`
 	Duration      string   `json:"duration"`
 	Rating        string   `json:"rating"`
 	Score         float64  `json:"score"`
@@ -34,14 +34,14 @@ type Anime struct {
 	Premiered     string   `json:"premiered"`
 	Broadcast     string   `json:"broadcast"`
 	Related       struct {
-		Adaptation []malItem `json:"Adaptation"`
-		SideStory  []malItem `json:"Side story"`
-		Summary    []malItem `json:"Summary"`
+		Adaptation []MalItem `json:"Adaptation"`
+		SideStory  []MalItem `json:"Side story"`
+		Summary    []MalItem `json:"Summary"`
 	} `json:"related"`
-	Producers     []malItem `json:"producers"`
-	Licensors     []malItem `json:"licensors"`
-	Studios       []malItem `json:"studios"`
-	Genres        []malItem `json:"genres"`
+	Producers     []MalItem `json:"producers"`
+	Licensors     []MalItem `json:"licensors"`
+	Studios       []MalItem `json:"studios"`
+	Genres        []MalItem `json:"genres"`
 	OpeningThemes []string  `json:"opening_themes"`
 	EndingThemes  []string  `json:"ending_themes"`
 }
@@ -133,7 +133,7 @@ type AnimeStats struct {
 	Dropped     int       `json:"dropped"`
 	PlanToWatch int       `json:"plan_to_watch"`
 	Total       int       `json:"total"`
-	Scores      malScores `json:"scores"`
+	Scores      MalScores `json:"scores"`
 }
 
 // Anime forum struct

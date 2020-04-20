@@ -19,7 +19,7 @@ type Manga struct {
 	Volumes       int      `json:"volumes"`
 	Chapters      int      `json:"chapters"`
 	Publishing    bool     `json:"publishing"`
-	Published     malDates `json:"published"`
+	Published     MalDates `json:"published"`
 	Rank          int      `json:"rank"`
 	Score         float64  `json:"score"`
 	ScoredBy      int      `json:"scored_by"`
@@ -29,17 +29,17 @@ type Manga struct {
 	Synopsis      string   `json:"synopsis"`
 	Background    string   `json:"background"`
 	Related       struct {
-		SideStory  []malItem `json:"Side story"`
-		Adaptation []malItem `json:"Adaptation"`
+		SideStory  []MalItem `json:"Side story"`
+		Adaptation []MalItem `json:"Adaptation"`
 	} `json:"related"`
-	Genres         []malItem `json:"genres"`
-	Authors        []malItem `json:"authors"`
-	Serializations []malItem `json:"serializations"`
+	Genres         []MalItem `json:"genres"`
+	Authors        []MalItem `json:"authors"`
+	Serializations []MalItem `json:"serializations"`
 }
 
 // Manga characters struct
 type MangaCharacters struct {
-	Characters []malRoleStaff `json:"characters"`
+	Characters []MalRoleStaff `json:"characters"`
 }
 
 // Manga news struct
@@ -56,7 +56,7 @@ type MangaStats struct {
 	Dropped    int       `json:"dropped"`
 	PlanToRead int       `json:"plan_to_read"`
 	Total      int       `json:"total"`
-	Scores     malScores `json:"scores"`
+	Scores     MalScores `json:"scores"`
 }
 
 // Manga forum struct
