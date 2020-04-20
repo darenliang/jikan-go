@@ -2,22 +2,40 @@ package jikan
 
 import (
 	"fmt"
-	"net/url"
 )
 
-// Genre struct for the /genre endpoint
-type Genre struct {
+// GenreAnime struct for the /genre/anime endpoint
+type GenreAnime struct {
 	MalURL    MalItem        `json:"mal_url"`
 	ItemCount int            `json:"item_count"`
 	Anime     []MalAnimeDesc `json:"anime"`
+}
+
+// GenreManga struct for the /genre/manga endpoint
+type GenreManga struct {
+	MalURL    MalItem        `json:"mal_url"`
+	ItemCount int            `json:"item_count"`
 	Manga     []MalMangaDesc `json:"manga"`
 }
 
-// GetGenre returns genre
-func GetGenre(mediaType string, id, page int) (*Genre, error) {
-	res := &Genre{}
+// GetGenreAnime returns genre anime
+func GetGenreAnime(id, page int) (*GenreAnime, error) {
+	res := &GenreAnime{}
 
-	err := urlToStruct(fmt.Sprintf("/genre/%s/%d/%d", url.QueryEscape(mediaType), id, page), res)
+	err := urlToStruct(fmt.Sprintf("/genre/anime/%d/%d", id, page), res)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return res, nil
+}
+
+// GetGenreManga returns genre manga
+func GetGenreManga(id, page int) (*GenreManga, error) {
+	res := &GenreManga{}
+
+	err := urlToStruct(fmt.Sprintf("/genre/manga/%d/%d", id, page), res)
 
 	if err != nil {
 		return nil, err
