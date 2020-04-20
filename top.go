@@ -5,29 +5,49 @@ import (
 	"strings"
 )
 
-// Top struct defines a top
-type Top struct {
-	Type    string // object type
+// TopQuery struct
+type TopQuery struct {
+	Type string // object type
+
 	Page    int    // page number (optional)
 	Subtype string // subtype (available upon page specification)
 }
 
-// Get returns a map of a top as specified in the Top struct.
-// Calls responses through the /top/ endpoint.
-func (top Top) Get() (map[string]interface{}, error) {
-	var result map[string]interface{}
-	var err error
+// Top struct
+type Top struct {
+	Top []struct {
+		MalID     int     `json:"mal_id"`
+		Rank      int     `json:"rank"`
+		Title     string  `json:"title"`
+		URL       string  `json:"url"`
+		ImageURL  string  `json:"image_url"`
+		Type      string  `json:"type"`
+		Episodes  int     `json:"episodes"`
+		StartDate string  `json:"start_date"`
+		EndDate   string  `json:"end_date"`
+		Members   int     `json:"members"`
+		Score     float64 `json:"score"`
+	} `json:"top"`
+}
+
+// GetTop returns top
+func GetTop(mediaType string, page int, subType string) (*Top, error) {
+	res := &Top{}
+
 	var query strings.Builder
-	query.WriteString(fmt.Sprintf("/top/%v", top.Type))
-	if top.Page != 0 {
-		query.WriteString(fmt.Sprintf("/%v", top.Page))
-		if top.Subtype != "" {
-			query.WriteString(fmt.Sprintf("/%v", top.Subtype))
+	query.WriteString(fmt.Sprintf("/top/%v", mediaType))
+	if page != 0 {
+		query.WriteString(fmt.Sprintf("/%v", page))
+		if subType != "" {
+			query.WriteString(fmt.Sprintf("/%v", subType))
 		}
 	}
-	result, err = getMapFromUrl(query.String()), nil
-	if _, ok := result["error"]; ok {
-		result, err = nil, getResultError(result)
+
+	err := urlToStruct(query.String(), res)
+
+	if err != nil {
+		return nil, err
 	}
-	return result, err
+
+	return res, nil
 }

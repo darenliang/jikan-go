@@ -2,28 +2,37 @@ package jikan
 
 import (
 	"fmt"
-	"strings"
+	"time"
 )
 
-// Magazine struct defines a magazine
 type Magazine struct {
-	MagazineID int // MyAnimeList magazine ID
-	Page       int // page number (optional)
+	Meta  malItem `json:"meta"`
+	Manga []struct {
+		MalID           int       `json:"mal_id"`
+		URL             string    `json:"url"`
+		Title           string    `json:"title"`
+		ImageURL        string    `json:"image_url"`
+		Synopsis        string    `json:"synopsis"`
+		Type            string    `json:"type"`
+		PublishingStart time.Time `json:"publishing_start"`
+		Volumes         int       `json:"volumes"`
+		Members         int       `json:"members"`
+		Genres          []malItem `json:"genres"`
+		Authors         []malItem `json:"authors"`
+		Score           float64   `json:"score"`
+		Serialization   []string  `json:"serialization"`
+	} `json:"manga"`
 }
 
-// Get returns a map of a magazine as specified in the Magazine struct.
-// Calls responses through the /magazine/ endpoint.
-func (magazine Magazine) Get() (map[string]interface{}, error) {
-	var result map[string]interface{}
-	var err error
-	var query strings.Builder
-	query.WriteString(fmt.Sprintf("/magazine/%v", magazine.MagazineID))
-	if magazine.Page != 0 {
-		query.WriteString(fmt.Sprintf("/%v", magazine.Page))
+// GetMagazine returns magazine
+func GetMagazine(id, page int) (*Magazine, error) {
+	res := &Magazine{}
+
+	err := urlToStruct(fmt.Sprintf("/magazine/%d/%d", id, page), res)
+
+	if err != nil {
+		return nil, err
 	}
-	result, err = getMapFromUrl(query.String()), nil
-	if _, ok := result["error"]; ok {
-		result, err = nil, getResultError(result)
-	}
-	return result, err
+
+	return res, nil
 }

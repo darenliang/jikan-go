@@ -2,48 +2,79 @@ package jikan
 
 import (
 	"fmt"
+	"time"
 )
 
-// Season struct defines a season
 type Season struct {
-	Year   int    // year
-	Season string // season
+	SeasonName string `json:"season_name"`
+	SeasonYear int    `json:"season_year"`
+	Anime      []struct {
+		MalID       int       `json:"mal_id"`
+		URL         string    `json:"url"`
+		Title       string    `json:"title"`
+		ImageURL    string    `json:"image_url"`
+		Synopsis    string    `json:"synopsis"`
+		Type        string    `json:"type"`
+		AiringStart time.Time `json:"airing_start"`
+		Episodes    int       `json:"episodes"`
+		Members     int       `json:"members"`
+		Genres      []malItem `json:"genres"`
+		Source      string    `json:"source"`
+		Producers   []malItem `json:"producers"`
+		Score       float64   `json:"score"`
+		Licensors   []string  `json:"licensors"`
+		R18         bool      `json:"r18"`
+		Kids        bool      `json:"kids"`
+		Continuing  bool      `json:"continuing"`
+	} `json:"anime"`
 }
 
-// Get returns a map of a season as specified in the Season struct.
-// Calls responses through the /season/ endpoint.
-func (season Season) Get() (map[string]interface{}, error) {
-	var result map[string]interface{}
-	var err error
-	result, err = getMapFromUrl(fmt.Sprintf("/season/%v/%v", season.Year, season.Season)), nil
-	if _, ok := result["error"]; ok {
-		result, err = nil, getResultError(result)
-	}
-	return result, err
+// SeasonArchive struct
+type SeasonArchive struct {
+	Archive []struct {
+		Year    int      `json:"year"`
+		Seasons []string `json:"seasons"`
+	} `json:"archive"`
 }
 
-// GetArchive returns a map of season archives.
-// Calls responses through the /season/archive endpoint.
-// An empty Season struct is allowed.
-func (season Season) GetArchive() (map[string]interface{}, error) {
-	var result map[string]interface{}
-	var err error
-	result, err = getMapFromUrl("/season/archive"), nil
-	if _, ok := result["error"]; ok {
-		result, err = nil, getResultError(result)
+// SeasonLater struct
+type SeasonLater = Season
+
+// GetSeason returns season
+func GetSeason(year int, season string) (*Season, error) {
+	res := &Season{}
+
+	err := urlToStruct(fmt.Sprintf("/season/%d/%s", year, season), res)
+
+	if err != nil {
+		return nil, err
 	}
-	return result, err
+
+	return res, nil
 }
 
-// GetLater returns a map of a list of anime from seasons later.
-// Calls responses through the /season/archive endpoint.
-// An empty Season struct is allowed.
-func (season Season) GetLater() (map[string]interface{}, error) {
-	var result map[string]interface{}
-	var err error
-	result, err = getMapFromUrl("/season/later"), nil
-	if _, ok := result["error"]; ok {
-		result, err = nil, getResultError(result)
+// GetSeasonArchive returns season archive
+func GetSeasonArchive() (*SeasonArchive, error) {
+	res := &SeasonArchive{}
+
+	err := urlToStruct("/season/archive", res)
+
+	if err != nil {
+		return nil, err
 	}
-	return result, err
+
+	return res, nil
+}
+
+// GetSeasonLater returns season later
+func GetSeasonLater() (*SeasonLater, error) {
+	res := &SeasonLater{}
+
+	err := urlToStruct("/season/later", res)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return res, nil
 }

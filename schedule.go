@@ -1,20 +1,31 @@
 package jikan
 
-import "fmt"
+import (
+	"fmt"
+)
 
-// Schedule struct defines a producer
+// Schedule struct
 type Schedule struct {
-	Day string // day of the week
+	Monday    []malAnimeShort `json:"monday"`
+	Tuesday   []malAnimeShort `json:"tuesday"`
+	Wednesday []malAnimeShort `json:"wednesday"`
+	Thursday  []malAnimeShort `json:"thursday"`
+	Friday    []malAnimeShort `json:"friday"`
+	Saturday  []malAnimeShort `json:"saturday"`
+	Sunday    []malAnimeShort `json:"sunday"`
+	Other     []malAnimeShort `json:"other"`
+	Unknown   []malAnimeShort `json:"unknown"`
 }
 
-// Get returns a map of a schedule as specified in the Schedule struct.
-// Calls responses through the /schedule/ endpoint.
-func (schedule Schedule) Get() (map[string]interface{}, error) {
-	var result map[string]interface{}
-	var err error
-	result, err = getMapFromUrl(fmt.Sprintf("/schedule/%v", schedule.Day)), nil
-	if _, ok := result["error"]; ok {
-		result, err = nil, getResultError(result)
+// GetSchedule returns schedule
+func GetSchedule(day string) (*Schedule, error) {
+	res := &Schedule{}
+
+	err := urlToStruct(fmt.Sprintf("/schedule/%s", day), res)
+
+	if err != nil {
+		return nil, err
 	}
-	return result, err
+
+	return res, nil
 }

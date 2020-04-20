@@ -2,29 +2,24 @@ package jikan
 
 import (
 	"fmt"
-	"strings"
 )
 
-// Genre struct defines a genre
+// Genre struct
 type Genre struct {
-	Type    string // media type
-	GenreID int    // MyAnimeList genre ID
-	Page    int    // page number (optional)
+	MalURL    malItem         `json:"mal_url"`
+	ItemCount int             `json:"item_count"`
+	Anime     []malAnimeShort `json:"anime"`
 }
 
-// Get returns a map of a genre as specified in the Genre struct.
-// Calls responses through the /genre/ endpoint.
-func (genre Genre) Get() (map[string]interface{}, error) {
-	var result map[string]interface{}
-	var err error
-	var query strings.Builder
-	query.WriteString(fmt.Sprintf("/genre/%v/%v", genre.Type, genre.GenreID))
-	if genre.Page != 0 {
-		query.WriteString(fmt.Sprintf("/%v", genre.Page))
+// GetGenre returns genre
+func GetGenre(mediaType string, id, page int) (*Genre, error) {
+	res := &Genre{}
+
+	err := urlToStruct(fmt.Sprintf("/genre/%s/%d/%d", mediaType, id, page), res)
+
+	if err != nil {
+		return nil, err
 	}
-	result, err = getMapFromUrl(query.String()), nil
-	if _, ok := result["error"]; ok {
-		result, err = nil, getResultError(result)
-	}
-	return result, err
+
+	return res, nil
 }

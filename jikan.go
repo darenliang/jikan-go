@@ -1,6 +1,13 @@
 package jikan
 
-// Mal is an interface that gets the specified Jikan json map
-type Mal interface {
-	Get() (map[string]interface{}, error) // get Jikan data as a map
+import (
+	"net/http"
+	"time"
+)
+
+// Client is a *http.Client
+var Client *http.Client
+
+func init() {
+	Client = &http.Client{Timeout: ClientTimeout * time.Second}
 }

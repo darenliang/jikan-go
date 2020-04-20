@@ -2,128 +2,199 @@ package jikan
 
 import (
 	"fmt"
-	"strings"
+	"time"
 )
 
-// User struct defines a user
+// User struct
 type User struct {
-	Username string // MyAnimeList username
-	Request  int    // request type
-	Data     string // specify data type
-
-	// Use only when choosing history
-	HistoryType string // specify history type
-
-	// Use only when choosing friends
-	FriendsPage int // specify friends page
-
-	AnimeListFilter string // anime List Filter
-	MangaListFilter string // manga List Filter
-
-	// Use only when choosing animelist or mangalist (Only need to choose what you need)
-	Search string // search query
-	Page   int    // page number
-	Sort   string // sort
-
-	// Only for AnimeListFilter
-	OrderBy      string // order by
-	OrderBy2     string // second order by
-	AiredFrom    string // aired from
-	AiredTo      string // aired to
-	Producer     int    // MyAnimeList producer ID
-	Year         int    // year
-	Season       string // season
-	AiringStatus string // airing status
-
-	// Only for MangaListFilter
-	PublishedFrom    string // published from
-	PublishedTo      string // published to
-	Magazine         int    // MyAnimeList magazine ID
-	PublishingStatus string // publishing status
+	UserID     int       `json:"user_id"`
+	Username   string    `json:"username"`
+	URL        string    `json:"url"`
+	ImageURL   string    `json:"image_url"`
+	LastOnline time.Time `json:"last_online"`
+	Gender     string    `json:"gender"`
+	Birthday   time.Time `json:"birthday"`
+	Location   string    `json:"location"`
+	Joined     time.Time `json:"joined"`
+	AnimeStats struct {
+		DaysWatched     float64 `json:"days_watched"`
+		MeanScore       float64 `json:"mean_score"`
+		Watching        int     `json:"watching"`
+		Completed       int     `json:"completed"`
+		OnHold          int     `json:"on_hold"`
+		Dropped         int     `json:"dropped"`
+		PlanToWatch     int     `json:"plan_to_watch"`
+		TotalEntries    int     `json:"total_entries"`
+		Rewatched       int     `json:"rewatched"`
+		EpisodesWatched int     `json:"episodes_watched"`
+	} `json:"anime_stats"`
+	MangaStats struct {
+		DaysRead     float64 `json:"days_read"`
+		MeanScore    float64 `json:"mean_score"`
+		Reading      int     `json:"reading"`
+		Completed    int     `json:"completed"`
+		OnHold       int     `json:"on_hold"`
+		Dropped      int     `json:"dropped"`
+		PlanToRead   int     `json:"plan_to_read"`
+		TotalEntries int     `json:"total_entries"`
+		Reread       int     `json:"reread"`
+		ChaptersRead int     `json:"chapters_read"`
+		VolumesRead  int     `json:"volumes_read"`
+	} `json:"manga_stats"`
+	Favorites struct {
+		Anime      []malItemImg `json:"anime"`
+		Manga      []malItemImg `json:"manga"`
+		Characters []malItemImg `json:"characters"`
+		People     []malItemImg `json:"people"`
+	} `json:"favorites"`
+	About string `json:"about"`
 }
 
-// Get returns a map of a user as specified in the User struct.
-// Calls responses through the /user/ endpoint.
-func (user User) Get() (map[string]interface{}, error) {
-	var result map[string]interface{}
-	var err error
-	var query, advancedQuery strings.Builder
-	query.WriteString(fmt.Sprintf("/user/%v/%v", user.Username, user.Request))
-	if user.Data != "" {
-		query.WriteString(fmt.Sprintf("/%v", user.Data))
-		if user.Data == "history" && user.HistoryType != "" {
-			query.WriteString(fmt.Sprintf("/%v", user.HistoryType))
-		} else if user.Data == "friends" && user.FriendsPage != 0 {
-			query.WriteString(fmt.Sprintf("/%v", user.FriendsPage))
-		} else if user.Data == "animelist" && user.AnimeListFilter != "" {
-			query.WriteString(fmt.Sprintf("/%v", user.AnimeListFilter))
-			if user.Search != "" {
-				advancedQuery.WriteString(fmt.Sprintf("search=%v&", user.Search))
-			}
-			if user.Page != 0 {
-				advancedQuery.WriteString(fmt.Sprintf("page=%v&", user.Page))
-			}
-			if user.Sort != "" {
-				advancedQuery.WriteString(fmt.Sprintf("sort=%v&", user.Sort))
-			}
-			if user.OrderBy != "" {
-				advancedQuery.WriteString(fmt.Sprintf("order_by=%v&", user.OrderBy))
-			}
-			if user.OrderBy2 != "" {
-				advancedQuery.WriteString(fmt.Sprintf("order_by2=%v&", user.OrderBy2))
-			}
-			if user.AiredFrom != "" {
-				advancedQuery.WriteString(fmt.Sprintf("aired_from=%v&", user.AiredFrom))
-			}
-			if user.AiredTo != "" {
-				advancedQuery.WriteString(fmt.Sprintf("aired_to=%v&", user.AiredTo))
-			}
-			if user.Producer != 0 {
-				advancedQuery.WriteString(fmt.Sprintf("producer=%v&", user.Producer))
-			}
-			if user.Year != 0 {
-				advancedQuery.WriteString(fmt.Sprintf("year=%v&", user.Year))
-			}
-			if user.Season != "" {
-				advancedQuery.WriteString(fmt.Sprintf("season=%v&", user.Season))
-			}
-			if user.AiringStatus != "" {
-				advancedQuery.WriteString(fmt.Sprintf("airing_status=%v&", user.AiringStatus))
-			}
-		} else if user.Data == "mangalist" && user.MangaListFilter != "" {
-			query.WriteString(fmt.Sprintf("/%v", user.MangaListFilter))
-			if user.Search != "" {
-				advancedQuery.WriteString(fmt.Sprintf("search=%v&", user.Search))
-			}
-			if user.Page != 0 {
-				advancedQuery.WriteString(fmt.Sprintf("page=%v&", user.Page))
-			}
-			if user.Sort != "" {
-				advancedQuery.WriteString(fmt.Sprintf("sort=%v&", user.Sort))
-			}
-			if user.OrderBy != "" {
-				advancedQuery.WriteString(fmt.Sprintf("order_by=%v&", user.OrderBy))
-			}
-			if user.OrderBy2 != "" {
-				advancedQuery.WriteString(fmt.Sprintf("order_by2=%v&", user.OrderBy2))
-			}
-			if user.PublishedFrom != "" {
-				advancedQuery.WriteString(fmt.Sprintf("published_from=%v&", user.PublishedFrom))
-			}
-			if user.PublishedTo != "" {
-				advancedQuery.WriteString(fmt.Sprintf("published_to=%v&", user.PublishedTo))
-			}
-			if user.Magazine != 0 {
-				advancedQuery.WriteString(fmt.Sprintf("magazine=%v&", user.Magazine))
-			}
-			if user.PublishingStatus != "" {
-				advancedQuery.WriteString(fmt.Sprintf("airing_status=%v&", user.PublishingStatus))
-			}
-		}
+// UserHistory struct
+type UserHistory struct {
+	History []struct {
+		Meta      malItem   `json:"meta"`
+		Increment int       `json:"increment"`
+		Date      time.Time `json:"date"`
+	} `json:"history"`
+}
+
+// UserFriends struct
+type UserFriends struct {
+	Friends []struct {
+		URL          string    `json:"url"`
+		Username     string    `json:"username"`
+		ImageURL     string    `json:"image_url"`
+		LastOnline   time.Time `json:"last_online"`
+		FriendsSince time.Time `json:"friends_since"`
+	} `json:"friends"`
+}
+
+// UserAnimeList struct
+type UserAnimeList struct {
+	Anime []struct {
+		MalID           int       `json:"mal_id"`
+		Title           string    `json:"title"`
+		VideoURL        string    `json:"video_url"`
+		URL             string    `json:"url"`
+		ImageURL        string    `json:"image_url"`
+		Type            string    `json:"type"`
+		WatchingStatus  int       `json:"watching_status"`
+		Score           int       `json:"score"`
+		WatchedEpisodes int       `json:"watched_episodes"`
+		TotalEpisodes   int       `json:"total_episodes"`
+		AiringStatus    int       `json:"airing_status"`
+		SeasonName      string    `json:"season_name"`
+		SeasonYear      int       `json:"season_year"`
+		HasEpisodeVideo bool      `json:"has_episode_video"`
+		HasPromoVideo   bool      `json:"has_promo_video"`
+		HasVideo        bool      `json:"has_video"`
+		IsRewatching    bool      `json:"is_rewatching"`
+		Tags            []string  `json:"tags"`
+		Rating          string    `json:"rating"`
+		StartDate       time.Time `json:"start_date"`
+		EndDate         time.Time `json:"end_date"`
+		WatchStartDate  time.Time `json:"watch_start_date"`
+		WatchEndDate    time.Time `json:"watch_end_date"`
+		Days            int       `json:"days"`
+		Storage         string    `json:"storage"`
+		Priority        string    `json:"priority"`
+		AddedToList     bool      `json:"added_to_list"`
+		Studios         []malItem `json:"studios"`
+		Licensors       []malItem `json:"licensors"`
+	} `json:"anime"`
+}
+
+// UserMangaList struct
+type UserMangaList struct {
+	Manga []struct {
+		MalID            int       `json:"mal_id"`
+		Title            string    `json:"title"`
+		URL              string    `json:"url"`
+		ImageURL         string    `json:"image_url"`
+		Type             string    `json:"type"`
+		ReadingStatus    int       `json:"reading_status"`
+		Score            int       `json:"score"`
+		ReadChapters     int       `json:"read_chapters"`
+		ReadVolumes      int       `json:"read_volumes"`
+		TotalChapters    int       `json:"total_chapters"`
+		TotalVolumes     int       `json:"total_volumes"`
+		PublishingStatus int       `json:"publishing_status"`
+		IsRereading      bool      `json:"is_rereading"`
+		Tags             []string  `json:"tags"`
+		StartDate        time.Time `json:"start_date"`
+		EndDate          time.Time `json:"end_date"`
+		ReadStartDate    time.Time `json:"read_start_date"`
+		ReadEndDate      time.Time `json:"read_end_date"`
+		Days             int       `json:"days"`
+		Retail           string    `json:"retail"`
+		Priority         string    `json:"priority"`
+		AddedToList      bool      `json:"added_to_list"`
+		Magazines        []malItem `json:"magazines"`
+	} `json:"manga"`
+}
+
+// GetUser returns user
+func GetUser(username string) (*User, error) {
+	res := &User{}
+
+	err := urlToStruct(fmt.Sprintf("/user/%s", username), res)
+
+	if err != nil {
+		return nil, err
 	}
-	result, err = getMapFromUrl(query.String()), nil
-	if _, ok := result["error"]; ok {
-		result, err = nil, getResultError(result)
+
+	return res, nil
+}
+
+// GetUserHistory returns user history
+func GetUserHistory(username, mediaType string) (*UserHistory, error) {
+	res := &UserHistory{}
+
+	err := urlToStruct(fmt.Sprintf("/user/%s/history/%s", username, mediaType), res)
+
+	if err != nil {
+		return nil, err
 	}
-	return result, err
+
+	return res, nil
+}
+
+// GetUserFriends returns user friends
+func GetUserFriends(username string, page int) (*UserFriends, error) {
+	res := &UserFriends{}
+
+	err := urlToStruct(fmt.Sprintf("/user/%s/friends/%d", username, page), res)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return res, nil
+}
+
+// GetUserAnimeList returns user anime list
+func GetUserAnimeList(username, option string, page int) (*UserAnimeList, error) {
+	res := &UserAnimeList{}
+
+	err := urlToStruct(fmt.Sprintf("/user/%s/animelist/%s/%d", username, option, page), res)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return res, nil
+}
+
+// GetUserMangaList returns user manga list
+func GetUserMangaList(username, option string, page int) (*UserMangaList, error) {
+	res := &UserMangaList{}
+
+	err := urlToStruct(fmt.Sprintf("/user/%s/mangalist/%s/%d", username, option, page), res)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return res, nil
 }

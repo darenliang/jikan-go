@@ -1,12 +1,15 @@
 package jikan
 
 import (
+	"errors"
 	"fmt"
+	"net/url"
 	"strings"
+	"time"
 )
 
-// Search struct defines a search
-type Search struct {
+// SearchQuery struct
+type SearchQuery struct {
 	Type string // object type
 
 	// All below are optional
@@ -28,64 +31,94 @@ type Search struct {
 	Letter       rune    // starting letter
 }
 
-// Get returns a map of an search as specified in the Search struct
-// Calls responses through the /search/ endpoint
-func (search Search) Get() (map[string]interface{}, error) {
-	var result map[string]interface{}
-	var err error
+// Search struct
+type Search struct {
+	Results []struct {
+		MalID     int       `json:"mal_id"`
+		URL       string    `json:"url"`
+		ImageURL  string    `json:"image_url"`
+		Title     string    `json:"title"`
+		Airing    bool      `json:"airing"`
+		Synopsis  string    `json:"synopsis"`
+		Type      string    `json:"type"`
+		Episodes  int       `json:"episodes"`
+		Score     float64   `json:"score"`
+		StartDate time.Time `json:"start_date"`
+		EndDate   time.Time `json:"end_date"`
+		Members   int       `json:"members"`
+		Rated     string    `json:"rated"`
+	} `json:"results"`
+	LastPage int `json:"last_page"`
+}
+
+// GetSearch returns search
+func GetSearch(q SearchQuery) (*Search, error) {
+	res := &Search{}
+
+	if q.Type == "" {
+		return nil, errors.New("search type not specified")
+	}
+
+	if q.Q == "" {
+		return nil, errors.New("search query not specified")
+	}
+
 	var query strings.Builder
-	query.WriteString(fmt.Sprintf("/search/%v/?", search.Type))
-	if search.Q != "" {
-		query.WriteString(fmt.Sprintf("q=%v&", search.Q))
+	query.WriteString(fmt.Sprintf("/search/%v/?", q.Type))
+	if q.Q != "" {
+		query.WriteString(fmt.Sprintf("q=%v&", url.QueryEscape(q.Q)))
 	}
-	if search.Page != 0 {
-		query.WriteString(fmt.Sprintf("page=%v&", search.Page))
+	if q.Page != 0 {
+		query.WriteString(fmt.Sprintf("page=%v&", q.Page))
 	}
-	if search.TypeFormat != "" {
-		query.WriteString(fmt.Sprintf("type=%v&", search.TypeFormat))
+	if q.TypeFormat != "" {
+		query.WriteString(fmt.Sprintf("type=%v&", q.TypeFormat))
 	}
-	if search.Status != "" {
-		query.WriteString(fmt.Sprintf("status=%v&", search.Status))
+	if q.Status != "" {
+		query.WriteString(fmt.Sprintf("status=%v&", q.Status))
 	}
-	if search.Rated != "" {
-		query.WriteString(fmt.Sprintf("rated=%v&", search.Rated))
+	if q.Rated != "" {
+		query.WriteString(fmt.Sprintf("rated=%v&", q.Rated))
 	}
-	if search.Genre != 0 {
-		query.WriteString(fmt.Sprintf("genre=%v&", search.Genre))
+	if q.Genre != 0 {
+		query.WriteString(fmt.Sprintf("genre=%v&", q.Genre))
 	}
-	if search.Score != 0 {
-		query.WriteString(fmt.Sprintf("score=%v&", search.Score))
+	if q.Score != 0 {
+		query.WriteString(fmt.Sprintf("score=%v&", q.Score))
 	}
-	if search.StartDate != "" {
-		query.WriteString(fmt.Sprintf("start_date=%v&", search.StartDate))
+	if q.StartDate != "" {
+		query.WriteString(fmt.Sprintf("start_date=%v&", q.StartDate))
 	}
-	if search.EndDate != "" {
-		query.WriteString(fmt.Sprintf("end_date=%v&", search.EndDate))
+	if q.EndDate != "" {
+		query.WriteString(fmt.Sprintf("end_date=%v&", q.EndDate))
 	}
-	if search.GenreExclude != false {
+	if q.GenreExclude != false {
 		query.WriteString(fmt.Sprintf("genre_exclude=%v&", 1))
 	}
-	if search.Limit != 0 {
-		query.WriteString(fmt.Sprintf("limit=%v&", search.Limit))
+	if q.Limit != 0 {
+		query.WriteString(fmt.Sprintf("limit=%v&", q.Limit))
 	}
-	if search.OrderBy != "" {
-		query.WriteString(fmt.Sprintf("order_by=%v&", search.OrderBy))
+	if q.OrderBy != "" {
+		query.WriteString(fmt.Sprintf("order_by=%v&", q.OrderBy))
 	}
-	if search.Sort != "" {
-		query.WriteString(fmt.Sprintf("sort=%v&", search.Sort))
+	if q.Sort != "" {
+		query.WriteString(fmt.Sprintf("sort=%v&", q.Sort))
 	}
-	if search.Producer != 0 {
-		query.WriteString(fmt.Sprintf("producer=%v&", search.Producer))
+	if q.Producer != 0 {
+		query.WriteString(fmt.Sprintf("producer=%v&", q.Producer))
 	}
-	if search.Magazine != 0 {
-		query.WriteString(fmt.Sprintf("magazine=%v&", search.Magazine))
+	if q.Magazine != 0 {
+		query.WriteString(fmt.Sprintf("magazine=%v&", q.Magazine))
 	}
-	if search.Letter != 0 {
-		query.WriteString(fmt.Sprintf("letter=%v&", search.Letter))
+	if q.Letter != 0 {
+		query.WriteString(fmt.Sprintf("letter=%v&", q.Letter))
 	}
-	result, err = getMapFromUrl(query.String()), nil
-	if _, ok := result["error"]; ok {
-		result, err = nil, getResultError(result)
+
+	err := urlToStruct(query.String(), res)
+
+	if err != nil {
+		return nil, err
 	}
-	return result, err
+
+	return res, nil
 }
