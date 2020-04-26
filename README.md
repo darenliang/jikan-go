@@ -40,6 +40,9 @@ Output:
 Cowboy Bebop
 ```
 ##### Search Query Example
+
+Consult the [Jikan search reference](https://jikan.docs.apiary.io/#reference/0/search) for a list of search parameters.
+
 ```go
 package main
 
