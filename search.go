@@ -2,7 +2,7 @@ package jikan
 
 import (
 	"fmt"
-	"strings"
+	"net/url"
 	"time"
 )
 
@@ -73,11 +73,10 @@ type SearchCharacter struct {
 }
 
 // GetSearchAnime returns search anime
-func GetSearchAnime(opts ...string) (*SearchAnime, error) {
+func GetSearchAnime(query url.Values) (*SearchAnime, error) {
 	res := &SearchAnime{}
 
-	err := urlToStruct(fmt.Sprintf("/search/anime?%s",
-		strings.Join(processArray(opts, escapeOption), "&")), res)
+	err := urlToStruct(fmt.Sprintf("/search/anime?%s", query.Encode()), res)
 
 	if err != nil {
 		return nil, err
@@ -87,11 +86,10 @@ func GetSearchAnime(opts ...string) (*SearchAnime, error) {
 }
 
 // GetSearchManga returns search manga
-func GetSearchManga(opts ...string) (*SearchManga, error) {
+func GetSearchManga(query url.Values) (*SearchManga, error) {
 	res := &SearchManga{}
 
-	err := urlToStruct(fmt.Sprintf("/search/manga?%s",
-		strings.Join(processArray(opts, escapeOption), "&")), res)
+	err := urlToStruct(fmt.Sprintf("/search/manga?%s", query.Encode()), res)
 
 	if err != nil {
 		return nil, err
@@ -101,11 +99,10 @@ func GetSearchManga(opts ...string) (*SearchManga, error) {
 }
 
 // GetSearchPeople returns search people
-func GetSearchPeople(opts ...string) (*SearchPeople, error) {
+func GetSearchPeople(query url.Values) (*SearchPeople, error) {
 	res := &SearchPeople{}
 
-	err := urlToStruct(fmt.Sprintf("/search/people?%s",
-		strings.Join(processArray(opts, escapeOption), "&")), res)
+	err := urlToStruct(fmt.Sprintf("/search/people?%s", query.Encode()), res)
 
 	if err != nil {
 		return nil, err
@@ -115,11 +112,10 @@ func GetSearchPeople(opts ...string) (*SearchPeople, error) {
 }
 
 // GetSearchCharacter returns search character
-func GetSearchCharacter(opts ...string) (*SearchCharacter, error) {
+func GetSearchCharacter(query url.Values) (*SearchCharacter, error) {
 	res := &SearchCharacter{}
 
-	err := urlToStruct(fmt.Sprintf("/search/character?%s",
-		strings.Join(processArray(opts, escapeOption), "&")), res)
+	err := urlToStruct(fmt.Sprintf("/search/character?%s", query.Encode()), res)
 
 	if err != nil {
 		return nil, err

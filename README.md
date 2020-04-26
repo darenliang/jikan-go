@@ -29,6 +29,7 @@ import (
 )
 
 func main() {
+	// Get anime
 	anime, _ := jikan.GetAnime(1)
 	fmt.Println(anime.Title)
 }
@@ -45,10 +46,17 @@ package main
 import (
 	"fmt"
 	"github.com/darenliang/jikan-go"
+	"net/url"
 )
 
 func main() {
-	search, _ := jikan.GetSearchAnime("q=Cowboy Bebop", "type=tv")
+	// Setup query
+	query := url.Values{}
+	query.Set("q", "Cowboy Bebop")
+	query.Set("type", "tv")
+
+	// Search anime
+	search, _ := jikan.GetSearchAnime(query)
 	fmt.Println(search.Results[0].Score)
 }
 ```
