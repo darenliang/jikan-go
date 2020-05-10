@@ -71,3 +71,8 @@ Output:
 ##### Troubleshooting
 
 If it is necessary to modify the http client (eg. modify timeout), you can access the client via `jikan.Client`.
+
+Example: setting the client timeout from 60 seconds (default) to 10 seconds.
+```go
+jikan.Client.Timeout = time.Second * 10
+```
