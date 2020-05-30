@@ -3,9 +3,7 @@
 [![GoDoc](https://godoc.org/github.com/darenliang/jikan-go?status.svg)](https://godoc.org/github.com/darenliang/jikan-go)
 [![Go Report Card](https://goreportcard.com/badge/github.com/darenliang/jikan-go)](https://goreportcard.com/report/github.com/darenliang/jikan-go)
 
-**The library has changed significantly. The current version is not backwards compatible with older versions.**
-
-A complete Go wrapper for the Jikan API.
+A Go wrapper for the Jikan API.
 
 Documentation can be found at [godoc.org](https://godoc.org/github.com/darenliang/jikan-go)
 
