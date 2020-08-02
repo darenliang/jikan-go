@@ -28,7 +28,10 @@ import (
 
 func main() {
 	// Get anime
-	anime, _ := jikan.GetAnime(1)
+	anime, err := jikan.GetAnime(1)
+	if err != nil {
+		panic(err)
+	}
 	fmt.Println(anime.Title)
 }
 ```
@@ -57,7 +60,10 @@ func main() {
 	query.Set("type", "tv")
 
 	// Search anime
-	search, _ := jikan.GetSearchAnime(query)
+	search, err := jikan.GetSearchAnime(query)
+	if err != nil {
+		panic(err)
+	}
 	fmt.Println(search.Results[0].Score)
 }
 ```
