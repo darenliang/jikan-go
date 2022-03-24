@@ -3,23 +3,7 @@ package jikan
 // WatchEpisodes struct
 type WatchEpisodes struct {
 	Data []struct {
-		Entry struct {
-			MalId  int    `json:"mal_id"`
-			Url    string `json:"url"`
-			Images struct {
-				Jpg struct {
-					ImageUrl      string `json:"image_url"`
-					SmallImageUrl string `json:"small_image_url"`
-					LargeImageUrl string `json:"large_image_url"`
-				} `json:"jpg"`
-				Webp struct {
-					ImageUrl      string `json:"image_url"`
-					SmallImageUrl string `json:"small_image_url"`
-					LargeImageUrl string `json:"large_image_url"`
-				} `json:"webp"`
-			} `json:"images"`
-			Title string `json:"title"`
-		} `json:"entry"`
+		Entry    EntryTitle3 `json:"entry"`
 		Episodes []struct {
 			MalId   int    `json:"mal_id"`
 			Url     string `json:"url"`
@@ -28,10 +12,7 @@ type WatchEpisodes struct {
 		} `json:"episodes"`
 		RegionLocked bool `json:"region_locked"`
 	} `json:"data"`
-	Pagination struct {
-		LastVisiblePage int  `json:"last_visible_page"`
-		HasNextPage     bool `json:"has_next_page"`
-	} `json:"pagination"`
+	Pagination Pagination `json:"pagination"`
 }
 
 // GetWatchRecentEpisodes returns watch recent episodes
@@ -57,24 +38,8 @@ func GetWatchPopularEpisodes() (*WatchEpisodes, error) {
 // WatchPromos struct
 type WatchPromos struct {
 	Data []struct {
-		Title string `json:"title"`
-		Entry struct {
-			MalId  int    `json:"mal_id"`
-			Url    string `json:"url"`
-			Images struct {
-				Jpg struct {
-					ImageUrl      string `json:"image_url"`
-					SmallImageUrl string `json:"small_image_url"`
-					LargeImageUrl string `json:"large_image_url"`
-				} `json:"jpg"`
-				Webp struct {
-					ImageUrl      string `json:"image_url"`
-					SmallImageUrl string `json:"small_image_url"`
-					LargeImageUrl string `json:"large_image_url"`
-				} `json:"webp"`
-			} `json:"images"`
-			Title string `json:"title"`
-		} `json:"entry"`
+		Title   string      `json:"title"`
+		Entry   EntryTitle3 `json:"entry"`
 		Trailer struct {
 			YoutubeId string `json:"youtube_id"`
 			Url       string `json:"url"`
@@ -88,10 +53,7 @@ type WatchPromos struct {
 			} `json:"images"`
 		} `json:"trailer"`
 	} `json:"data"`
-	Pagination struct {
-		LastVisiblePage int  `json:"last_visible_page"`
-		HasNextPage     bool `json:"has_next_page"`
-	} `json:"pagination"`
+	Pagination Pagination `json:"pagination"`
 }
 
 // GetWatchRecentPromos returns watch recent promos

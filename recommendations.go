@@ -3,36 +3,15 @@ package jikan
 // RecentRecommendations struct
 type RecentRecommendations struct {
 	Data []struct {
-		MalId string `json:"mal_id"`
-		Entry []struct {
-			MalId  int    `json:"mal_id"`
-			Url    string `json:"url"`
-			Images struct {
-				Jpg struct {
-					ImageUrl      string `json:"image_url"`
-					SmallImageUrl string `json:"small_image_url"`
-					LargeImageUrl string `json:"large_image_url"`
-				} `json:"jpg"`
-				Webp struct {
-					ImageUrl      string `json:"image_url"`
-					SmallImageUrl string `json:"small_image_url"`
-					LargeImageUrl string `json:"large_image_url"`
-				} `json:"webp"`
-			} `json:"images"`
-			Title string `json:"title"`
-		} `json:"entry"`
-		Content string `json:"content"`
+		MalId   string        `json:"mal_id"`
+		Entry   []EntryTitle3 `json:"entry"`
+		Content string        `json:"content"`
 		User    struct {
-			Data struct {
-				Url      string `json:"url"`
-				Username string `json:"username"`
-			} `json:"data"`
+			Url      string `json:"url"`
+			Username string `json:"username"`
 		} `json:"user"`
 	} `json:"data"`
-	Pagination struct {
-		LastVisiblePage int  `json:"last_visible_page"`
-		HasNextPage     bool `json:"has_next_page"`
-	} `json:"pagination"`
+	Pagination Pagination `json:"pagination"`
 }
 
 // GetRecentAnimeRecommendations returns recent anime recommendations

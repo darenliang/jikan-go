@@ -8,10 +8,7 @@ import (
 // Season struct
 type Season struct {
 	Data       []AnimeBase `json:"data"`
-	Pagination struct {
-		LastVisiblePage int  `json:"last_visible_page"`
-		HasNextPage     bool `json:"has_next_page"`
-	} `json:"pagination"`
+	Pagination Pagination  `json:"pagination"`
 }
 
 // GetSeason returns season
@@ -44,7 +41,7 @@ type SeasonsList struct {
 // GetSeasonsList returns seasons list
 func GetSeasonsList() (*SeasonsList, error) {
 	res := &SeasonsList{}
-	err := urlToStruct("/seasons/list", res)
+	err := urlToStruct("/seasons", res)
 	if err != nil {
 		return nil, err
 	}

@@ -8,17 +8,10 @@ import (
 
 // UsersBase struct
 type UsersBase struct {
-	MalId    int    `json:"mal_id"`
-	Username string `json:"username"`
-	Url      string `json:"url"`
-	Images   struct {
-		Jpg struct {
-			ImageUrl string `json:"image_url"`
-		} `json:"jpg"`
-		Webp struct {
-			ImageUrl string `json:"image_url"`
-		} `json:"webp"`
-	} `json:"images"`
+	MalId      int       `json:"mal_id"`
+	Username   string    `json:"username"`
+	Url        string    `json:"url"`
+	Images     Images1   `json:"images"`
 	LastOnline time.Time `json:"last_online"`
 	Gender     string    `json:"gender"`
 	Birthday   time.Time `json:"birthday"`
@@ -29,22 +22,12 @@ type UsersBase struct {
 // UsersSearch struct
 type UsersSearch struct {
 	Data []struct {
-		Username string `json:"username"`
-		Url      string `json:"url"`
-		Images   struct {
-			Jpg struct {
-				ImageUrl string `json:"image_url"`
-			} `json:"jpg"`
-			Webp struct {
-				ImageUrl string `json:"image_url"`
-			} `json:"webp"`
-		} `json:"images"`
+		Username   string    `json:"username"`
+		Url        string    `json:"url"`
+		Images     Images1   `json:"images"`
 		LastOnline time.Time `json:"last_online"`
 	} `json:"data"`
-	Pagination struct {
-		LastVisiblePage int  `json:"last_visible_page"`
-		HasNextPage     bool `json:"has_next_page"`
-	} `json:"pagination"`
+	Pagination Pagination `json:"pagination"`
 }
 
 // GetUsersSearch returns users search
@@ -74,17 +57,10 @@ func GetUserByID(id int) (*UserByID, error) {
 
 // UserProfile struct
 type UserProfile struct {
-	MalId    int    `json:"mal_id"`
-	Username string `json:"username"`
-	Url      string `json:"url"`
-	Images   struct {
-		Jpg struct {
-			ImageUrl string `json:"image_url"`
-		} `json:"jpg"`
-		Webp struct {
-			ImageUrl string `json:"image_url"`
-		} `json:"webp"`
-	} `json:"images"`
+	MalId      int       `json:"mal_id"`
+	Username   string    `json:"username"`
+	Url        string    `json:"url"`
+	Images     Images1   `json:"images"`
 	LastOnline time.Time `json:"last_online"`
 	Gender     string    `json:"gender"`
 	Birthday   time.Time `json:"birthday"`
@@ -149,81 +125,28 @@ func GetUserStatistics(username string) (*UserStatistics, error) {
 type UserFavorites struct {
 	Data struct {
 		Anime []struct {
-			Type      string `json:"type"`
-			StartYear int    `json:"start_year"`
-			MalId     int    `json:"mal_id"`
-			Url       string `json:"url"`
-			Images    struct {
-				Jpg struct {
-					ImageUrl      string `json:"image_url"`
-					SmallImageUrl string `json:"small_image_url"`
-					LargeImageUrl string `json:"large_image_url"`
-				} `json:"jpg"`
-				Webp struct {
-					ImageUrl      string `json:"image_url"`
-					SmallImageUrl string `json:"small_image_url"`
-					LargeImageUrl string `json:"large_image_url"`
-				} `json:"webp"`
-			} `json:"images"`
-			Title string `json:"title"`
+			Type      string  `json:"type"`
+			StartYear int     `json:"start_year"`
+			MalId     int     `json:"mal_id"`
+			Url       string  `json:"url"`
+			Images    Images3 `json:"images"`
+			Title     string  `json:"title"`
 		} `json:"anime"`
 		Manga []struct {
-			Type      string `json:"type"`
-			StartYear int    `json:"start_year"`
-			MalId     int    `json:"mal_id"`
-			Url       string `json:"url"`
-			Images    struct {
-				Jpg struct {
-					ImageUrl      string `json:"image_url"`
-					SmallImageUrl string `json:"small_image_url"`
-					LargeImageUrl string `json:"large_image_url"`
-				} `json:"jpg"`
-				Webp struct {
-					ImageUrl      string `json:"image_url"`
-					SmallImageUrl string `json:"small_image_url"`
-					LargeImageUrl string `json:"large_image_url"`
-				} `json:"webp"`
-			} `json:"images"`
-			Title string `json:"title"`
+			Type      string  `json:"type"`
+			StartYear int     `json:"start_year"`
+			MalId     int     `json:"mal_id"`
+			Url       string  `json:"url"`
+			Images    Images3 `json:"images"`
+			Title     string  `json:"title"`
 		} `json:"manga"`
 		Characters []struct {
-			Field1 struct {
-				MalId int    `json:"mal_id"`
-				Type  string `json:"type"`
-				Title string `json:"title"`
-				Url   string `json:"url"`
-			} `json:""`
-			MalId  int    `json:"mal_id"`
-			Url    string `json:"url"`
-			Images struct {
-				Jpg struct {
-					ImageUrl      string `json:"image_url"`
-					SmallImageUrl string `json:"small_image_url"`
-				} `json:"jpg"`
-				Webp struct {
-					ImageUrl      string `json:"image_url"`
-					SmallImageUrl string `json:"small_image_url"`
-				} `json:"webp"`
-			} `json:"images"`
-			Name string `json:"name"`
+			MalId  int     `json:"mal_id"`
+			Url    string  `json:"url"`
+			Images Images2 `json:"images"`
+			Name   string  `json:"name"`
 		} `json:"characters"`
-		People []struct {
-			Field1 struct {
-				MalId  int    `json:"mal_id"`
-				Url    string `json:"url"`
-				Images struct {
-					Jpg struct {
-						ImageUrl      string `json:"image_url"`
-						SmallImageUrl string `json:"small_image_url"`
-					} `json:"jpg"`
-					Webp struct {
-						ImageUrl      string `json:"image_url"`
-						SmallImageUrl string `json:"small_image_url"`
-					} `json:"webp"`
-				} `json:"images"`
-				Name string `json:"name"`
-			} `json:""`
-		} `json:"people"`
+		People []EntryName2 `json:"people"`
 	} `json:"data"`
 }
 
@@ -242,54 +165,22 @@ func GetUserFavorites(username string) (*UserFavorites, error) {
 type UserUpdates struct {
 	Data struct {
 		Anime []struct {
-			Entry struct {
-				MalId  int    `json:"mal_id"`
-				Url    string `json:"url"`
-				Images struct {
-					Jpg struct {
-						ImageUrl      string `json:"image_url"`
-						SmallImageUrl string `json:"small_image_url"`
-						LargeImageUrl string `json:"large_image_url"`
-					} `json:"jpg"`
-					Webp struct {
-						ImageUrl      string `json:"image_url"`
-						SmallImageUrl string `json:"small_image_url"`
-						LargeImageUrl string `json:"large_image_url"`
-					} `json:"webp"`
-				} `json:"images"`
-				Title string `json:"title"`
-			} `json:"entry"`
-			Score         float64   `json:"score"`
-			Status        string    `json:"status"`
-			EpisodesSeen  int       `json:"episodes_seen"`
-			EpisodesTotal int       `json:"episodes_total"`
-			Date          time.Time `json:"date"`
+			Entry         EntryTitle3 `json:"entry"`
+			Score         float64     `json:"score"`
+			Status        string      `json:"status"`
+			EpisodesSeen  int         `json:"episodes_seen"`
+			EpisodesTotal int         `json:"episodes_total"`
+			Date          time.Time   `json:"date"`
 		} `json:"anime"`
 		Manga []struct {
-			Entry struct {
-				MalId  int    `json:"mal_id"`
-				Url    string `json:"url"`
-				Images struct {
-					Jpg struct {
-						ImageUrl      string `json:"image_url"`
-						SmallImageUrl string `json:"small_image_url"`
-						LargeImageUrl string `json:"large_image_url"`
-					} `json:"jpg"`
-					Webp struct {
-						ImageUrl      string `json:"image_url"`
-						SmallImageUrl string `json:"small_image_url"`
-						LargeImageUrl string `json:"large_image_url"`
-					} `json:"webp"`
-				} `json:"images"`
-				Title string `json:"title"`
-			} `json:"entry"`
-			Score         float64   `json:"score"`
-			Status        string    `json:"status"`
-			ChaptersRead  int       `json:"chapters_read"`
-			ChaptersTotal int       `json:"chapters_total"`
-			VolumesRead   int       `json:"volumes_read"`
-			VolumesTotal  int       `json:"volumes_total"`
-			Date          time.Time `json:"date"`
+			Entry         EntryTitle3 `json:"entry"`
+			Score         float64     `json:"score"`
+			Status        string      `json:"status"`
+			ChaptersRead  int         `json:"chapters_read"`
+			ChaptersTotal int         `json:"chapters_total"`
+			VolumesRead   int         `json:"volumes_read"`
+			VolumesTotal  int         `json:"volumes_total"`
+			Date          time.Time   `json:"date"`
 		} `json:"manga"`
 	} `json:"data"`
 }
@@ -326,12 +217,7 @@ func GetUserAbout(username string) (*UserAbout, error) {
 // UserHistory struct
 type UserHistory struct {
 	Data []struct {
-		Entry struct {
-			MalId int    `json:"mal_id"`
-			Type  string `json:"type"`
-			Name  string `json:"name"`
-			Url   string `json:"url"`
-		} `json:"entry"`
+		Entry     MalItem   `json:"entry"`
 		Increment int       `json:"increment"`
 		Date      time.Time `json:"date"`
 	} `json:"data"`
@@ -361,25 +247,11 @@ func GetUserHistory(username string, filter UserHistoryFilter) (*UserHistory, er
 // UserFriends struct
 type UserFriends struct {
 	Data []struct {
-		User struct {
-			Username string `json:"username"`
-			Url      string `json:"url"`
-			Images   struct {
-				Jpg struct {
-					ImageUrl string `json:"image_url"`
-				} `json:"jpg"`
-				Webp struct {
-					ImageUrl string `json:"image_url"`
-				} `json:"webp"`
-			} `json:"images"`
-		} `json:"user"`
+		User         UserItem  `json:"user"`
 		LastOnline   time.Time `json:"last_online"`
 		FriendsSince time.Time `json:"friends_since"`
 	} `json:"data"`
-	Pagination struct {
-		LastVisiblePage int  `json:"last_visible_page"`
-		HasNextPage     bool `json:"has_next_page"`
-	} `json:"pagination"`
+	Pagination Pagination `json:"pagination"`
 }
 
 // GetUserFriends returns user friends
@@ -407,71 +279,7 @@ type UserAnimelist struct {
 		Days            int       `json:"days"`
 		Storage         string    `json:"storage"`
 		Priority        string    `json:"priority"`
-		Anime           struct {
-			MalId  int    `json:"mal_id"`
-			Title  string `json:"title"`
-			Url    string `json:"url"`
-			Images struct {
-				Jpg struct {
-					ImageUrl      string `json:"image_url"`
-					SmallImageUrl string `json:"small_image_url"`
-					LargeImageUrl string `json:"large_image_url"`
-				} `json:"jpg"`
-				Webp struct {
-					ImageUrl      string `json:"image_url"`
-					SmallImageUrl string `json:"small_image_url"`
-					LargeImageUrl string `json:"large_image_url"`
-				} `json:"webp"`
-			} `json:"images"`
-			Type     string `json:"type"`
-			Season   string `json:"season"`
-			Year     int    `json:"year"`
-			Episodes int    `json:"episodes"`
-			Rating   string `json:"rating"`
-			Status   string `json:"status"`
-			Airing   bool   `json:"airing"`
-			Aired    struct {
-				From time.Time `json:"from"`
-				To   time.Time `json:"to"`
-				Prop struct {
-					From struct {
-						Day   int `json:"day"`
-						Month int `json:"month"`
-						Year  int `json:"year"`
-					} `json:"from"`
-					To struct {
-						Day   int `json:"day"`
-						Month int `json:"month"`
-						Year  int `json:"year"`
-					} `json:"to"`
-				} `json:"prop"`
-				String string `json:"string"`
-			} `json:"aired"`
-			Studios []struct {
-				MalId int    `json:"mal_id"`
-				Type  string `json:"type"`
-				Name  string `json:"name"`
-				Url   string `json:"url"`
-			} `json:"studios"`
-			Licensors []struct {
-				MalId int    `json:"mal_id"`
-				Type  string `json:"type"`
-				Name  string `json:"name"`
-				Url   string `json:"url"`
-			} `json:"licensors"`
-			Genres []struct {
-				MalId int    `json:"mal_id"`
-				Type  string `json:"type"`
-				Name  string `json:"name"`
-				Url   string `json:"url"`
-			} `json:"genres"`
-			Demographics []struct {
-				MalId int    `json:"mal_id"`
-				Type  string `json:"type"`
-				Name  string `json:"name"`
-				Url   string `json:"url"`
-			} `json:"demographics"`
-		} `json:"anime"`
+		Anime           AnimeBase `json:"anime"`
 	} `json:"data"`
 }
 
@@ -502,63 +310,7 @@ type UserMangalist struct {
 		Days          int       `json:"days"`
 		Retail        int       `json:"retail"`
 		Priority      string    `json:"priority"`
-		Manga         struct {
-			MalId  int    `json:"mal_id"`
-			Title  string `json:"title"`
-			Url    string `json:"url"`
-			Images struct {
-				Jpg struct {
-					ImageUrl      string `json:"image_url"`
-					SmallImageUrl string `json:"small_image_url"`
-					LargeImageUrl string `json:"large_image_url"`
-				} `json:"jpg"`
-				Webp struct {
-					ImageUrl      string `json:"image_url"`
-					SmallImageUrl string `json:"small_image_url"`
-					LargeImageUrl string `json:"large_image_url"`
-				} `json:"webp"`
-			} `json:"images"`
-			Type       string `json:"type"`
-			Chapters   int    `json:"chapters"`
-			Volumes    int    `json:"volumes"`
-			Status     string `json:"status"`
-			Publishing bool   `json:"publishing"`
-			Published  struct {
-				From time.Time `json:"from"`
-				To   time.Time `json:"to"`
-				Prop struct {
-					From struct {
-						Day   int `json:"day"`
-						Month int `json:"month"`
-						Year  int `json:"year"`
-					} `json:"from"`
-					To struct {
-						Day   int `json:"day"`
-						Month int `json:"month"`
-						Year  int `json:"year"`
-					} `json:"to"`
-				} `json:"prop"`
-				String string `json:"string"`
-			} `json:"published"`
-			Magazines []struct {
-				MalId int    `json:"mal_id"`
-				Type  string `json:"type"`
-				Name  string `json:"name"`
-				Url   string `json:"url"`
-			} `json:"magazines"`
-			Genres []struct {
-				MalId int    `json:"mal_id"`
-				Type  string `json:"type"`
-				Name  string `json:"name"`
-				Url   string `json:"url"`
-			} `json:"genres"`
-			Demographics []struct {
-				MalId int    `json:"mal_id"`
-				Type  string `json:"type"`
-				Name  string `json:"name"`
-				Url   string `json:"url"`
-			} `json:"demographics"`
-		} `json:"manga"`
+		Manga         MangaBase `json:"manga"`
 	} `json:"data"`
 }
 
@@ -577,45 +329,18 @@ func GetUserMangalist(username string) (*UserMangalist, error) {
 // UserReviews struct
 type UserReviews struct {
 	Data []struct {
-		MalId        int       `json:"mal_id"`
-		Url          string    `json:"url"`
-		Type         string    `json:"type"`
-		Votes        int       `json:"votes"`
-		Date         time.Time `json:"date"`
-		Review       string    `json:"review"`
-		ChaptersRead int       `json:"chapters_read"`
-		Scores       struct {
-			Overall   int `json:"overall"`
-			Story     int `json:"story"`
-			Art       int `json:"art"`
-			Character int `json:"character"`
-			Enjoyment int `json:"enjoyment"`
-			Animation int `json:"animation"`
-			Sound     int `json:"sound"`
-		} `json:"scores"`
-		Entry struct {
-			MalId  int    `json:"mal_id"`
-			Url    string `json:"url"`
-			Images struct {
-				Jpg struct {
-					ImageUrl      string `json:"image_url"`
-					SmallImageUrl string `json:"small_image_url"`
-					LargeImageUrl string `json:"large_image_url"`
-				} `json:"jpg"`
-				Webp struct {
-					ImageUrl      string `json:"image_url"`
-					SmallImageUrl string `json:"small_image_url"`
-					LargeImageUrl string `json:"large_image_url"`
-				} `json:"webp"`
-			} `json:"images"`
-			Title string `json:"title"`
-		} `json:"entry"`
-		EpisodesWatched int `json:"episodes_watched"`
+		MalId           int         `json:"mal_id"`
+		Url             string      `json:"url"`
+		Type            string      `json:"type"`
+		Votes           int         `json:"votes"`
+		Date            time.Time   `json:"date"`
+		Review          string      `json:"review"`
+		ChaptersRead    int         `json:"chapters_read"`
+		Scores          ScoresLong  `json:"scores"`
+		Entry           EntryTitle3 `json:"entry"`
+		EpisodesWatched int         `json:"episodes_watched"`
 	} `json:"data"`
-	Pagination struct {
-		LastVisiblePage int  `json:"last_visible_page"`
-		HasNextPage     bool `json:"has_next_page"`
-	} `json:"pagination"`
+	Pagination Pagination `json:"pagination"`
 }
 
 // GetUserReviews returns user reviews
@@ -632,36 +357,15 @@ func GetUserReviews(username string) (*UserReviews, error) {
 // UserRecommendations struct
 type UserRecommendations struct {
 	Data []struct {
-		MalId string `json:"mal_id"`
-		Entry []struct {
-			MalId  int    `json:"mal_id"`
-			Url    string `json:"url"`
-			Images struct {
-				Jpg struct {
-					ImageUrl      string `json:"image_url"`
-					SmallImageUrl string `json:"small_image_url"`
-					LargeImageUrl string `json:"large_image_url"`
-				} `json:"jpg"`
-				Webp struct {
-					ImageUrl      string `json:"image_url"`
-					SmallImageUrl string `json:"small_image_url"`
-					LargeImageUrl string `json:"large_image_url"`
-				} `json:"webp"`
-			} `json:"images"`
-			Title string `json:"title"`
-		} `json:"entry"`
-		Content string `json:"content"`
+		MalId   string        `json:"mal_id"`
+		Entry   []EntryTitle3 `json:"entry"`
+		Content string        `json:"content"`
 		User    struct {
-			Data struct {
-				Url      string `json:"url"`
-				Username string `json:"username"`
-			} `json:"data"`
+			Url      string `json:"url"`
+			Username string `json:"username"`
 		} `json:"user"`
 	} `json:"data"`
-	Pagination struct {
-		LastVisiblePage int  `json:"last_visible_page"`
-		HasNextPage     bool `json:"has_next_page"`
-	} `json:"pagination"`
+	Pagination Pagination `json:"pagination"`
 }
 
 // GetUserRecommendations returns user recommendations
@@ -682,10 +386,7 @@ type UserClubs struct {
 		Name  string `json:"name"`
 		Url   string `json:"url"`
 	} `json:"data"`
-	Pagination struct {
-		LastVisiblePage int  `json:"last_visible_page"`
-		HasNextPage     bool `json:"has_next_page"`
-	} `json:"pagination"`
+	Pagination Pagination `json:"pagination"`
 }
 
 // GetUserClubs returns user clubs

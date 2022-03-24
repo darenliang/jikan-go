@@ -5,10 +5,7 @@ import "fmt"
 // Schedules struct
 type Schedules struct {
 	Data       []AnimeBase `json:"data"`
-	Pagination struct {
-		LastVisiblePage int  `json:"last_visible_page"`
-		HasNextPage     bool `json:"has_next_page"`
-	} `json:"pagination"`
+	Pagination Pagination  `json:"pagination"`
 }
 
 type ScheduleFilter string

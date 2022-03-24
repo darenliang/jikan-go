@@ -43,24 +43,8 @@ func GetPersonById(id int) (*PersonById, error) {
 // PersonAnime struct
 type PersonAnime struct {
 	Data []struct {
-		Position string `json:"position"`
-		Anime    struct {
-			MalId  int    `json:"mal_id"`
-			Url    string `json:"url"`
-			Images struct {
-				Jpg struct {
-					ImageUrl      string `json:"image_url"`
-					SmallImageUrl string `json:"small_image_url"`
-					LargeImageUrl string `json:"large_image_url"`
-				} `json:"jpg"`
-				Webp struct {
-					ImageUrl      string `json:"image_url"`
-					SmallImageUrl string `json:"small_image_url"`
-					LargeImageUrl string `json:"large_image_url"`
-				} `json:"webp"`
-			} `json:"images"`
-			Title string `json:"title"`
-		} `json:"anime"`
+		Position string      `json:"position"`
+		Anime    EntryTitle3 `json:"anime"`
 	} `json:"data"`
 }
 
@@ -77,39 +61,9 @@ func GetPersonAnime(id int) (*PersonAnime, error) {
 // PersonVoices struct
 type PersonVoices struct {
 	Data []struct {
-		Role  string `json:"role"`
-		Anime struct {
-			MalId  int    `json:"mal_id"`
-			Url    string `json:"url"`
-			Images struct {
-				Jpg struct {
-					ImageUrl      string `json:"image_url"`
-					SmallImageUrl string `json:"small_image_url"`
-					LargeImageUrl string `json:"large_image_url"`
-				} `json:"jpg"`
-				Webp struct {
-					ImageUrl      string `json:"image_url"`
-					SmallImageUrl string `json:"small_image_url"`
-					LargeImageUrl string `json:"large_image_url"`
-				} `json:"webp"`
-			} `json:"images"`
-			Title string `json:"title"`
-		} `json:"anime"`
-		Character struct {
-			MalId  int    `json:"mal_id"`
-			Url    string `json:"url"`
-			Images struct {
-				Jpg struct {
-					ImageUrl      string `json:"image_url"`
-					SmallImageUrl string `json:"small_image_url"`
-				} `json:"jpg"`
-				Webp struct {
-					ImageUrl      string `json:"image_url"`
-					SmallImageUrl string `json:"small_image_url"`
-				} `json:"webp"`
-			} `json:"images"`
-			Name string `json:"name"`
-		} `json:"character"`
+		Role      string      `json:"role"`
+		Anime     EntryTitle3 `json:"anime"`
+		Character EntryName2  `json:"character"`
 	} `json:"data"`
 }
 
@@ -126,24 +80,8 @@ func GetPersonVoices(id int) (*PersonVoices, error) {
 // PersonManga struct
 type PersonManga struct {
 	Data []struct {
-		Position string `json:"position"`
-		Manga    struct {
-			MalId  int    `json:"mal_id"`
-			Url    string `json:"url"`
-			Images struct {
-				Jpg struct {
-					ImageUrl      string `json:"image_url"`
-					SmallImageUrl string `json:"small_image_url"`
-					LargeImageUrl string `json:"large_image_url"`
-				} `json:"jpg"`
-				Webp struct {
-					ImageUrl      string `json:"image_url"`
-					SmallImageUrl string `json:"small_image_url"`
-					LargeImageUrl string `json:"large_image_url"`
-				} `json:"webp"`
-			} `json:"images"`
-			Title string `json:"title"`
-		} `json:"manga"`
+		Position string      `json:"position"`
+		Manga    EntryTitle3 `json:"manga"`
 	} `json:"data"`
 }
 
@@ -179,10 +117,7 @@ func GetPersonPictures(id int) (*PersonPictures, error) {
 // PeopleSearch struct
 type PeopleSearch struct {
 	Data       []PeopleBase `json:"data"`
-	Pagination struct {
-		LastVisiblePage int  `json:"last_visible_page"`
-		HasNextPage     bool `json:"has_next_page"`
-	} `json:"pagination"`
+	Pagination Pagination   `json:"pagination"`
 }
 
 // GetPeopleSearch returns people search

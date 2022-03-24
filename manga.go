@@ -8,90 +8,33 @@ import (
 
 // MangaBase struct
 type MangaBase struct {
-	MalId  int    `json:"mal_id"`
-	Url    string `json:"url"`
-	Images struct {
-		Jpg struct {
-			ImageUrl      string `json:"image_url"`
-			SmallImageUrl string `json:"small_image_url"`
-			LargeImageUrl string `json:"large_image_url"`
-		} `json:"jpg"`
-		Webp struct {
-			ImageUrl      string `json:"image_url"`
-			SmallImageUrl string `json:"small_image_url"`
-			LargeImageUrl string `json:"large_image_url"`
-		} `json:"webp"`
-	} `json:"images"`
-	Title         string   `json:"title"`
-	TitleEnglish  string   `json:"title_english"`
-	TitleJapanese string   `json:"title_japanese"`
-	TitleSynonyms []string `json:"title_synonyms"`
-	Type          string   `json:"type"`
-	Chapters      int      `json:"chapters"`
-	Volumes       int      `json:"volumes"`
-	Status        string   `json:"status"`
-	Publishing    bool     `json:"publishing"`
-	Published     struct {
-		From time.Time `json:"from"`
-		To   time.Time `json:"to"`
-		Prop struct {
-			From struct {
-				Day   int `json:"day"`
-				Month int `json:"month"`
-				Year  int `json:"year"`
-			} `json:"from"`
-			To struct {
-				Day   int `json:"day"`
-				Month int `json:"month"`
-				Year  int `json:"year"`
-			} `json:"to"`
-			String string `json:"string"`
-		} `json:"prop"`
-	} `json:"published"`
-	Score      float64 `json:"score"`
-	ScoredBy   int     `json:"scored_by"`
-	Rank       int     `json:"rank"`
-	Popularity int     `json:"popularity"`
-	Members    int     `json:"members"`
-	Favorites  int     `json:"favorites"`
-	Synopsis   string  `json:"synopsis"`
-	Background string  `json:"background"`
-	Authors    []struct {
-		MalId int    `json:"mal_id"`
-		Type  string `json:"type"`
-		Name  string `json:"name"`
-		Url   string `json:"url"`
-	} `json:"authors"`
-	Serializations []struct {
-		MalId int    `json:"mal_id"`
-		Type  string `json:"type"`
-		Name  string `json:"name"`
-		Url   string `json:"url"`
-	} `json:"serializations"`
-	Genres []struct {
-		MalId int    `json:"mal_id"`
-		Type  string `json:"type"`
-		Name  string `json:"name"`
-		Url   string `json:"url"`
-	} `json:"genres"`
-	ExplicitGenres []struct {
-		MalId int    `json:"mal_id"`
-		Type  string `json:"type"`
-		Name  string `json:"name"`
-		Url   string `json:"url"`
-	} `json:"explicit_genres"`
-	Themes []struct {
-		MalId int    `json:"mal_id"`
-		Type  string `json:"type"`
-		Name  string `json:"name"`
-		Url   string `json:"url"`
-	} `json:"themes"`
-	Demographics []struct {
-		MalId int    `json:"mal_id"`
-		Type  string `json:"type"`
-		Name  string `json:"name"`
-		Url   string `json:"url"`
-	} `json:"demographics"`
+	MalId          int       `json:"mal_id"`
+	Url            string    `json:"url"`
+	Images         Images3   `json:"images"`
+	Title          string    `json:"title"`
+	TitleEnglish   string    `json:"title_english"`
+	TitleJapanese  string    `json:"title_japanese"`
+	TitleSynonyms  []string  `json:"title_synonyms"`
+	Type           string    `json:"type"`
+	Chapters       int       `json:"chapters"`
+	Volumes        int       `json:"volumes"`
+	Status         string    `json:"status"`
+	Publishing     bool      `json:"publishing"`
+	Published      DateRange `json:"published"`
+	Score          float64   `json:"score"`
+	ScoredBy       int       `json:"scored_by"`
+	Rank           int       `json:"rank"`
+	Popularity     int       `json:"popularity"`
+	Members        int       `json:"members"`
+	Favorites      int       `json:"favorites"`
+	Synopsis       string    `json:"synopsis"`
+	Background     string    `json:"background"`
+	Authors        []MalItem `json:"authors"`
+	Serializations []MalItem `json:"serializations"`
+	Genres         []MalItem `json:"genres"`
+	ExplicitGenres []MalItem `json:"explicit_genres"`
+	Themes         []MalItem `json:"themes"`
+	Demographics   []MalItem `json:"demographics"`
 }
 
 // MangaById struct
@@ -113,19 +56,10 @@ func GetMangaById(id int) (*MangaById, error) {
 type MangaCharacters struct {
 	Data []struct {
 		Character struct {
-			MalId  int    `json:"mal_id"`
-			Url    string `json:"url"`
-			Images struct {
-				Jpg struct {
-					ImageUrl      string `json:"image_url"`
-					SmallImageUrl string `json:"small_image_url"`
-				} `json:"jpg"`
-				Webp struct {
-					ImageUrl      string `json:"image_url"`
-					SmallImageUrl string `json:"small_image_url"`
-				} `json:"webp"`
-			} `json:"images"`
-			Name string `json:"name"`
+			MalId  int     `json:"mal_id"`
+			Url    string  `json:"url"`
+			Images Images2 `json:"images"`
+			Name   string  `json:"name"`
 		} `json:"character"`
 		Role string `json:"role"`
 	} `json:"data"`
@@ -159,10 +93,7 @@ type MangaNews struct {
 		Comments int    `json:"comments"`
 		Excerpt  string `json:"excerpt"`
 	} `json:"data"`
-	Pagination struct {
-		LastVisiblePage int  `json:"last_visible_page"`
-		HasNextPage     bool `json:"has_next_page"`
-	} `json:"pagination"`
+	Pagination Pagination `json:"pagination"`
 }
 
 // GetMangaNews returns manga news
@@ -185,12 +116,7 @@ type MangaForum struct {
 		AuthorUsername string    `json:"author_username"`
 		AuthorUrl      string    `json:"author_url"`
 		Comments       int       `json:"comments"`
-		LastComment    struct {
-			Url            string    `json:"url"`
-			AuthorUsername string    `json:"author_username"`
-			AuthorUrl      string    `json:"author_url"`
-			Date           time.Time `json:"date"`
-		} `json:"last_comment"`
+		LastComment    Comment   `json:"last_comment"`
 	} `json:"data"`
 }
 
@@ -218,18 +144,7 @@ func GetMangaForum(id int, filter MangaForumFilter) (*MangaForum, error) {
 
 // MangaPictures struct
 type MangaPictures struct {
-	Data []struct {
-		Jpg struct {
-			ImageUrl      string `json:"image_url"`
-			SmallImageUrl string `json:"small_image_url"`
-			LargeImageUrl string `json:"large_image_url"`
-		} `json:"jpg"`
-		Webp struct {
-			ImageUrl      string `json:"image_url"`
-			SmallImageUrl string `json:"small_image_url"`
-			LargeImageUrl string `json:"large_image_url"`
-		} `json:"webp"`
-	} `json:"data"`
+	Data []Images3 `json:"data"`
 }
 
 // GetMangaPictures returns manga pictures
@@ -245,17 +160,13 @@ func GetMangaPictures(id int) (*MangaPictures, error) {
 // MangaStatistics struct
 type MangaStatistics struct {
 	Data struct {
-		Reading    int `json:"reading"`
-		Completed  int `json:"completed"`
-		OnHold     int `json:"on_hold"`
-		Dropped    int `json:"dropped"`
-		PlanToRead int `json:"plan_to_read"`
-		Total      int `json:"total"`
-		Scores     []struct {
-			Score      float64 `json:"score"`
-			Votes      int     `json:"votes"`
-			Percentage float64 `json:"percentage"`
-		} `json:"scores"`
+		Reading    int           `json:"reading"`
+		Completed  int           `json:"completed"`
+		OnHold     int           `json:"on_hold"`
+		Dropped    int           `json:"dropped"`
+		PlanToRead int           `json:"plan_to_read"`
+		Total      int           `json:"total"`
+		Scores     []ScoresShort `json:"scores"`
 	} `json:"data"`
 }
 
@@ -288,25 +199,9 @@ func GetMangaMoreInfo(id int) (*MangaMoreInfo, error) {
 // MangaRecommendations struct
 type MangaRecommendations struct {
 	Data []struct {
-		Entry []struct {
-			MalId  int    `json:"mal_id"`
-			Url    string `json:"url"`
-			Images struct {
-				Jpg struct {
-					ImageUrl      string `json:"image_url"`
-					SmallImageUrl string `json:"small_image_url"`
-					LargeImageUrl string `json:"large_image_url"`
-				} `json:"jpg"`
-				Webp struct {
-					ImageUrl      string `json:"image_url"`
-					SmallImageUrl string `json:"small_image_url"`
-					LargeImageUrl string `json:"large_image_url"`
-				} `json:"webp"`
-			} `json:"images"`
-			Title string `json:"title"`
-		} `json:"entry"`
-		Url   string `json:"url"`
-		Votes int    `json:"votes"`
+		Entry EntryTitle3 `json:"entry"`
+		Url   string      `json:"url"`
+		Votes int         `json:"votes"`
 	} `json:"data"`
 }
 
@@ -323,18 +218,7 @@ func GetMangaRecommendations(id int) (*MangaRecommendations, error) {
 // MangaUserUpdates struct
 type MangaUserUpdates struct {
 	Data []struct {
-		User struct {
-			Username string `json:"username"`
-			Url      string `json:"url"`
-			Images   struct {
-				Jpg struct {
-					ImageUrl string `json:"image_url"`
-				} `json:"jpg"`
-				Webp struct {
-					ImageUrl string `json:"image_url"`
-				} `json:"webp"`
-			} `json:"images"`
-		} `json:"user"`
+		User          UserItem  `json:"user"`
 		Score         float64   `json:"score"`
 		Status        string    `json:"status"`
 		VolumesRead   int       `json:"volumes_read"`
@@ -343,10 +227,7 @@ type MangaUserUpdates struct {
 		ChaptersTotal int       `json:"chapters_total"`
 		Date          time.Time `json:"date"`
 	} `json:"data"`
-	Pagination struct {
-		LastVisiblePage int  `json:"last_visible_page"`
-		HasNextPage     bool `json:"has_next_page"`
-	} `json:"pagination"`
+	Pagination Pagination `json:"pagination"`
 }
 
 // GetMangaUserUpdates returns manga user updates
@@ -362,37 +243,17 @@ func GetMangaUserUpdates(id, page int) (*MangaUserUpdates, error) {
 // MangaReviews struct
 type MangaReviews struct {
 	Data []struct {
-		User struct {
-			Username string `json:"username"`
-			Url      string `json:"url"`
-			Images   struct {
-				Jpg struct {
-					ImageUrl string `json:"image_url"`
-				} `json:"jpg"`
-				Webp struct {
-					ImageUrl string `json:"image_url"`
-				} `json:"webp"`
-			} `json:"images"`
-		} `json:"user"`
-		MalId        int       `json:"mal_id"`
-		Url          string    `json:"url"`
-		Type         string    `json:"type"`
-		Votes        int       `json:"votes"`
-		Date         time.Time `json:"date"`
-		ChaptersRead int       `json:"chapters_read"`
-		Review       string    `json:"review"`
-		Scores       struct {
-			Overall   int `json:"overall"`
-			Story     int `json:"story"`
-			Art       int `json:"art"`
-			Character int `json:"character"`
-			Enjoyment int `json:"enjoyment"`
-		} `json:"scores"`
+		User         UserItem    `json:"user"`
+		MalId        int         `json:"mal_id"`
+		Url          string      `json:"url"`
+		Type         string      `json:"type"`
+		Votes        int         `json:"votes"`
+		Date         time.Time   `json:"date"`
+		ChaptersRead int         `json:"chapters_read"`
+		Review       string      `json:"review"`
+		Scores       ScoresManga `json:"scores"`
 	} `json:"data"`
-	Pagination struct {
-		LastVisiblePage int  `json:"last_visible_page"`
-		HasNextPage     bool `json:"has_next_page"`
-	} `json:"pagination"`
+	Pagination Pagination `json:"pagination"`
 }
 
 // GetMangaReviews returns manga reviews
@@ -408,13 +269,8 @@ func GetMangaReviews(id, page int) (*MangaReviews, error) {
 // MangaRelations struct
 type MangaRelations struct {
 	Data []struct {
-		Relation string `json:"relation"`
-		Entry    []struct {
-			MalId int    `json:"mal_id"`
-			Type  string `json:"type"`
-			Name  string `json:"name"`
-			Url   string `json:"url"`
-		} `json:"entry"`
+		Relation string    `json:"relation"`
+		Entry    []MalItem `json:"entry"`
 	} `json:"data"`
 }
 
@@ -449,10 +305,7 @@ func GetMangaExternal(id int) (*MangaExternal, error) {
 // MangaSearch struct
 type MangaSearch struct {
 	Data       []MangaBase `json:"data"`
-	Pagination struct {
-		LastVisiblePage int  `json:"last_visible_page"`
-		HasNextPage     bool `json:"has_next_page"`
-	} `json:"pagination"`
+	Pagination Pagination  `json:"pagination"`
 }
 
 // GetMangaSearch returns manga search

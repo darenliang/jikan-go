@@ -7,18 +7,9 @@ import (
 
 // CharactersBase struct
 type CharactersBase struct {
-	MalId  int    `json:"mal_id"`
-	Url    string `json:"url"`
-	Images struct {
-		Jpg struct {
-			ImageUrl      string `json:"image_url"`
-			SmallImageUrl string `json:"small_image_url"`
-		} `json:"jpg"`
-		Webp struct {
-			ImageUrl      string `json:"image_url"`
-			SmallImageUrl string `json:"small_image_url"`
-		} `json:"webp"`
-	} `json:"images"`
+	MalId     int      `json:"mal_id"`
+	Url       string   `json:"url"`
+	Images    Images2  `json:"images"`
 	Name      string   `json:"name"`
 	NameKanji string   `json:"name_kanji"`
 	Nicknames []string `json:"nicknames"`
@@ -44,24 +35,8 @@ func GetCharacterById(id int) (*CharacterById, error) {
 // CharacterAnime struct
 type CharacterAnime struct {
 	Data []struct {
-		Role  string `json:"role"`
-		Anime struct {
-			MalId  int    `json:"mal_id"`
-			Url    string `json:"url"`
-			Images struct {
-				Jpg struct {
-					ImageUrl      string `json:"image_url"`
-					SmallImageUrl string `json:"small_image_url"`
-					LargeImageUrl string `json:"large_image_url"`
-				} `json:"jpg"`
-				Webp struct {
-					ImageUrl      string `json:"image_url"`
-					SmallImageUrl string `json:"small_image_url"`
-					LargeImageUrl string `json:"large_image_url"`
-				} `json:"webp"`
-			} `json:"images"`
-			Title string `json:"title"`
-		} `json:"anime"`
+		Role  string      `json:"role"`
+		Anime EntryTitle3 `json:"anime"`
 	} `json:"data"`
 }
 
@@ -78,24 +53,8 @@ func GetCharacterAnime(id int) (*CharacterAnime, error) {
 // CharacterManga struct
 type CharacterManga struct {
 	Data []struct {
-		Role  string `json:"role"`
-		Manga struct {
-			MalId  int    `json:"mal_id"`
-			Url    string `json:"url"`
-			Images struct {
-				Jpg struct {
-					ImageUrl      string `json:"image_url"`
-					SmallImageUrl string `json:"small_image_url"`
-					LargeImageUrl string `json:"large_image_url"`
-				} `json:"jpg"`
-				Webp struct {
-					ImageUrl      string `json:"image_url"`
-					SmallImageUrl string `json:"small_image_url"`
-					LargeImageUrl string `json:"large_image_url"`
-				} `json:"webp"`
-			} `json:"images"`
-			Title string `json:"title"`
-		} `json:"manga"`
+		Role  string      `json:"role"`
+		Manga EntryTitle3 `json:"manga"`
 	} `json:"data"`
 }
 
@@ -156,10 +115,7 @@ func GetCharacterPictures(id int) (*CharacterPictures, error) {
 // CharactersSearch struct
 type CharactersSearch struct {
 	Data       []CharacterById `json:"data"`
-	Pagination struct {
-		LastVisiblePage int  `json:"last_visible_page"`
-		HasNextPage     bool `json:"has_next_page"`
-	} `json:"pagination"`
+	Pagination Pagination      `json:"pagination"`
 }
 
 // GetCharactersSearch returns characters search

@@ -7,111 +7,49 @@ import (
 )
 
 type AnimeBase struct {
-	MalId  int    `json:"mal_id"`
-	Url    string `json:"url"`
-	Images struct {
-		Jpg struct {
-			ImageUrl      string `json:"image_url"`
-			SmallImageUrl string `json:"small_image_url"`
-			LargeImageUrl string `json:"large_image_url"`
-		} `json:"jpg"`
-		Webp struct {
-			ImageUrl      string `json:"image_url"`
-			SmallImageUrl string `json:"small_image_url"`
-			LargeImageUrl string `json:"large_image_url"`
-		} `json:"webp"`
-	} `json:"images"`
+	MalId   int     `json:"mal_id"`
+	Url     string  `json:"url"`
+	Images  Images3 `json:"images"`
 	Trailer struct {
 		YoutubeID string `json:"youtube_id"`
 		Url       string `json:"url"`
 		EmbedUrl  string `json:"embed_url"`
 	} `json:"trailer"`
-	Title         string   `json:"title"`
-	TitleEnglish  string   `json:"title_english"`
-	TitleJapanese string   `json:"title_japanese"`
-	TitleSynonyms []string `json:"title_synonyms"`
-	Type          string   `json:"type"`
-	Source        string   `json:"source"`
-	Episodes      int      `json:"episodes"`
-	Status        string   `json:"status"`
-	Airing        bool     `json:"airing"`
-	Aired         struct {
-		From time.Time `json:"from"`
-		To   time.Time `json:"to"`
-		Prop struct {
-			From struct {
-				Day   int `json:"day"`
-				Month int `json:"month"`
-				Year  int `json:"year"`
-			} `json:"from"`
-			To struct {
-				Day   int `json:"day"`
-				Month int `json:"month"`
-				Year  int `json:"year"`
-			} `json:"to"`
-			String string `json:"string"`
-		} `json:"prop"`
-	} `json:"aired"`
-	Duration   string  `json:"duration"`
-	Rating     string  `json:"rating"`
-	Score      float64 `json:"score"`
-	ScoredBy   int     `json:"scored_by"`
-	Rank       int     `json:"rank"`
-	Popularity int     `json:"popularity"`
-	Members    int     `json:"members"`
-	Favorites  int     `json:"favorites"`
-	Synopsis   string  `json:"synopsis"`
-	Background string  `json:"background"`
-	Season     string  `json:"season"`
-	Year       int     `json:"year"`
-	Broadcast  struct {
+	Title         string    `json:"title"`
+	TitleEnglish  string    `json:"title_english"`
+	TitleJapanese string    `json:"title_japanese"`
+	TitleSynonyms []string  `json:"title_synonyms"`
+	Type          string    `json:"type"`
+	Source        string    `json:"source"`
+	Episodes      int       `json:"episodes"`
+	Status        string    `json:"status"`
+	Airing        bool      `json:"airing"`
+	Aired         DateRange `json:"aired"`
+	Duration      string    `json:"duration"`
+	Rating        string    `json:"rating"`
+	Score         float64   `json:"score"`
+	ScoredBy      int       `json:"scored_by"`
+	Rank          int       `json:"rank"`
+	Popularity    int       `json:"popularity"`
+	Members       int       `json:"members"`
+	Favorites     int       `json:"favorites"`
+	Synopsis      string    `json:"synopsis"`
+	Background    string    `json:"background"`
+	Season        string    `json:"season"`
+	Year          int       `json:"year"`
+	Broadcast     struct {
 		Day      string `json:"day"`
 		Time     string `json:"time"`
 		Timezone string `json:"timezone"`
 		String   string `json:"string"`
 	} `json:"broadcast"`
-	Producers []struct {
-		MalId int    `json:"mal_id"`
-		Type  string `json:"type"`
-		Name  string `json:"name"`
-		Url   string `json:"url"`
-	} `json:"producers"`
-	Licensors []struct {
-		MalId int    `json:"mal_id"`
-		Type  string `json:"type"`
-		Name  string `json:"name"`
-		Url   string `json:"url"`
-	} `json:"licensors"`
-	Studios []struct {
-		MalId int    `json:"mal_id"`
-		Type  string `json:"type"`
-		Name  string `json:"name"`
-		Url   string `json:"url"`
-	} `json:"studios"`
-	Genres []struct {
-		MalId int    `json:"mal_id"`
-		Type  string `json:"type"`
-		Name  string `json:"name"`
-		Url   string `json:"url"`
-	} `json:"genres"`
-	ExplicitGenres []struct {
-		MalId int    `json:"mal_id"`
-		Type  string `json:"type"`
-		Name  string `json:"name"`
-		Url   string `json:"url"`
-	} `json:"explicit_genres"`
-	Themes []struct {
-		MalId int    `json:"mal_id"`
-		Type  string `json:"type"`
-		Name  string `json:"name"`
-		Url   string `json:"url"`
-	} `json:"themes"`
-	Demographics []struct {
-		MalId int    `json:"mal_id"`
-		Type  string `json:"type"`
-		Name  string `json:"name"`
-		Url   string `json:"url"`
-	} `json:"demographics"`
+	Producers      []MalItem `json:"producers"`
+	Licensors      []MalItem `json:"licensors"`
+	Studios        []MalItem `json:"studios"`
+	Genres         []MalItem `json:"genres"`
+	ExplicitGenres []MalItem `json:"explicit_genres"`
+	Themes         []MalItem `json:"themes"`
+	Demographics   []MalItem `json:"demographics"`
 }
 
 // AnimeById struct
@@ -133,19 +71,10 @@ func GetAnimeById(id int) (*AnimeById, error) {
 type AnimeCharacters struct {
 	Data []struct {
 		Character struct {
-			MalId  int    `json:"mal_id"`
-			Url    string `json:"url"`
-			Images struct {
-				Jpg struct {
-					ImageUrl      string `json:"image_url"`
-					SmallImageUrl string `json:"small_image_url"`
-				} `json:"jpg"`
-				Webp struct {
-					ImageUrl      string `json:"image_url"`
-					SmallImageUrl string `json:"small_image_url"`
-				} `json:"webp"`
-			} `json:"images"`
-			Name string `json:"name"`
+			MalId  int     `json:"mal_id"`
+			Url    string  `json:"url"`
+			Images Images2 `json:"images"`
+			Name   string  `json:"name"`
 		} `json:"character"`
 		Role        string `json:"role"`
 		VoiceActors []struct {
@@ -215,10 +144,7 @@ type AnimeEpisodes struct {
 		Recap         bool      `json:"recap"`
 		ForumUrl      string    `json:"forum_url"`
 	} `json:"data"`
-	Pagination struct {
-		LastVisiblePage int  `json:"last_visible_page"`
-		HasNextPage     bool `json:"has_next_page"`
-	} `json:"pagination"`
+	Pagination Pagination `json:"pagination"`
 }
 
 // GetAnimeEpisodes returns anime episodes
@@ -275,10 +201,7 @@ type AnimeNews struct {
 		Comments int    `json:"comments"`
 		Excerpt  string `json:"excerpt"`
 	} `json:"data"`
-	Pagination struct {
-		LastVisiblePage int  `json:"last_visible_page"`
-		HasNextPage     bool `json:"has_next_page"`
-	} `json:"pagination"`
+	Pagination Pagination `json:"pagination"`
 }
 
 // GetAnimeNews returns anime news
@@ -301,12 +224,7 @@ type AnimeForum struct {
 		AuthorUsername string    `json:"author_username"`
 		AuthorUrl      string    `json:"author_url"`
 		Comments       int       `json:"comments"`
-		LastComment    struct {
-			Url            string    `json:"url"`
-			AuthorUsername string    `json:"author_username"`
-			AuthorUrl      string    `json:"author_url"`
-			Date           time.Time `json:"date"`
-		} `json:"last_comment"`
+		LastComment    Comment   `json:"last_comment"`
 	} `json:"data"`
 }
 
@@ -398,17 +316,13 @@ func GetAnimePictures(id int) (*AnimePictures, error) {
 // AnimeStatistics struct
 type AnimeStatistics struct {
 	Data struct {
-		Watching    int `json:"watching"`
-		Completed   int `json:"completed"`
-		OnHold      int `json:"on_hold"`
-		Dropped     int `json:"dropped"`
-		PlanToWatch int `json:"plan_to_watch"`
-		Total       int `json:"total"`
-		Scores      []struct {
-			Score      float64 `json:"score"`
-			Votes      int     `json:"votes"`
-			Percentage float64 `json:"percentage"`
-		} `json:"scores"`
+		Watching    int           `json:"watching"`
+		Completed   int           `json:"completed"`
+		OnHold      int           `json:"on_hold"`
+		Dropped     int           `json:"dropped"`
+		PlanToWatch int           `json:"plan_to_watch"`
+		Total       int           `json:"total"`
+		Scores      []ScoresShort `json:"scores"`
 	} `json:"data"`
 }
 
@@ -442,25 +356,9 @@ func GetAnimeMoreInfo(id int) (*AnimeMoreInfo, error) {
 // AnimeRecommendations struct
 type AnimeRecommendations struct {
 	Data []struct {
-		Entry struct {
-			MalId  int    `json:"mal_id"`
-			Url    string `json:"url"`
-			Images struct {
-				Jpg struct {
-					ImageUrl      string `json:"image_url"`
-					SmallImageUrl string `json:"small_image_url"`
-					LargeImageUrl string `json:"large_image_url"`
-				} `json:"jpg"`
-				Webp struct {
-					ImageUrl      string `json:"image_url"`
-					SmallImageUrl string `json:"small_image_url"`
-					LargeImageUrl string `json:"large_image_url"`
-				} `json:"webp"`
-			} `json:"images"`
-			Title string `json:"title"`
-		} `json:"entry"`
-		Url   string `json:"url"`
-		Votes int    `json:"votes"`
+		Entry EntryTitle3 `json:"entry"`
+		Url   string      `json:"url"`
+		Votes int         `json:"votes"`
 	} `json:"data"`
 }
 
@@ -477,28 +375,14 @@ func GetAnimeRecommendations(id int) (*AnimeRecommendations, error) {
 // AnimeUserUpdates struct
 type AnimeUserUpdates struct {
 	Data []struct {
-		User struct {
-			Username string `json:"username"`
-			Url      string `json:"url"`
-			Images   struct {
-				Jpg struct {
-					ImageUrl string `json:"image_url"`
-				} `json:"jpg"`
-				Webp struct {
-					ImageUrl string `json:"image_url"`
-				} `json:"webp"`
-			} `json:"images"`
-		} `json:"user"`
-		Score         float64 `json:"score"`
-		Status        string  `json:"status"`
-		EpisodesSeen  int     `json:"episodes_seen"`
-		EpisodesTotal int     `json:"episodes_total"`
-		Date          string  `json:"date"`
+		User          UserItem `json:"user"`
+		Score         float64  `json:"score"`
+		Status        string   `json:"status"`
+		EpisodesSeen  int      `json:"episodes_seen"`
+		EpisodesTotal int      `json:"episodes_total"`
+		Date          string   `json:"date"`
 	} `json:"data"`
-	Pagination struct {
-		LastVisiblePage int  `json:"last_visible_page"`
-		HasNextPage     bool `json:"has_next_page"`
-	} `json:"pagination"`
+	Pagination Pagination `json:"pagination"`
 }
 
 // GetAnimeUserUpdates returns anime user updates
@@ -514,18 +398,7 @@ func GetAnimeUserUpdates(id, page int) (*AnimeUserUpdates, error) {
 // AnimeReviews struct
 type AnimeReviews struct {
 	Data []struct {
-		User struct {
-			Username string `json:"username"`
-			Url      string `json:"url"`
-			Images   struct {
-				Jpg struct {
-					ImageUrl string `json:"image_url"`
-				} `json:"jpg"`
-				Webp struct {
-					ImageUrl string `json:"image_url"`
-				} `json:"webp"`
-			} `json:"images"`
-		} `json:"user"`
+		User            UserItem  `json:"user"`
 		MalId           int       `json:"mal_id"`
 		Url             string    `json:"url"`
 		Type            string    `json:"type"`
@@ -542,10 +415,7 @@ type AnimeReviews struct {
 			Enjoyment int `json:"enjoyment"`
 		} `json:"scores"`
 	} `json:"data"`
-	Pagination struct {
-		LastVisiblePage int  `json:"last_visible_page"`
-		HasNextPage     bool `json:"has_next_page"`
-	} `json:"pagination"`
+	Pagination Pagination `json:"pagination"`
 }
 
 // GetAnimeReviews returns anime reviews
@@ -561,13 +431,8 @@ func GetAnimeReviews(id, page int) (*AnimeReviews, error) {
 // AnimeRelations struct
 type AnimeRelations struct {
 	Data []struct {
-		Relation string `json:"relation"`
-		Entry    []struct {
-			MalId int    `json:"mal_id"`
-			Type  string `json:"type"`
-			Name  string `json:"name"`
-			Url   string `json:"url"`
-		} `json:"entry"`
+		Relation string    `json:"relation"`
+		Entry    []MalItem `json:"entry"`
 	} `json:"data"`
 }
 
@@ -620,10 +485,7 @@ func GetAnimeExternal(id int) (*AnimeExternal, error) {
 // AnimeSearch struct
 type AnimeSearch struct {
 	Data       []AnimeBase `json:"data"`
-	Pagination struct {
-		LastVisiblePage int  `json:"last_visible_page"`
-		HasNextPage     bool `json:"has_next_page"`
-	} `json:"pagination"`
+	Pagination Pagination  `json:"pagination"`
 }
 
 // GetAnimeSearch returns anime search

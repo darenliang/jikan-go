@@ -4,12 +4,7 @@ import "fmt"
 
 // Genres struct
 type Genres struct {
-	Data []struct {
-		MalId int    `json:"mal_id"`
-		Name  string `json:"name"`
-		Url   string `json:"url"`
-		Count int    `json:"count"`
-	} `json:"data"`
+	Data []MalItemCount `json:"data"`
 }
 
 type GenreFilter string

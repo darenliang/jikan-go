@@ -10,10 +10,7 @@ import (
 // TopAnime struct
 type TopAnime struct {
 	Data       []AnimeBase `json:"data"`
-	Pagination struct {
-		LastVisiblePage int  `json:"last_visible_page"`
-		HasNextPage     bool `json:"has_next_page"`
-	} `json:"pagination"`
+	Pagination Pagination  `json:"pagination"`
 }
 
 type TopAnimeType string
@@ -57,10 +54,7 @@ func GetTopAnime(subType TopAnimeType, filter TopAnimeFilter, page int) (*TopAni
 // TopManga struct
 type TopManga struct {
 	Data       []MangaBase `json:"data"`
-	Pagination struct {
-		LastVisiblePage int  `json:"last_visible_page"`
-		HasNextPage     bool `json:"has_next_page"`
-	} `json:"pagination"`
+	Pagination Pagination  `json:"pagination"`
 }
 
 type TopMangaType string
@@ -105,10 +99,7 @@ func GetTopManga(subType TopMangaType, filter TopMangaFilter, page int) (*TopMan
 // TopPeople struct
 type TopPeople struct {
 	Data       []PeopleBase `json:"data"`
-	Pagination struct {
-		LastVisiblePage int  `json:"last_visible_page"`
-		HasNextPage     bool `json:"has_next_page"`
-	} `json:"pagination"`
+	Pagination Pagination   `json:"pagination"`
 }
 
 // GetTopPeople returns top people
@@ -124,10 +115,7 @@ func GetTopPeople(page int) (*TopPeople, error) {
 // TopCharacters struct
 type TopCharacters struct {
 	Data       []CharactersBase `json:"data"`
-	Pagination struct {
-		LastVisiblePage int  `json:"last_visible_page"`
-		HasNextPage     bool `json:"has_next_page"`
-	} `json:"pagination"`
+	Pagination Pagination       `json:"pagination"`
 }
 
 // GetTopCharacters returns top characters
@@ -143,57 +131,19 @@ func GetTopCharacters(page int) (*TopCharacters, error) {
 // TopReviews struct
 type TopReviews struct {
 	Data []struct {
-		MalId           int       `json:"mal_id"`
-		Url             string    `json:"url"`
-		Type            string    `json:"type"`
-		Votes           int       `json:"votes"`
-		Date            time.Time `json:"date"`
-		Review          string    `json:"review"`
-		EpisodesWatched int       `json:"episodes_watched"`
-		Scores          struct {
-			Overall   int `json:"overall"`
-			Story     int `json:"story"`
-			Animation int `json:"animation"`
-			Sound     int `json:"sound"`
-			Character int `json:"character"`
-			Enjoyment int `json:"enjoyment"`
-			Art       int `json:"art"`
-		} `json:"scores"`
-		Entry struct {
-			MalId  int    `json:"mal_id"`
-			Url    string `json:"url"`
-			Images struct {
-				Jpg struct {
-					ImageUrl      string `json:"image_url"`
-					SmallImageUrl string `json:"small_image_url"`
-					LargeImageUrl string `json:"large_image_url"`
-				} `json:"jpg"`
-				Webp struct {
-					ImageUrl      string `json:"image_url"`
-					SmallImageUrl string `json:"small_image_url"`
-					LargeImageUrl string `json:"large_image_url"`
-				} `json:"webp"`
-			} `json:"images"`
-			Title string `json:"title"`
-		} `json:"entry"`
-		User struct {
-			Url      string `json:"url"`
-			Username string `json:"username"`
-			Images   struct {
-				Jpg struct {
-					ImageUrl string `json:"image_url"`
-				} `json:"jpg"`
-				Webp struct {
-					ImageUrl string `json:"image_url"`
-				} `json:"webp"`
-			} `json:"images"`
-		} `json:"user"`
-		ChaptersRead int `json:"chapters_read"`
+		MalId           int         `json:"mal_id"`
+		Url             string      `json:"url"`
+		Type            string      `json:"type"`
+		Votes           int         `json:"votes"`
+		Date            time.Time   `json:"date"`
+		Review          string      `json:"review"`
+		EpisodesWatched int         `json:"episodes_watched"`
+		Scores          ScoresLong  `json:"scores"`
+		Entry           EntryTitle3 `json:"entry"`
+		User            UserItem    `json:"user"`
+		ChaptersRead    int         `json:"chapters_read"`
 	} `json:"data"`
-	Pagination struct {
-		LastVisiblePage int  `json:"last_visible_page"`
-		HasNextPage     bool `json:"has_next_page"`
-	} `json:"pagination"`
+	Pagination Pagination `json:"pagination"`
 }
 
 // GetTopReviews returns top reviews

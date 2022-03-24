@@ -38,18 +38,8 @@ func GetClubsById(id int) (*ClubsById, error) {
 }
 
 type ClubMembers struct {
-	Data []struct {
-		Jpg struct {
-			ImageUrl string `json:"image_url"`
-		} `json:"jpg"`
-		Webp struct {
-			ImageUrl string `json:"image_url"`
-		} `json:"webp"`
-	} `json:"data"`
-	Pagination struct {
-		LastVisiblePage int  `json:"last_visible_page"`
-		HasNextPage     bool `json:"has_next_page"`
-	} `json:"pagination"`
+	Data       []UserItem `json:"data"`
+	Pagination Pagination `json:"pagination"`
 }
 
 // GetClubMembers returns club members
@@ -83,24 +73,9 @@ func GetClubStaff(id int) (*ClubStaff, error) {
 // ClubRelations struct
 type ClubRelations struct {
 	Data struct {
-		Anime []struct {
-			MalId int    `json:"mal_id"`
-			Type  string `json:"type"`
-			Name  string `json:"name"`
-			Url   string `json:"url"`
-		} `json:"anime"`
-		Manga []struct {
-			MalId int    `json:"mal_id"`
-			Type  string `json:"type"`
-			Name  string `json:"name"`
-			Url   string `json:"url"`
-		} `json:"manga"`
-		Characters []struct {
-			MalId int    `json:"mal_id"`
-			Type  string `json:"type"`
-			Name  string `json:"name"`
-			Url   string `json:"url"`
-		} `json:"characters"`
+		Anime      []MalItem `json:"anime"`
+		Manga      []MalItem `json:"manga"`
+		Characters []MalItem `json:"characters"`
 	} `json:"data"`
 }
 
@@ -117,10 +92,7 @@ func GetClubRelations(id int) (*ClubRelations, error) {
 // ClubsSearch struct
 type ClubsSearch struct {
 	Data       []ClubsBase `json:"data"`
-	Pagination struct {
-		LastVisiblePage int  `json:"last_visible_page"`
-		HasNextPage     bool `json:"has_next_page"`
-	} `json:"pagination"`
+	Pagination Pagination  `json:"pagination"`
 }
 
 // GetClubsSearch returns clubs search

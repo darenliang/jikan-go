@@ -6,16 +6,8 @@ import (
 
 // Magazines struct
 type Magazines struct {
-	Data []struct {
-		MalId int    `json:"mal_id"`
-		Name  string `json:"name"`
-		Url   string `json:"url"`
-		Count int    `json:"count"`
-	} `json:"data"`
-	Pagination struct {
-		LastVisiblePage int  `json:"last_visible_page"`
-		HasNextPage     bool `json:"has_next_page"`
-	} `json:"pagination"`
+	Data       []MalItemCount `json:"data"`
+	Pagination Pagination     `json:"pagination"`
 }
 
 // GetMagazines returns magazines
