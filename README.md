@@ -1,15 +1,14 @@
 # Jikan-go
 
-[![GoDoc](https://pkg.go.dev/badge/github.com/darenliang/jikan-go?status.svg)](https://pkg.go.dev/github.com/darenliang/jikan-go?tab=doc)
-[![Go Report Card](https://goreportcard.com/badge/github.com/darenliang/jikan-go)](https://goreportcard.com/report/github.com/darenliang/jikan-go)
+[![Go Reference](https://pkg.go.dev/badge/github.com/darenliang/jikan-go.svg)](https://pkg.go.dev/github.com/darenliang/jikan-go)
 
-A Go wrapper for the Jikan v3 API.
+A Go wrapper for the Jikan v4 API.
 
-Support for Jikan v4 API coming soon.
+> **Notice:** Jikan v4 introduces breaking changes. You **will** need to make
+> changes to your code when upgrading to v1.2.0+.
 
-Documentation can be found at [godoc.org](https://godoc.org/github.com/darenliang/jikan-go)
-
-Refer to the official [Jikan API documentation](https://jikan.docs.apiary.io) for clarification on request parameters.
+Documentation can be found
+at [go.dev](https://pkg.go.dev/github.com/darenliang/jikan-go).
 
 ### Installation
 
@@ -20,6 +19,7 @@ To import: `import "github.com/darenliang/jikan-go"` and use as `jikan`
 ### Usage
 
 ##### Basic Example
+
 ```go
 package main
 
@@ -30,21 +30,25 @@ import (
 
 func main() {
 	// Get anime
-	anime, err := jikan.GetAnime(1)
+	anime, err := jikan.GetAnimeById(1)
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(anime.Title)
+	fmt.Println(anime.Data.Title)
 }
 ```
+
 ```
 Output:
 
 Cowboy Bebop
 ```
+
 ##### Search Query Example
 
-Consult the [Jikan search reference](https://jikan.docs.apiary.io/#reference/0/search) for a list of search parameters.
+Please refer to the
+official [Jikan API documentation](https://docs.api.jikan.moe/) for
+clarification on query parameters.
 
 ```go
 package main
@@ -62,23 +66,27 @@ func main() {
 	query.Set("type", "tv")
 
 	// Search anime
-	search, err := jikan.GetSearchAnime(query)
+	search, err := jikan.GetAnimeSearch(query)
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(search.Results[0].Score)
+	fmt.Println(search.Data[0].Score)
 }
 ```
+
 ```
 Output:
 
 8.79
 ```
+
 ##### Troubleshooting
 
-If it is necessary to modify the http client (eg. modify timeout), you can access the client via `jikan.Client`.
+If it is necessary to modify the http client (eg. modify timeout), you can
+access the client via `jikan.Client`.
 
 Example: setting the client timeout from 60 seconds (default) to 10 seconds.
+
 ```go
 jikan.Client.Timeout = time.Second * 10
 ```
