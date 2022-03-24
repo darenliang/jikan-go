@@ -1,7 +1,6 @@
 # Jikan-go
 
 [![GoDoc](https://pkg.go.dev/badge/github.com/darenliang/jikan-go?status.svg)](https://pkg.go.dev/github.com/darenliang/jikan-go?tab=doc)
-[![Go Report Card](https://goreportcard.com/badge/github.com/darenliang/jikan-go)](https://goreportcard.com/report/github.com/darenliang/jikan-go)
 
 A Go wrapper for the Jikan v3 API.
 
