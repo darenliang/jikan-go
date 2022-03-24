@@ -12,7 +12,7 @@ Refer to the official [Jikan API documentation](https://jikan.docs.apiary.io) fo
 
 ### Installation
 
-To install/update: `go get -u github.com/darenliang/jikan-go`
+To install/update: `go install github.com/darenliang/jikan-go@latest`
 
 To import: `import "github.com/darenliang/jikan-go"` and use as `jikan`
 
