@@ -12,7 +12,7 @@ at [go.dev](https://pkg.go.dev/github.com/darenliang/jikan-go).
 
 ### Installation
 
-To install/update: `go get -u github.com/darenliang/jikan-go`
+To install/update: `go install github.com/darenliang/jikan-go@latest`
 
 To import: `import "github.com/darenliang/jikan-go"` and use as `jikan`
 
