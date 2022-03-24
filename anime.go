@@ -6,8 +6,8 @@ import (
 )
 
 type AnimeBase struct {
-	MalID  int    `json:"mal_id"`
-	URL    string `json:"url"`
+	MalId  int    `json:"mal_id"`
+	Url    string `json:"url"`
 	Images struct {
 		Jpg struct {
 			ImageUrl      string `json:"image_url"`
@@ -22,8 +22,8 @@ type AnimeBase struct {
 	} `json:"images"`
 	Trailer struct {
 		YoutubeID string `json:"youtube_id"`
-		URL       string `json:"url"`
-		EmbedURL  string `json:"embed_url"`
+		Url       string `json:"url"`
+		EmbedUrl  string `json:"embed_url"`
 	} `json:"trailer"`
 	Title         string   `json:"title"`
 	TitleEnglish  string   `json:"title_english"`
@@ -70,46 +70,46 @@ type AnimeBase struct {
 		String   string `json:"string"`
 	} `json:"broadcast"`
 	Producers []struct {
-		MalID int    `json:"mal_id"`
+		MalId int    `json:"mal_id"`
 		Type  string `json:"type"`
 		Name  string `json:"name"`
-		URL   string `json:"url"`
+		Url   string `json:"url"`
 	} `json:"producers"`
 	Licensors []struct {
-		MalID int    `json:"mal_id"`
+		MalId int    `json:"mal_id"`
 		Type  string `json:"type"`
 		Name  string `json:"name"`
-		URL   string `json:"url"`
+		Url   string `json:"url"`
 	} `json:"licensors"`
 	Studios []struct {
-		MalID int    `json:"mal_id"`
+		MalId int    `json:"mal_id"`
 		Type  string `json:"type"`
 		Name  string `json:"name"`
-		URL   string `json:"url"`
+		Url   string `json:"url"`
 	} `json:"studios"`
 	Genres []struct {
-		MalID int    `json:"mal_id"`
+		MalId int    `json:"mal_id"`
 		Type  string `json:"type"`
 		Name  string `json:"name"`
-		URL   string `json:"url"`
+		Url   string `json:"url"`
 	} `json:"genres"`
 	ExplicitGenres []struct {
-		MalID int    `json:"mal_id"`
+		MalId int    `json:"mal_id"`
 		Type  string `json:"type"`
 		Name  string `json:"name"`
-		URL   string `json:"url"`
+		Url   string `json:"url"`
 	} `json:"explicit_genres"`
 	Themes []struct {
-		MalID int    `json:"mal_id"`
+		MalId int    `json:"mal_id"`
 		Type  string `json:"type"`
 		Name  string `json:"name"`
-		URL   string `json:"url"`
+		Url   string `json:"url"`
 	} `json:"themes"`
 	Demographics []struct {
-		MalID int    `json:"mal_id"`
+		MalId int    `json:"mal_id"`
 		Type  string `json:"type"`
 		Name  string `json:"name"`
-		URL   string `json:"url"`
+		Url   string `json:"url"`
 	} `json:"demographics"`
 }
 
@@ -132,8 +132,8 @@ func GetAnimeById(id int) (*AnimeById, error) {
 type AnimeCharacters struct {
 	Data []struct {
 		Character struct {
-			MalID  int    `json:"mal_id"`
-			URL    string `json:"url"`
+			MalId  int    `json:"mal_id"`
+			Url    string `json:"url"`
 			Images struct {
 				Jpg struct {
 					ImageUrl      string `json:"image_url"`
@@ -149,8 +149,8 @@ type AnimeCharacters struct {
 		Role        string `json:"role"`
 		VoiceActors []struct {
 			Person struct {
-				MalID  int    `json:"mal_id"`
-				URL    string `json:"url"`
+				MalId  int    `json:"mal_id"`
+				Url    string `json:"url"`
 				Images struct {
 					Jpg struct {
 						ImageUrl string `json:"image_url"`
@@ -177,8 +177,8 @@ func GetAnimeCharacters(id int) (*AnimeCharacters, error) {
 type AnimeStaff struct {
 	Data []struct {
 		Person struct {
-			MalID  int    `json:"mal_id"`
-			URL    string `json:"url"`
+			MalId  int    `json:"mal_id"`
+			Url    string `json:"url"`
 			Images struct {
 				Jpg struct {
 					ImageUrl string `json:"image_url"`
@@ -203,8 +203,8 @@ func GetAnimeStaff(id int) (*AnimeStaff, error) {
 // AnimeEpisodes struct
 type AnimeEpisodes struct {
 	Data []struct {
-		MalID         int    `json:"mal_id"`
-		URL           string `json:"url"`
+		MalId         int    `json:"mal_id"`
+		Url           string `json:"url"`
 		Title         string `json:"title"`
 		TitleJapanese string `json:"title_japanese"`
 		TitleRomanji  string `json:"title_romanji"`
@@ -212,7 +212,7 @@ type AnimeEpisodes struct {
 		Aired         string `json:"aired"`
 		Filler        bool   `json:"filler"`
 		Recap         bool   `json:"recap"`
-		ForumURL      string `json:"forum_url"`
+		ForumUrl      string `json:"forum_url"`
 	} `json:"data"`
 	Pagination struct {
 		LastVisiblePage int  `json:"last_visible_page"`
