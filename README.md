@@ -1,8 +1,9 @@
 # Jikan-go
 
 [![Go Reference](https://pkg.go.dev/badge/github.com/darenliang/jikan-go.svg)](https://pkg.go.dev/github.com/darenliang/jikan-go)
+[![Go Report Card](https://goreportcard.com/badge/github.com/darenliang/jikan-go)](https://goreportcard.com/report/github.com/darenliang/jikan-go)
 
-A Go wrapper for the Jikan v4 API.
+A Go wrapper for the [Jikan v4 API](https://jikan.moe/).
 
 > **Notice:** Jikan v4 introduces breaking changes. You **will** need to make
 > changes to your code when upgrading to v1.2.0+.
