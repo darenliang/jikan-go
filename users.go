@@ -85,11 +85,11 @@ type UserProfile struct {
 			ImageUrl string `json:"image_url"`
 		} `json:"webp"`
 	} `json:"images"`
-	LastOnline string `json:"last_online"`
-	Gender     string `json:"gender"`
-	Birthday   string `json:"birthday"`
-	Location   string `json:"location"`
-	Joined     string `json:"joined"`
+	LastOnline time.Time `json:"last_online"`
+	Gender     string    `json:"gender"`
+	Birthday   time.Time `json:"birthday"`
+	Location   string    `json:"location"`
+	Joined     time.Time `json:"joined"`
 }
 
 // GetUserProfile returns user profile
@@ -259,11 +259,11 @@ type UserUpdates struct {
 				} `json:"images"`
 				Title string `json:"title"`
 			} `json:"entry"`
-			Score         float64 `json:"score"`
-			Status        string  `json:"status"`
-			EpisodesSeen  int     `json:"episodes_seen"`
-			EpisodesTotal int     `json:"episodes_total"`
-			Date          string  `json:"date"`
+			Score         float64   `json:"score"`
+			Status        string    `json:"status"`
+			EpisodesSeen  int       `json:"episodes_seen"`
+			EpisodesTotal int       `json:"episodes_total"`
+			Date          time.Time `json:"date"`
 		} `json:"anime"`
 		Manga []struct {
 			Entry struct {
@@ -283,13 +283,13 @@ type UserUpdates struct {
 				} `json:"images"`
 				Title string `json:"title"`
 			} `json:"entry"`
-			Score         float64 `json:"score"`
-			Status        string  `json:"status"`
-			ChaptersRead  int     `json:"chapters_read"`
-			ChaptersTotal int     `json:"chapters_total"`
-			VolumesRead   int     `json:"volumes_read"`
-			VolumesTotal  int     `json:"volumes_total"`
-			Date          string  `json:"date"`
+			Score         float64   `json:"score"`
+			Status        string    `json:"status"`
+			ChaptersRead  int       `json:"chapters_read"`
+			ChaptersTotal int       `json:"chapters_total"`
+			VolumesRead   int       `json:"volumes_read"`
+			VolumesTotal  int       `json:"volumes_total"`
+			Date          time.Time `json:"date"`
 		} `json:"manga"`
 	} `json:"data"`
 }
@@ -373,8 +373,8 @@ type UserFriends struct {
 				} `json:"webp"`
 			} `json:"images"`
 		} `json:"user"`
-		LastOnline   string `json:"last_online"`
-		FriendsSince string `json:"friends_since"`
+		LastOnline   time.Time `json:"last_online"`
+		FriendsSince time.Time `json:"friends_since"`
 	} `json:"data"`
 	Pagination struct {
 		LastVisiblePage int  `json:"last_visible_page"`

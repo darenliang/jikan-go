@@ -3,6 +3,7 @@ package jikan
 import (
 	"fmt"
 	"net/url"
+	"time"
 )
 
 type AnimeBase struct {
@@ -35,8 +36,8 @@ type AnimeBase struct {
 	Status        string   `json:"status"`
 	Airing        bool     `json:"airing"`
 	Aired         struct {
-		From string `json:"from"`
-		To   string `json:"to"`
+		From time.Time `json:"from"`
+		To   time.Time `json:"to"`
 		Prop struct {
 			From struct {
 				Day   int `json:"day"`
@@ -203,16 +204,16 @@ func GetAnimeStaff(id int) (*AnimeStaff, error) {
 // AnimeEpisodes struct
 type AnimeEpisodes struct {
 	Data []struct {
-		MalId         int    `json:"mal_id"`
-		Url           string `json:"url"`
-		Title         string `json:"title"`
-		TitleJapanese string `json:"title_japanese"`
-		TitleRomanji  string `json:"title_romanji"`
-		Duration      int    `json:"duration"`
-		Aired         string `json:"aired"`
-		Filler        bool   `json:"filler"`
-		Recap         bool   `json:"recap"`
-		ForumUrl      string `json:"forum_url"`
+		MalId         int       `json:"mal_id"`
+		Url           string    `json:"url"`
+		Title         string    `json:"title"`
+		TitleJapanese string    `json:"title_japanese"`
+		TitleRomanji  string    `json:"title_romanji"`
+		Duration      int       `json:"duration"`
+		Aired         time.Time `json:"aired"`
+		Filler        bool      `json:"filler"`
+		Recap         bool      `json:"recap"`
+		ForumUrl      string    `json:"forum_url"`
 	} `json:"data"`
 	Pagination struct {
 		LastVisiblePage int  `json:"last_visible_page"`
@@ -233,16 +234,16 @@ func GetAnimeEpisodes(id, page int) (*AnimeEpisodes, error) {
 // AnimeEpisodeById struct
 type AnimeEpisodeById struct {
 	Data struct {
-		MalId         int    `json:"mal_id"`
-		Url           string `json:"url"`
-		Title         string `json:"title"`
-		TitleJapanese string `json:"title_japanese"`
-		TitleRomanji  string `json:"title_romanji"`
-		Duration      int    `json:"duration"`
-		Aired         string `json:"aired"`
-		Filler        bool   `json:"filler"`
-		Recap         bool   `json:"recap"`
-		Synopsis      string `json:"synopsis"`
+		MalId         int       `json:"mal_id"`
+		Url           string    `json:"url"`
+		Title         string    `json:"title"`
+		TitleJapanese string    `json:"title_japanese"`
+		TitleRomanji  string    `json:"title_romanji"`
+		Duration      int       `json:"duration"`
+		Aired         time.Time `json:"aired"`
+		Filler        bool      `json:"filler"`
+		Recap         bool      `json:"recap"`
+		Synopsis      string    `json:"synopsis"`
 	} `json:"data"`
 }
 
@@ -259,13 +260,13 @@ func GetAnimeEpisodeById(id, episode int) (*AnimeEpisodeById, error) {
 // AnimeNews struct
 type AnimeNews struct {
 	Data []struct {
-		MalId          int    `json:"mal_id"`
-		Url            string `json:"url"`
-		Title          string `json:"title"`
-		Date           string `json:"date"`
-		AuthorUsername string `json:"author_username"`
-		AuthorUrl      string `json:"author_url"`
-		ForumUrl       string `json:"forum_url"`
+		MalId          int       `json:"mal_id"`
+		Url            string    `json:"url"`
+		Title          string    `json:"title"`
+		Date           time.Time `json:"date"`
+		AuthorUsername string    `json:"author_username"`
+		AuthorUrl      string    `json:"author_url"`
+		ForumUrl       string    `json:"forum_url"`
 		Images         struct {
 			Jpg struct {
 				ImageUrl string `json:"image_url"`
@@ -293,18 +294,18 @@ func GetAnimeNews(id, page int) (*AnimeNews, error) {
 // AnimeForum struct
 type AnimeForum struct {
 	Data []struct {
-		MalId          int    `json:"mal_id"`
-		Url            string `json:"url"`
-		Title          string `json:"title"`
-		Date           string `json:"date"`
-		AuthorUsername string `json:"author_username"`
-		AuthorUrl      string `json:"author_url"`
-		Comments       int    `json:"comments"`
+		MalId          int       `json:"mal_id"`
+		Url            string    `json:"url"`
+		Title          string    `json:"title"`
+		Date           time.Time `json:"date"`
+		AuthorUsername string    `json:"author_username"`
+		AuthorUrl      string    `json:"author_url"`
+		Comments       int       `json:"comments"`
 		LastComment    struct {
-			Url            string `json:"url"`
-			AuthorUsername string `json:"author_username"`
-			AuthorUrl      string `json:"author_url"`
-			Date           string `json:"date"`
+			Url            string    `json:"url"`
+			AuthorUsername string    `json:"author_username"`
+			AuthorUrl      string    `json:"author_url"`
+			Date           time.Time `json:"date"`
 		} `json:"last_comment"`
 	} `json:"data"`
 }
@@ -525,13 +526,13 @@ type AnimeReviews struct {
 				} `json:"webp"`
 			} `json:"images"`
 		} `json:"user"`
-		MalId           int    `json:"mal_id"`
-		Url             string `json:"url"`
-		Type            string `json:"type"`
-		Votes           int    `json:"votes"`
-		Date            string `json:"date"`
-		Review          string `json:"review"`
-		EpisodesWatched int    `json:"episodes_watched"`
+		MalId           int       `json:"mal_id"`
+		Url             string    `json:"url"`
+		Type            string    `json:"type"`
+		Votes           int       `json:"votes"`
+		Date            time.Time `json:"date"`
+		Review          string    `json:"review"`
+		EpisodesWatched int       `json:"episodes_watched"`
 		Scores          struct {
 			Overall   int `json:"overall"`
 			Story     int `json:"story"`

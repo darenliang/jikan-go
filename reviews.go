@@ -1,5 +1,7 @@
 package jikan
 
+import "time"
+
 // RecentAnimeReviews struct
 type RecentAnimeReviews struct {
 	Data []struct {
@@ -32,13 +34,13 @@ type RecentAnimeReviews struct {
 			} `json:"images"`
 			Title string `json:"title"`
 		} `json:"anime"`
-		MalId           int    `json:"mal_id"`
-		Url             string `json:"url"`
-		Type            string `json:"type"`
-		Votes           int    `json:"votes"`
-		Date            string `json:"date"`
-		Review          string `json:"review"`
-		EpisodesWatched int    `json:"episodes_watched"`
+		MalId           int       `json:"mal_id"`
+		Url             string    `json:"url"`
+		Type            string    `json:"type"`
+		Votes           int       `json:"votes"`
+		Date            time.Time `json:"date"`
+		Review          string    `json:"review"`
+		EpisodesWatched int       `json:"episodes_watched"`
 		Scores          struct {
 			Overall   int `json:"overall"`
 			Story     int `json:"story"`
@@ -96,13 +98,13 @@ type RecentMangaReviews struct {
 			} `json:"images"`
 			Title string `json:"title"`
 		} `json:"manga"`
-		MalId        int    `json:"mal_id"`
-		Url          string `json:"url"`
-		Type         string `json:"type"`
-		Votes        int    `json:"votes"`
-		Date         string `json:"date"`
-		ChaptersRead int    `json:"chapters_read"`
-		Review       string `json:"review"`
+		MalId        int       `json:"mal_id"`
+		Url          string    `json:"url"`
+		Type         string    `json:"type"`
+		Votes        int       `json:"votes"`
+		Date         time.Time `json:"date"`
+		ChaptersRead int       `json:"chapters_read"`
+		Review       string    `json:"review"`
 		Scores       struct {
 			Overall   int `json:"overall"`
 			Story     int `json:"story"`

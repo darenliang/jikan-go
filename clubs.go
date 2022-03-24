@@ -3,6 +3,7 @@ package jikan
 import (
 	"fmt"
 	"net/url"
+	"time"
 )
 
 // ClubsBase struct
@@ -15,10 +16,10 @@ type ClubsBase struct {
 			ImageUrl string `json:"image_url"`
 		} `json:"jpg"`
 	} `json:"images"`
-	Members  int    `json:"members"`
-	Category string `json:"category"`
-	Created  string `json:"created"`
-	Access   string `json:"access"`
+	Members  int       `json:"members"`
+	Category string    `json:"category"`
+	Created  time.Time `json:"created"`
+	Access   string    `json:"access"`
 }
 
 // ClubsById struct
